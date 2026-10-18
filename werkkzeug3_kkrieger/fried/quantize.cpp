@@ -35,12 +35,13 @@ namespace FRIED
     else
       prod += bias;
 
-    prod += 1i64 << (s - 1);
+    prod += 1LL << (s - 1);
     return sInt(prod >> s);
   }
 
   static sInt imul14(sInt a,sInt b)
   {
+#ifdef _MSC_VER
     __asm
     {
       mov   eax, [a];
@@ -53,6 +54,11 @@ namespace FRIED
     }
 
     return a;
+#else
+    // Portable equivalent: (a*b + 8192) >> 14 with 64-bit intermediate
+    long long prod = (long long)a * (long long)b + 8192;
+    return sInt(prod >> 14);
+#endif
   }
 
   static sInt descaleOld(sInt x,sInt bias,sInt factor,sInt shift)
@@ -158,6 +164,7 @@ namespace FRIED
     }
   }
 
+#ifdef _MSC_VER
   static void rescaleLoopMMX(sS16 *x,sInt count,sInt f,sInt shift)
   {
     if(shift >= 4)
@@ -269,6 +276,13 @@ namespace FRIED
       }
     }
   }
+#else /* !_MSC_VER : portable fallback */
+  static void rescaleLoopMMX(sS16 *x,sInt count,sInt f,sInt shift)
+  {
+    // The MMX version is mathematically identical to the scalar loop.
+    rescaleLoop(x,count,f,shift);
+  }
+#endif /* _MSC_VER */
 
   void newDequantize(sInt qs,sS16 *x,sInt npts,sInt cwidth)
   {

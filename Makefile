@@ -5,7 +5,7 @@ CXX = g++
 # -fpermissive: the original 32-bit MSVC engine stores pointer values in sInt/sU32
 # fields (packed blob references). On x86-64 GCC rejects these casts as errors by
 # default; -fpermissive -w downgrades them to warnings so the historical code compiles.
-CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -fpermissive -w -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader -Iwerkkzeug3_kkrieger/materials
+CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -fpermissive -w -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader -Iwerkkzeug3_kkrieger/materials -Iwerkkzeug3_kkrieger/base -Iwerkkzeug3_kkrieger/fried
 LDFLAGS =
 SDL_CFLAGS = $(shell pkg-config --cflags sdl2 2>/dev/null || echo -I/usr/include/SDL2)
 SDL_LIBS = $(shell pkg-config --libs sdl2 2>/dev/null || echo -lSDL2) -lGL
@@ -54,7 +54,22 @@ ENGINE_SOURCES = \
     werkkzeug3_kkrieger/genmaterial.cpp \
     werkkzeug3_kkrieger/genbitmap.cpp \
     werkkzeug3_kkrieger/geneffectipp.cpp \
-    werkkzeug3_kkrieger/novaplayer.cpp
+    werkkzeug3_kkrieger/novaplayer.cpp \
+    werkkzeug3_kkrieger/sGlobals.cpp \
+    werkkzeug3_kkrieger/base/base_oplist.cpp \
+    werkkzeug3_kkrieger/materials/rtmanager.cpp \
+    werkkzeug3_kkrieger/materials/material11.cpp \
+    werkkzeug3_kkrieger/materials/materialdirect.cpp \
+    werkkzeug3_kkrieger/materials/material20.cpp \
+    werkkzeug3_kkrieger/fried/decode.cpp \
+    werkkzeug3_kkrieger/fried/encode.cpp \
+    werkkzeug3_kkrieger/fried/entropy.cpp \
+    werkkzeug3_kkrieger/fried/pixel.cpp \
+    werkkzeug3_kkrieger/fried/quantize.cpp \
+    werkkzeug3_kkrieger/fried/transforms.cpp
+
+# Additional include paths needed by the newly added engine/material/fried sources.
+EXTRA_INCLUDES = -Iwerkkzeug3_kkrieger/base -Iwerkkzeug3_kkrieger/fried
 
 ENGINE_OBJECTS = $(ENGINE_SOURCES:.cpp=.o)
 

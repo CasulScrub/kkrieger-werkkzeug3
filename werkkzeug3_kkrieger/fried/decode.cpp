@@ -48,6 +48,7 @@ namespace FRIED
     // TODO: write the corresponding row using the correct innerloop
   }
 
+#ifdef _MSC_VER
   #define MM_LOAD4(reg0,reg1,reg2,reg3,offset) \
     __asm mov       eax, [c0] \
     __asm mov       ebx, [c1] \
@@ -106,6 +107,38 @@ namespace FRIED
 
     __asm emms;
   }
+#else /* !_MSC_VER : portable scalar fallback (open-source build) */
+  // shuffle4x16 transposes four 16-entry sS16 columns (c0..c3) into the
+  // destination planes. Each MM_LOAD4/MM_TRANSPOSE/MM_STORE4 triple moves a
+  // 4x8 sS16 block: rows r*8..r*8+7 of each column are transposed and stored
+  // at dest[i] + xOffs*2 + col*16 for the rotation sequence below.
+  static inline void shuffle4x16(sS16 **dest,sInt xOffs,sS16 *c0,sS16 *c1,sS16 *c2,sS16 *c3)
+  {
+    sS16 *src[4] = { c0, c1, c2, c3 };
+    sInt rot[4][4] = {
+      { 0, 1, 3, 2 },
+      { 2, 0, 1, 3 },
+      { 3, 2, 0, 1 },
+      { 1, 3, 2, 0 },
+    };
+
+    for(sInt round=0;round<4;round++)
+    {
+      sS16 blk[4][8];
+      for(sInt i=0;i<4;i++)
+        for(sInt j=0;j<8;j++)
+          blk[i][j] = src[rot[round][i]][round*8+j];
+
+      for(sInt i=0;i<4;i++)
+        for(sInt j=0;j<8;j++)
+          dest[i][xOffs*2 + round*16 + j*2 + 0] = 0; // placeholder cleared below
+
+      for(sInt i=0;i<4;i++)
+        for(sInt j=0;j<8;j++)
+          dest[i][xOffs*2 + round*16 + j*2] = blk[j][i];
+    }
+  }
+#endif /* _MSC_VER */
 
   static void inv_reorder(sS16 **dest,sInt xOffs,sS16 *src,sInt cwidth)
   {
