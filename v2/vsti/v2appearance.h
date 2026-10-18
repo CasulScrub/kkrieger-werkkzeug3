@@ -773,7 +773,7 @@ namespace V2
 				}
 			};
 
-			__declspec(selectany) Appearance::Patch g_patch;
+			Appearance::Patch g_patch;
 		} // namespace Appearance
 
 		static Appearance::Patch* GetTheAppearance()

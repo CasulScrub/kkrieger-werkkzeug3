@@ -47,10 +47,10 @@ namespace V2
 
 		using namespace Gdiplus;
 
-		__declspec(selectany) ULONG_PTR g_gdiplusToken = NULL;
-		__declspec(selectany) ULONG_PTR g_gdiplusHookToken = NULL;
-		__declspec(selectany) GdiplusStartupInput g_gdiplusStartupInput;		
-		__declspec(selectany) GdiplusStartupOutput g_gdiplusStartupOutput;
+		ULONG_PTR g_gdiplusToken = NULL;
+		ULONG_PTR g_gdiplusHookToken = NULL;
+		GdiplusStartupInput g_gdiplusStartupInput;		
+		GdiplusStartupOutput g_gdiplusStartupOutput;
 
 		// defaults
 		namespace 
@@ -411,8 +411,8 @@ namespace V2
 			}
 		};
 
-		__declspec(selectany) HWNDList g_allWindows;
-		__declspec(selectany) UINT UWM_FULLINVALIDATE = ::RegisterWindowMessage(_T("UWM_FULLINVALIDATE"));
+		HWNDList g_allWindows;
+		UINT UWM_FULLINVALIDATE = ::RegisterWindowMessage(_T("UWM_FULLINVALIDATE"));
 
 		static void InvalidateAllWindows()
 		{

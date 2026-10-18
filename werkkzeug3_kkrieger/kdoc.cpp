@@ -39,7 +39,7 @@ extern "C" sBool  SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,FILETIME *
 #endif
 
 #if sOP_PERFORMANCE
-extern "C" int __cdecl wsprintfA(char *dest,const char *format,...);
+extern "C" int snprintf(char *dest,const char *format,...);
 extern "C" void  OutputDebugStringA(const char *str);
 #endif
 
@@ -1632,7 +1632,7 @@ void KDoc::Init(const sU8 *&dataPtr)
 
 #if sOP_PERFORMANCE
     sChar buffer[64];
-    wsprintfA(buffer,"%02x->[%02x]\n",nClasses,i);
+    snprintf(buffer,"%02x->[%02x]\n",nClasses,i);
     OutputDebugStringA(buffer);
 #endif
  
@@ -1918,13 +1918,13 @@ void KDoc::Precalc(KEnvironment *kenv)
     if(OpPerf[i])
     {
       sChar buffer[64];
-      wsprintfA(buffer,"%02x: %d ms\n",i,OpPerf[i]);
+      snprintf(buffer,"%02x: %d ms\n",i,OpPerf[i]);
       OutputDebugStringA(buffer);
       perft += OpPerf[i];
     }
   }
   sChar buffer[64];
-  wsprintfA(buffer,"%d ms total (ops)\n",perft);
+  snprintf(buffer,"%d ms total (ops)\n",perft);
   OutputDebugStringA(buffer);
 #endif
 }

@@ -23,7 +23,7 @@
 #if sDUMP_IPPALLOC
 static sInt OverlayMaxAlloc[GENOVER_RTSIZES] = { 0 };
 extern "C" void  OutputDebugStringA(const sChar *msg);
-extern "C" void  wsprintfA(sChar *str,const sChar *format,...);
+extern "C" void  snprintf(sChar *str,const sChar *format,...);
 #endif
 
 /****************************************************************************/
@@ -492,7 +492,7 @@ GenOverlayManagerClass::~GenOverlayManagerClass()
   for(i=0;i<GENOVER_RTSIZES;i++)
   {
     sChar buffer[64];
-    wsprintfA(buffer,"maxalloc[%d] = %d\n",i,OverlayMaxAlloc[i]);
+    snprintf(buffer,"maxalloc[%d] = %d\n",i,OverlayMaxAlloc[i]);
     OutputDebugStringA(buffer);
   }
 #endif

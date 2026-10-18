@@ -1304,7 +1304,7 @@ sU32 CV2MPlayer::CalcPositions(sS32 **a_dest)
 
 // no problem if this header is included multiple times
 // in case you get any linker collisions, prepend 
-// __declspec(selectany) to the problematic declaration
+// to the problematic declaration
 
 enum V2CTLTYPES { VCTL_SKIP, VCTL_SLIDER, VCTL_MB, };
 

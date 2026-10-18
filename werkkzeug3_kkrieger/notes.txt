@@ -135,7 +135,7 @@ void Edit_Mesh_Cube(WerkkzeugApp *app,WerkOp *op)
 C:\Users\eclipse\source\repos\Kkrieger-Werkkzeug3\werkkzeug3_kkrieger\werkops.cpp
 
 Each time a parameter for a Cube us adjusted this is called:
-GenMesh * __stdcall Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
+GenMesh * Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
 C:\Users\eclipse\source\repos\Kkrieger-Werkkzeug3\werkkzeug3_kkrieger\genmesh.cpp
 
 Called each time the main window is painted:
@@ -182,7 +182,7 @@ struct sSystem_
 C:\Users\eclipse\source\repos\Kkrieger-Werkkzeug3\werkkzeug3_kkrieger\_start.hpp
 
 Logging - System has custom logging methods:
-void __cdecl sDPrintF(const sChar *format,...)
+void sDPrintF(const sChar *format,...)
 C:\Users\eclipse\source\repos\Kkrieger-Werkkzeug3\werkkzeug3_kkrieger\_types.cpp
 
 Application starts here.

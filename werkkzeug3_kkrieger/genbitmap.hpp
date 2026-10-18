@@ -87,8 +87,8 @@ GenBitmap *  Bitmap_Bricks(sInt bmxs,sInt bmys,sInt color0,sInt color1,sInt colo
 GenBitmap *  Bitmap_Bulge(GenBitmap *bm,sF32 warp);
 GenBitmap *  Bitmap_Render(KOp *op,class GenIPP *ipp,sInt xs,sInt ys);
 GenBitmap *  Bitmap_RenderAuto(KOp *op,class GenMinMesh *mesh,sInt xs,sInt ys,sInt flags);
-void _stdcall Exec_Bitmap_Render(sInt xs,sInt ys);
-void _stdcall Exec_Bitmap_RenderAuto(sInt xs,sInt ys,sInt flags);
+void Exec_Bitmap_Render(sInt xs,sInt ys);
+void Exec_Bitmap_RenderAuto(sInt xs,sInt ys,sInt flags);
 
 extern sInt GenBitmapTextureSizeOffset;         // 0 = normal, -1 = smaller, 1 = large
 

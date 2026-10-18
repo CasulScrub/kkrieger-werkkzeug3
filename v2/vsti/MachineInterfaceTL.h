@@ -736,17 +736,17 @@ namespace Buzz
 	};
 
 	template<typename TOwner>
-	__declspec(selectany) Parameters Machine<TOwner>::m_parameters;
+	Parameters Machine<TOwner>::m_parameters;
 	template<typename TOwner>
-	__declspec(selectany) Info Machine<TOwner>::m_info;
+	Info Machine<TOwner>::m_info;
 	template<typename TOwner>
-	__declspec(selectany) int Machine<TOwner>::m_globalValuesOffset = -1;
+	int Machine<TOwner>::m_globalValuesOffset = -1;
 	template<typename TOwner>
-	__declspec(selectany) int Machine<TOwner>::m_trackValuesOffset = -1;
+	int Machine<TOwner>::m_trackValuesOffset = -1;
 	template<typename TOwner>
-	__declspec(selectany) int Machine<TOwner>::m_attribValuesOffset = -1;
+	int Machine<TOwner>::m_attribValuesOffset = -1;
 	template<typename TOwner>
-	__declspec(selectany) int Machine<TOwner>::m_trackParameterSize = 0;
+	int Machine<TOwner>::m_trackParameterSize = 0;
 
 #define STARTING_AT(identifier) \
 	((void*)(&(((ThisMachineClass*)0)->identifier)))

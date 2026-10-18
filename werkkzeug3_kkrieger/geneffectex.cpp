@@ -603,19 +603,19 @@ private:
   sInt StepTimer;
 
   // ---- particles
-  static sF32 __forceinline SmoothStep(sF32 x)
+  static sF32 inline __attribute__((always_inline)) SmoothStep(sF32 x)
   {
     return x*x*(3.0f - 2.0f*x);
   }
 
-  static void __forceinline xLerp(sVector3 &out,const sVector3 *base,sInt d,sF32 t)
+  static void inline __attribute__((always_inline)) xLerp(sVector3 &out,const sVector3 *base,sInt d,sF32 t)
   {
     out.x = base->x + t * (base[d].x - base->x);
     out.y = base->y + t * (base[d].y - base->y);
     out.z = base->z + t * (base[d].z - base->z);
   }
 
-  static void __forceinline vLerp(sVector3 &out,const sVector3 &a,const sVector3 &b,sF32 t)
+  static void inline __attribute__((always_inline)) vLerp(sVector3 &out,const sVector3 &a,const sVector3 &b,sF32 t)
   {
     out.x = a.x + t * (b.x - a.x);
     out.y = a.y + t * (b.y - a.y);
@@ -714,12 +714,12 @@ private:
   }
 
   // ---- force field
-  __forceinline sInt Index(sInt x,sInt y,sInt z)
+  inline __attribute__((always_inline)) sInt Index(sInt x,sInt y,sInt z)
   {
     return (x & MaskField) + (y & MaskField) * yStep + (z & MaskField) * zStep;
   }
 
-  __forceinline sVector3 &Field(sInt x,sInt y,sInt z)
+  inline __attribute__((always_inline)) sVector3 &Field(sInt x,sInt y,sInt z)
   {
     return ForceField[Index(x,y,z)];
   }

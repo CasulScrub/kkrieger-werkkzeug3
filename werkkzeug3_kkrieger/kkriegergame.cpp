@@ -1161,7 +1161,6 @@ void KKriegerGame::FireShot(KEnvironment *kenv,sInt weapon,KKriegerMonster *mons
   shot->Event->Monster = monster;
 }
 
-extern "C" int __cdecl wsprintfA(sChar *buffer,const sChar *format,...);
 extern "C" void  OutputDebugStringA(const sChar *str);
 
 void KKriegerGame::OnTick(KEnvironment *kenv,sInt slices)

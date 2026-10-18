@@ -903,8 +903,8 @@ public:
 
 };
 
-__declspec(selectany) V2Interface V2Interface::m_v2;
-__declspec(selectany) V2Interface::V2MachineList V2Interface::m_machines;
+V2Interface V2Interface::m_v2;
+V2Interface::V2MachineList V2Interface::m_machines;
 
 } // namespace Buzz
 

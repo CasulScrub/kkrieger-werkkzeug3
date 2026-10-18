@@ -28,7 +28,7 @@ namespace FRIED
 
   static sInt imuls(sInt a,sInt b,sInt s,sInt bias)
   {
-    __int64 prod = ((__int64) a) * b;
+    long long prod = ((long long) a) * b;
 
     if(prod >= 0)
       prod -= bias;

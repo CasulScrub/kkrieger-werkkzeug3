@@ -438,7 +438,7 @@ In_Module mod =
 
 };
 
-extern "C" __declspec( dllexport ) In_Module * winampGetInModule2()
+extern "C" __attribute__((visibility("default"))) In_Module * winampGetInModule2()
 {
 	return &mod;
 }

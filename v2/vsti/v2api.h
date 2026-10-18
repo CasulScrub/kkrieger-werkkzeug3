@@ -524,7 +524,7 @@ namespace V2
 
 	};
 
-	__declspec(selectany) Synth g_theSynth;
+	Synth g_theSynth;
 
 	Synth* GetTheSynth()
 	{

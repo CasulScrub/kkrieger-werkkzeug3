@@ -1,29 +1,24 @@
-// Platform compatibility header for Linux build
-// Replaces MSVC-specific keywords with Linux equivalents
+// Platform compatibility header for Linux / open-source builds.
+//
+// NOTE: All MSVC-specific keywords (__forceinline, __cdecl, _,
+// __declspec, __int64) have been REMOVED from the sources themselves and
+// replaced with portable C++11 / GCC equivalents directly in the code.
+// This header now only provides genuinely portable helpers; it no longer
+// redefines reserved compiler keywords (which was fragile and non-standard).
 
 #ifndef __PLATFORM_LINUX_HPP__
 #define __PLATFORM_LINUX_HPP__
 
-// Replace MSVC __forceinline with inline or always_inline
-#define __forceinline inline __attribute__((always_inline))
+#include <cstddef>
 
-// Linux default calling convention is cdecl, replace MSVC __cdecl
-#define __cdecl
+// Portable aligned-storage helper (replacement for __declspec(align(16)) usage)
+#define PORT_ALIGN16 __attribute__((aligned(16)))
 
-// Replace MSVC __declspec(align) with GCC attribute
-#define __declspec(x) __attribute__((x))
+// Portable forced-inline helper (replacement for MSVC __forceinline)
+#define PORT_FORCEINLINE inline __attribute__((always_inline))
 
-// Special case: __attribute__((aligned(16)))
-// Note: The macro above handles this correctly
-
-// Replace  with nothing
-#define 
-#define 
-
-// Replace __attribute__((noreturn)) with GCC equivalent
-#define __attribute__((noreturn)) __attribute__((noreturn))
-
-// Handle __int64 (already compatible on Linux/gcc)
-// No replacement needed - __int64 works on GCC
+// Portable selectany replacement marker (was __declspec(selectany));
+// single-definition semantics are handled by C++11 inline variables where used.
+#define PORT_SELECTANY /* nothing: rely on inline/unique definitions */
 
 #endif

@@ -9,7 +9,7 @@
 
 namespace V2
 {
-	__declspec(selectany) GUI::Frame* g_BuzzEditor = NULL;
+	GUI::Frame* g_BuzzEditor = NULL;
 
 	struct Host : InteractsWithIClientImpl<IHost>
 	{	
@@ -46,6 +46,6 @@ namespace V2
 		}
 	};
 
-	__declspec(selectany) Host g_theHost;
+	Host g_theHost;
 
 } // namespace V2

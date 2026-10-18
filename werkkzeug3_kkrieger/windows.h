@@ -102,3 +102,15 @@ typedef GUID CLSID;
 typedef CLSID* LPCLSID;
 typedef const CLSID& REFCLSID;
 typedef const IID& REFIID;
+
+// ---------------------------------------------------------------------------
+// Open-source (POSIX) replacements for Windows debug APIs
+// OutputDebugStringA -> writes to stderr on Linux (open-source equivalent)
+// ---------------------------------------------------------------------------
+#ifndef _WIN32
+#include <cstdio>
+#include <cstdarg>
+inline void OutputDebugStringA_impl_unused(const char* str) {
+    if (str) { fputs(str, stderr); fputc('\n', stderr); }
+}
+#endif

@@ -87,10 +87,12 @@
 #define _MFC_OVERRIDES_NEW
 void *   operator new(size_t);
 void *   operator new(size_t,const char *,int);
-#ifdef __MINGW32__
+// Portable (GCC/Linux): placement array new is used because of the
+// '#define new new(__FILE__,__LINE__)' debug macro below. Declared for all
+// platforms (was restricted to __MINGW32__), defined in port_shims.cpp.
 void *   operator new[](size_t,const char *,int);
-#endif
 inline void  operator delete(void *p, const char *, int s) { ::operator delete(p); }
+inline void  operator delete[](void *p, const char *, int s) { ::operator delete[](p); }
 #define new new(__FILE__,__LINE__)
 #endif
 //#endif
@@ -220,7 +222,7 @@ typedef unsigned int              sU32;     // for packed arrays and bitfields
 #ifdef __GNUC__
 typedef unsigned long long        sU64;     // use as needed
 #else
-typedef unsigned __int64          sU64;     // use as needed
+typedef unsigned long long          sU64;     // use as needed
 #endif
 typedef signed char               sS8;      // for packed arrays
 typedef short                     sS16;     // for packed arrays
@@ -228,7 +230,7 @@ typedef int                       sS32;     // for packed arrays
 #ifdef __GNUC__
 typedef signed long long          sS64;     // use as needed
 #else
-typedef signed __int64            sS64;     // use as needed
+typedef signed long long            sS64;     // use as needed
 #endif
 #if !sMOBILE
 typedef float                     sF32;     // basic floatingpoint
