@@ -76,7 +76,7 @@ namespace FRIED
     __asm punpckldq reg4, reg5 \
     __asm punpckhdq reg3, reg5
 
-  static __forceinline void shuffle4x16(sS16 **dest,sInt xOffs,sS16 *c0,sS16 *c1,sS16 *c2,sS16 *c3)
+  static __attribute__((always_inline)) inline void shuffle4x16(sS16 **dest,sInt xOffs,sS16 *c0,sS16 *c1,sS16 *c2,sS16 *c3)
   {
     __asm
     {

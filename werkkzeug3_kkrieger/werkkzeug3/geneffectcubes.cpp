@@ -22,9 +22,9 @@
 static const sInt CubesPerInstance = 112; // this depends on the shader!
 static const sInt ShadowMapRes = 2048;    // tweak me if you dare :)
 
-#define SSEALIGN __declspec(align(16))
+#define SSEALIGN __attribute__((aligned(16)))
 
-sVector __declspec(align(16)) CubeBuffer[0x10100*2];
+sVector __attribute__((aligned(16))) CubeBuffer[0x10100*2];
 sInt CubeCount = 0;
 
 #if sPROFILE
@@ -80,12 +80,12 @@ struct GridCompare
 };
 
 
-KObject * __stdcall Init_Effect_BounceWorm(KOp *op)
+KObject *  Init_Effect_BounceWorm(KOp *op)
 {
   return MakeEffect(0);
 }
 
-void __stdcall Exec_Effect_BounceWorm(KOp *op,KEnvironment *kenv,sInt _seed,sF32 _grav,
+void  Exec_Effect_BounceWorm(KOp *op,KEnvironment *kenv,sInt _seed,sF32 _grav,
   sF32 _damp,sF32 _float,sF32 _size,sInt timeslice,sInt _skipcubes)
 {
   sZONE(WormZone);
@@ -259,7 +259,7 @@ void __stdcall Exec_Effect_BounceWorm(KOp *op,KEnvironment *kenv,sInt _seed,sF32
 /****************************************************************************/
 
 
-KObject * __stdcall Init_Effect_Wirbeln(KOp *op)
+KObject *  Init_Effect_Wirbeln(KOp *op)
 {
   return MakeEffect(0);
 }
@@ -272,7 +272,7 @@ struct wirbels
   sF32 phi,rad,ele,rho;
 } SSEALIGN wirbeln[wirbelcount];
 
-void __stdcall Exec_Effect_Wirbeln(KOp *op,KEnvironment *kenv,
+void  Exec_Effect_Wirbeln(KOp *op,KEnvironment *kenv,
   sF32 _speed,sF32 _speeddelta,sF32 _size,sF32 _radius,sF32 _width,sF32 _height,
   sInt _wobble1,sInt _wobble2,sF32 _strength,sF32 _yscale,sF32 _yadd,sInt _count)
 {
@@ -313,7 +313,7 @@ void __stdcall Exec_Effect_Wirbeln(KOp *op,KEnvironment *kenv,
 
   sF32 phase = kenv->BeatTime/65536.0f*_speed;
   sInt used = 0;
-  sF32 __declspec(align(16)) x[4],s[4],c[4];
+  sF32 __attribute__((aligned(16))) x[4],s[4],c[4];
   // make we'll stay within the bounds of 'wirbeln' during the loop
   sVERIFY(_count >=0 && _count < wirbelcount);
   for(sInt i=0;i<_count;i++)
@@ -718,7 +718,7 @@ sInt CubeHordeEffect::ShadowRT = sINVALID;
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_Cubes(KOp *op)
+KObject *  Init_Effect_Cubes(KOp *op)
 {
   sF32 groundPlaneY = *op->GetEditPtrF(9);
   sF32 groundPlaneSize = *op->GetEditPtrF(10);
@@ -732,7 +732,7 @@ KObject * __stdcall Init_Effect_Cubes(KOp *op)
   return fx;
 }
 
-void __stdcall Exec_Effect_Cubes(KOp *op,KEnvironment *kenv)
+void  Exec_Effect_Cubes(KOp *op,KEnvironment *kenv)
 {
   CubeHordeEffect *fx = (CubeHordeEffect *) op->Cache;
 
@@ -1042,7 +1042,7 @@ static sBool CubeMorpherFirst = sTRUE;
 static sF32 CubeMorpherWeight = 0.0f;
 static sInt CubeMorpherCount = 0;
 
-KObject * __stdcall Init_Effect_XSI2Cube(KOp *op)
+KObject *  Init_Effect_XSI2Cube(KOp *op)
 {
   sInt size;
   const sU8 *data = op->GetBlob(size);
@@ -1081,7 +1081,7 @@ KObject * __stdcall Init_Effect_XSI2Cube(KOp *op)
   return new XSI2CubeEffect((const sVector *) data,size/(2*sizeof(sVector)),norm);
 }
 
-void __stdcall Exec_Effect_XSI2Cube(KOp *op,KEnvironment *kenv)
+void  Exec_Effect_XSI2Cube(KOp *op,KEnvironment *kenv)
 {
   XSI2CubeEffect *fx = (XSI2CubeEffect *) op->Cache;
 
@@ -1166,12 +1166,12 @@ void __stdcall Exec_Effect_XSI2Cube(KOp *op,KEnvironment *kenv)
   }
 }
 
-KObject * __stdcall Init_Effect_CubeMorpher(KOp *op)
+KObject *  Init_Effect_CubeMorpher(KOp *op)
 {
   return MakeEffect(0);
 }
 
-void __stdcall Exec_Effect_CubeMorpher(KOp *op,KEnvironment *kenv)
+void  Exec_Effect_CubeMorpher(KOp *op,KEnvironment *kenv)
 {
   ++CubeMorpherActive;
 

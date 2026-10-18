@@ -654,32 +654,32 @@ void MemManagerExit();
 
 class GenScene;
 
-KObject * __stdcall Init_Misc_Nop(KOp *op);
-KObject * __stdcall Init_Misc_If(KOp *op);
-KObject * __stdcall Init_Misc_Load(KObject *o);
-KObject * __stdcall Init_Misc_Event(KObject *o,sF32 duration);
-KObject * __stdcall Init_Misc_Trigger(KObject *o,KOp *event,
+KObject *  Init_Misc_Nop(KOp *op);
+KObject *  Init_Misc_If(KOp *op);
+KObject *  Init_Misc_Load(KObject *o);
+KObject *  Init_Misc_Event(KObject *o,sF32 duration);
+KObject *  Init_Misc_Trigger(KObject *o,KOp *event,
   sF32 trigger,sF32 tresh,sF32 delay,sF32 duration,sInt flags,
   sF32 mod,sF32 vel,sInt sel,sF323 s,sF323 r,sF323 t,sU32 col,KSpline *spline);
-GenScene * __stdcall Init_Misc_PlaySample(GenScene *scene,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange);
-KObject * __stdcall Init_Misc_Demo(KOp *op);
-KObject * __stdcall Init_Misc_MasterCam(sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy);
-void __stdcall Exec_Misc_Nop(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_Misc_Load(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_Misc_Time(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_Misc_Event(KOp *op,KEnvironment *kenv,sF32 duration);
-void __stdcall Exec_Misc_Trigger(KOp *op,KEnvironment *kenv,
+GenScene *  Init_Misc_PlaySample(GenScene *scene,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange);
+KObject *  Init_Misc_Demo(KOp *op);
+KObject *  Init_Misc_MasterCam(sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy);
+void  Exec_Misc_Nop(KOp *op,KEnvironment *kenv);
+void  Exec_Misc_Load(KOp *op,KEnvironment *kenv);
+void  Exec_Misc_Time(KOp *op,KEnvironment *kenv);
+void  Exec_Misc_Event(KOp *op,KEnvironment *kenv,sF32 duration);
+void  Exec_Misc_Trigger(KOp *op,KEnvironment *kenv,
   sF32 trigger,sF32 tresh,sF32 delay,sF32 duration,sInt flags,
   sF32 mod,sF32 vel,sInt sel,sF323 s,sF323 r,sF323 t,sU32 col,KSpline *spline);
-void __stdcall Exec_Misc_Delay(KOp *op,KEnvironment *kenv,sInt flags,sInt sw,sF32 tresh,sF32 hyst,sF32 time0,sF32 time1,sF32 time2);
-void __stdcall Exec_Misc_State(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt cond,sInt condsw,sInt condval);
-void __stdcall Exec_Misc_SetIf(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt var,sInt osw);
-void __stdcall Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags);
-void __stdcall Exec_Misc_If(KOp *op,KEnvironment *kenv,sInt sw,sInt val);
-void __stdcall Exec_Misc_PlaySample(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange);
-void __stdcall Exec_Misc_Demo(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags);
-void __stdcall Exec_Misc_MasterCam(KOp *op,KEnvironment *kenv,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy);
+void  Exec_Misc_Delay(KOp *op,KEnvironment *kenv,sInt flags,sInt sw,sF32 tresh,sF32 hyst,sF32 time0,sF32 time1,sF32 time2);
+void  Exec_Misc_State(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt cond,sInt condsw,sInt condval);
+void  Exec_Misc_SetIf(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt var,sInt osw);
+void  Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags);
+void  Exec_Misc_If(KOp *op,KEnvironment *kenv,sInt sw,sInt val);
+void  Exec_Misc_PlaySample(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange);
+void  Exec_Misc_Demo(KOp *op,KEnvironment *kenv);
+void  Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags);
+void  Exec_Misc_MasterCam(KOp *op,KEnvironment *kenv,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy);
 
 class GenDemo : public KObject
 {
@@ -691,7 +691,7 @@ public:
 /****************************************************************************/
 /****************************************************************************/
 
-template <class t> __forceinline t * KEnvironment::GetInst(KOp *me)
+template <class t> __attribute__((always_inline)) inline t * KEnvironment::GetInst(KOp *me)
 {
   return (t *)GetInstImpl(me,sizeof(t));
 }

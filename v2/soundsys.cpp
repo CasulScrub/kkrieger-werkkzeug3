@@ -401,7 +401,7 @@ void ssTick()
 
 
 
-void __stdcall ssRender(void *, sF32 *outbuf, sU32 len)
+void  ssRender(void *, sF32 *outbuf, sU32 len)
 {
 #ifdef _DEBUG
 	int oldsmpl=dsGetCurSmp();
@@ -487,7 +487,7 @@ void __stdcall ssRender(void *, sF32 *outbuf, sU32 len)
 }
 
 
-void __stdcall ssInit(sU8 *d, void *hWnd)
+void  ssInit(sU8 *d, void *hWnd)
 {
 
 	ssInitBase(d,base);
@@ -506,13 +506,13 @@ void __stdcall ssInit(sU8 *d, void *hWnd)
 }
 
 
-void __stdcall ssFadeOut(sU32 time)
+void  ssFadeOut(sU32 time)
 {
 	//dsFadeOut(time*44100/TIMER_TICKS_PER_SEC);
 }
 
 
-void __stdcall ssClose()
+void  ssClose()
 {
   dsClose();
 
@@ -523,7 +523,7 @@ void __stdcall ssClose()
 }
 
 
-sS32 __stdcall ssGetTime()
+sS32  ssGetTime()
 {
 	sS32 bla=dsGetCurSmp()-state.tdif;
 	__asm
@@ -539,7 +539,7 @@ sS32 __stdcall ssGetTime()
 }
 
 
-void __stdcall ssPlay()
+void  ssPlay()
 {
 	ssStop();
 	ssReset();
@@ -552,14 +552,14 @@ void __stdcall ssPlay()
 }
 
 
-void __stdcall ssStop()
+void  ssStop()
 {
 	state.running=0;
 	state.silent=1;
 	// MIDI-Reset schicken!
 }
 
-void __stdcall ssDoTick()
+void  ssDoTick()
 {
   dsTick();
 }
@@ -567,7 +567,7 @@ void __stdcall ssDoTick()
 
 #ifdef RULESYNC
 
-sS32 __stdcall ssGetPos()
+sS32  ssGetPos()
 {
 	if (!state.running)
 		return rscurpos;
@@ -577,7 +577,7 @@ sS32 __stdcall ssGetPos()
 	return rscurpos;
 }
 
-sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m)
+sU32  ssCalcPositions(sS32 **dest, sU8 *otherv2m)
 {
 	_ssbase mybase;
 	if (otherv2m)
@@ -649,7 +649,7 @@ sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m)
 
 
 
-void __stdcall ssPlayFrom(sS32 time)
+void  ssPlayFrom(sS32 time)
 {
 	state.silent=1;
 	ssStop();
@@ -695,7 +695,7 @@ void __stdcall ssPlayFrom(sS32 time)
 }
 
 
-sS32 __stdcall ssGetSongTime()
+sS32  ssGetSongTime()
 {
 	sS32 bla=dsGetCurSmp();
   bla+=rstimeoffs;

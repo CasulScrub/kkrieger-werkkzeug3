@@ -139,18 +139,18 @@ public:
 
 /****************************************************************************/
 
-//void __stdcall Exec_Misc_Spline(KOp *op,KEnvironment *kenv);
-//void __stdcall Exec_Misc_Shaker(KOp *op,KEnvironment *kenv,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center);
-//void __stdcall Exec_Misc_PipeSpline(KOp *op,KEnvironment *kenv);
-KObject * __stdcall Init_Misc_Spline(KOp *op);
-KObject * __stdcall Init_Misc_Shaker(KOp *op,GenSpline *gs,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center);
-KObject * __stdcall Init_Misc_PipeSpline(KOp *op);
+//void  Exec_Misc_Spline(KOp *op,KEnvironment *kenv);
+//void  Exec_Misc_Shaker(KOp *op,KEnvironment *kenv,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center);
+//void  Exec_Misc_PipeSpline(KOp *op,KEnvironment *kenv);
+KObject *  Init_Misc_Spline(KOp *op);
+KObject *  Init_Misc_Shaker(KOp *op,GenSpline *gs,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center);
+KObject *  Init_Misc_PipeSpline(KOp *op);
 
 struct Init_Misc_MetaSplinePara
 {
   GenSpline *sp[8];
   sF32 time[8];
 };
-KObject * __stdcall Init_Misc_MetaSpline(Init_Misc_MetaSplinePara);
+KObject *  Init_Misc_MetaSpline(Init_Misc_MetaSplinePara);
 
 /****************************************************************************/

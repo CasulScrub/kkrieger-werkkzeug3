@@ -8,11 +8,11 @@
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_LineShuffle(sInt pass);
-void __stdcall Exec_Effect_LineShuffle(KOp *op,KEnvironment *kenv,sInt pass);
+KObject *  Init_Effect_LineShuffle(sInt pass);
+void  Exec_Effect_LineShuffle(KOp *op,KEnvironment *kenv,sInt pass);
 
-KObject * __stdcall Init_Effect_JPEG(sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters);
-void __stdcall Exec_Effect_JPEG(KOp *op,KEnvironment *kenv,sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters);
+KObject *  Init_Effect_JPEG(sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters);
+void  Exec_Effect_JPEG(KOp *op,KEnvironment *kenv,sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters);
 
 /****************************************************************************/
 

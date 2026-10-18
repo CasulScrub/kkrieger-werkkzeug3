@@ -34,13 +34,13 @@ struct SYSTEMTIME
 
 typedef sU64 FILETIME;
 
-extern "C" void __stdcall GetSystemTime(SYSTEMTIME *lpSystemTime);
-extern "C" sBool __stdcall SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,FILETIME *lpFileTime);
+extern "C" void  GetSystemTime(SYSTEMTIME *lpSystemTime);
+extern "C" sBool  SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,FILETIME *lpFileTime);
 #endif
 
 #if sOP_PERFORMANCE
 extern "C" int __cdecl wsprintfA(char *dest,const char *format,...);
-extern "C" void __stdcall OutputDebugStringA(const char *str);
+extern "C" void  OutputDebugStringA(const char *str);
 #endif
 
 
@@ -552,7 +552,7 @@ void KOp::Exec(KEnvironment *kenv)
 
   if(Convention&OPC_ALTEXEC)
   {
-    ((void (__stdcall *)(KOp *,KEnvironment *))ExecHandler)(this,kenv);
+    ((void ( *)(KOp *,KEnvironment *))ExecHandler)(this,kenv);
   }
   else
   {
@@ -2432,41 +2432,41 @@ void MemManagerExit()
 
 #pragma lekktor(off)
 
-KObject * __stdcall Init_Misc_Load(KObject *o)
+KObject *  Init_Misc_Load(KObject *o)
 {
   return o;
 }
 
-KObject * __stdcall Init_Misc_Nop(KOp *op)
+KObject *  Init_Misc_Nop(KOp *op)
 {
   return op->GetInput(0)->Cache;
 }
 
-KObject * __stdcall Init_Misc_If(KOp *op)
+KObject *  Init_Misc_If(KOp *op)
 {
   if(op->GetInput(1)->Cache)
     op->GetInput(1)->Cache->Release();
   return op->GetInput(0)->Cache;
 }
 
-KObject * __stdcall Init_Misc_Event(KObject *o,sF32 duration)
+KObject *  Init_Misc_Event(KObject *o,sF32 duration)
 {
   return o;
 }
 
-KObject * __stdcall Init_Misc_Trigger(KObject *o,KOp *event,
+KObject *  Init_Misc_Trigger(KObject *o,KOp *event,
   sF32 trigger,sF32 tresh,sF32 delay,sF32 duration,sInt flags,
   sF32 mod,sF32 vel,sInt sel,sF323 s,sF323 r,sF323 t,sU32 col,KSpline *spline)
 {
   return o;
 }
 
-void __stdcall Exec_Misc_Nop(KOp *op,KEnvironment *kenv)
+void  Exec_Misc_Nop(KOp *op,KEnvironment *kenv)
 {
   op->ExecInputs(kenv);
 }
 
-void __stdcall Exec_Misc_Load(KOp *op,KEnvironment *kenv)
+void  Exec_Misc_Load(KOp *op,KEnvironment *kenv)
 {
   sVERIFY(op->GetLink(0));
 
@@ -2475,14 +2475,14 @@ void __stdcall Exec_Misc_Load(KOp *op,KEnvironment *kenv)
 
 /****************************************************************************/
 
-void __stdcall Exec_Misc_Time(KOp *op,KEnvironment *kenv)
+void  Exec_Misc_Time(KOp *op,KEnvironment *kenv)
 {
   sVERIFY(op->GetInput(0));
   if(op->FirstEvent)
     op->GetInput(0)->ExecEvent(kenv,op->FirstEvent,0);
 }
 
-void __stdcall Exec_Misc_Event(KOp *op,KEnvironment *kenv,sF32 duration)
+void  Exec_Misc_Event(KOp *op,KEnvironment *kenv,sF32 duration)
 {
   KEvent *event;
   
@@ -2508,7 +2508,7 @@ struct TriggerMem : KInstanceMem
   sInt Time;
 };
 
-void __stdcall Exec_Misc_Trigger(KOp *op,KEnvironment *kenv,
+void  Exec_Misc_Trigger(KOp *op,KEnvironment *kenv,
   sF32 trigger,sF32 tresh,sF32 delay,sF32 duration,sInt flags,
   sF32 vel,sF32 mod,sInt sel,sF323 s,sF323 r,sF323 t,sU32 col,KSpline *spline)
 {
@@ -2582,7 +2582,7 @@ struct DelayMem : KInstanceMem
   sF32 Time;
 };
 
-void __stdcall Exec_Misc_Delay(KOp *op,KEnvironment *kenv,sInt flags,sInt sw,sF32 tresh,sF32 hyst,sF32 time0,sF32 time1,sF32 time2)
+void  Exec_Misc_Delay(KOp *op,KEnvironment *kenv,sInt flags,sInt sw,sF32 tresh,sF32 hyst,sF32 time0,sF32 time1,sF32 time2)
 {
   sF32 val;
   sF32 delta;
@@ -2683,7 +2683,7 @@ void __stdcall Exec_Misc_Delay(KOp *op,KEnvironment *kenv,sInt flags,sInt sw,sF3
 
 /****************************************************************************/
 
-void __stdcall Exec_Misc_If(KOp *op,KEnvironment *kenv,sInt sw,sInt val)
+void  Exec_Misc_If(KOp *op,KEnvironment *kenv,sInt sw,sInt val)
 {
   KOp *child;
 
@@ -2703,7 +2703,7 @@ void __stdcall Exec_Misc_If(KOp *op,KEnvironment *kenv,sInt sw,sInt val)
 
 /****************************************************************************/
 
-void __stdcall Exec_Misc_SetIf(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt flags,sInt osw)
+void  Exec_Misc_SetIf(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt flags,sInt osw)
 {
   sVector v;
   sInt var;
@@ -2744,7 +2744,7 @@ void __stdcall Exec_Misc_SetIf(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt 
 
 /****************************************************************************/
 
-void __stdcall Exec_Misc_State(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt cond,sInt condsw,sInt condval)
+void  Exec_Misc_State(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt cond,sInt condsw,sInt condval)
 {
   sInt ok;
 
@@ -2794,7 +2794,7 @@ void __stdcall Exec_Misc_State(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sInt 
   op->ExecInputs(kenv);
 }
 
-void __stdcall Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags)
+void  Exec_Misc_Menu(KOp *op,KEnvironment *kenv,sInt sw,sInt max,sInt flags)
 {
   sInt i;
 
@@ -2824,7 +2824,7 @@ struct PlaySampleMem : public KInstanceMem
 
 #if sLINK_KKRIEGER
 
-void __stdcall Exec_Misc_PlaySample(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange)
+void  Exec_Misc_PlaySample(KOp *op,KEnvironment *kenv,sInt sw,sInt val,sF32 tresh,sInt sample,sF32 volume,sF32 retrigger,sF32 halfrange)
 {
   PlaySampleMem *mem;
   sInt ok,buf;
@@ -2895,7 +2895,7 @@ GenDemo::~GenDemo()
 {
 }
 
-KObject * __stdcall Init_Misc_Demo(KOp *op)
+KObject *  Init_Misc_Demo(KOp *op)
 {
   sInt i;
   KObject *obj;
@@ -2915,7 +2915,7 @@ KObject * __stdcall Init_Misc_Demo(KOp *op)
   return new GenDemo;
 }
 
-void __stdcall Exec_Misc_Demo(KOp *op,KEnvironment *kenv)
+void  Exec_Misc_Demo(KOp *op,KEnvironment *kenv)
 {
   sInt i;
   KOp *in;
@@ -2943,12 +2943,12 @@ void __stdcall Exec_Misc_Demo(KOp *op,KEnvironment *kenv)
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Misc_MasterCam(sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy)
+KObject *  Init_Misc_MasterCam(sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy)
 {
   return new GenDemo;
 }
 
-void __stdcall Exec_Misc_MasterCam(KOp *op,KEnvironment *kenv,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy)
+void  Exec_Misc_MasterCam(KOp *op,KEnvironment *kenv,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy)
 {
   sMaterialEnv env;
 

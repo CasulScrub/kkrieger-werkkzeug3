@@ -355,7 +355,7 @@ namespace Ronan
 
 using namespace Ronan;
 
-extern "C" void __stdcall ronanCBSetSR(syWRonan *ptr,sU32 sr)
+extern "C" void  ronanCBSetSR(syWRonan *ptr,sU32 sr)
 {
 	g.samplerate=sr;
 	g.fc2pi_sr=2.0f*PI/(sF32)sr;
@@ -363,7 +363,7 @@ extern "C" void __stdcall ronanCBSetSR(syWRonan *ptr,sU32 sr)
 }
 
 
-extern "C" void __stdcall ronanCBInit(syWRonan *wsptr)
+extern "C" void  ronanCBInit(syWRonan *wsptr)
 {
 	// convert phoneme table to a usable format
 	register const sS8 *ptr=(const sS8*)rawphonemes;
@@ -395,7 +395,7 @@ extern "C" void __stdcall ronanCBInit(syWRonan *wsptr)
 }
 
 
-extern "C" void __stdcall ronanCBTick(syWRonan *wsptr)
+extern "C" void  ronanCBTick(syWRonan *wsptr)
 {
   if (wsptr->wait4off || wsptr->wait4on) return;
 
@@ -481,18 +481,18 @@ extern "C" void __stdcall ronanCBTick(syWRonan *wsptr)
 
 }
 
-extern "C" void __stdcall ronanCBNoteOn(syWRonan *wsptr)
+extern "C" void  ronanCBNoteOn(syWRonan *wsptr)
 {
 	wsptr->wait4on=0;
 }
 
-extern "C" void __stdcall ronanCBNoteOff(syWRonan *wsptr)
+extern "C" void  ronanCBNoteOff(syWRonan *wsptr)
 {
 	wsptr->wait4off=0;
 }
 
 
-extern "C" void __stdcall ronanCBSetCtl(syWRonan *wsptr,sU32 ctl, sU32 val)
+extern "C" void  ronanCBSetCtl(syWRonan *wsptr,sU32 ctl, sU32 val)
 {
 	// controller 4, 0-63			: set text #
 	// controller 4, 64-127		: set frame rate
@@ -520,7 +520,7 @@ extern "C" void __stdcall ronanCBSetCtl(syWRonan *wsptr,sU32 ctl, sU32 val)
 }
 
 
-extern "C" void __stdcall ronanCBProcess(syWRonan *wsptr,sF32 *buf, sU32 len)
+extern "C" void  ronanCBProcess(syWRonan *wsptr,sF32 *buf, sU32 len)
 {
 	static syVRonan deltaframe;
 
@@ -576,9 +576,9 @@ extern "C" void __stdcall ronanCBProcess(syWRonan *wsptr,sF32 *buf, sU32 len)
 
 }
 
-extern "C" extern void* __stdcall synthGetSpeechMem(void *a_pthis);
+extern "C" extern void*  synthGetSpeechMem(void *a_pthis);
 
-extern "C" void __stdcall synthSetLyrics(void *a_pthis,const char **a_ptr)
+extern "C" void  synthSetLyrics(void *a_pthis,const char **a_ptr)
 {
   syWRonan *wsptr=(syWRonan*)synthGetSpeechMem(a_pthis);
 	for (sInt i=0; i<64; i++) wsptr->texts[i]=a_ptr[i];

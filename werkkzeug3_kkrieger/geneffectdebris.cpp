@@ -20,7 +20,7 @@ extern sU32 SceneWireMask;
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_WalkTheSpline(class GenMinMesh *mesh,class GenSpline *spline,sF32 animpos,sF32 animwalk,sInt count,sInt seed,sF32 side,sF32 middle)
+KObject *  Init_Effect_WalkTheSpline(class GenMinMesh *mesh,class GenSpline *spline,sF32 animpos,sF32 animwalk,sInt count,sInt seed,sF32 side,sF32 middle)
 {
   EngMesh *engmesh;
   if(spline) spline->Release();
@@ -52,7 +52,7 @@ KObject * __stdcall Init_Effect_WalkTheSpline(class GenMinMesh *mesh,class GenSp
 
 /****************************************************************************/
 
-void __stdcall Exec_Effect_WalkTheSpline(KOp *op,KEnvironment *kenv,sF32 animpos,sF32 animwalk,sInt count,sInt seed,sF32 side,sF32 middle)
+void  Exec_Effect_WalkTheSpline(KOp *op,KEnvironment *kenv,sF32 animpos,sF32 animwalk,sInt count,sInt seed,sF32 side,sF32 middle)
 {
   GenMinMesh *mesh = (GenMinMesh *)op->GetInput(0)->Cache;
   GenSpline *spline = (GenSpline *) op->GetInput(1)->Cache;
@@ -111,7 +111,7 @@ void __stdcall Exec_Effect_WalkTheSpline(KOp *op,KEnvironment *kenv,sF32 animpos
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_ChainLine(GenMaterial *mtrl,
+KObject *  Init_Effect_ChainLine(GenMaterial *mtrl,
                                           sF323 posa,sF323 posb,sInt marka,sInt markb,sF32 dist,sF32 thick,sF32 gravity,sF32 damp,sF32 spring,
                                           sF32 rip,sF32 windspeed,sF32 windforce,sInt flags,sF323 basewind,sInt rippoint)
 {
@@ -140,7 +140,7 @@ struct CLData : public KInstanceMem
   sVector OldA,OldB;
 };
 
-void __stdcall Exec_Effect_ChainLine(KOp *op,KEnvironment *kenv,
+void  Exec_Effect_ChainLine(KOp *op,KEnvironment *kenv,
                                      sF323 _posa,sF323 _posb,sInt marka,sInt markb,sF32 dist,sF32 thick,sF32 gravity,sF32 damp,sF32 spring,
                                      sF32 rip,sF32 windspeed,sF32 windforce,sInt flags,sF323 basewind,sInt rippoint)
 {
@@ -433,7 +433,7 @@ struct BFData : public KInstanceMem
   sVector *Data;
 };
 
-KObject * __stdcall Init_Effect_BillboardField(class GenMaterial *mtrl,sF32 size,sF32 aspect,sF32 maxdist,sInt mode,sF323 r0,sF323 r1,sF32 anim,sInt count,sInt seed,sF32 heightrnd,sF32 mindist)
+KObject *  Init_Effect_BillboardField(class GenMaterial *mtrl,sF32 size,sF32 aspect,sF32 maxdist,sInt mode,sF323 r0,sF323 r1,sF32 anim,sInt count,sInt seed,sF32 heightrnd,sF32 mindist)
 {
   sInt pass = 0;
   if(mtrl)
@@ -446,7 +446,7 @@ KObject * __stdcall Init_Effect_BillboardField(class GenMaterial *mtrl,sF32 size
   return eff;
 }
 
-void __stdcall Exec_Effect_BillboardField(KOp *op,KEnvironment *kenv,sF32 size,sF32 aspect,sF32 maxdist,sInt mode,sF323 r0,sF323 r1,sF32 anim,sInt max,sInt seed,sF32 heightrnd,sF32 mindist)
+void  Exec_Effect_BillboardField(KOp *op,KEnvironment *kenv,sF32 size,sF32 aspect,sF32 maxdist,sInt mode,sF323 r0,sF323 r1,sF32 anim,sInt max,sInt seed,sF32 heightrnd,sF32 mindist)
 {
   GenMaterial *mtrl;
   sVector v;

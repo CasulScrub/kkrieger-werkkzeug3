@@ -27,7 +27,7 @@ typedef double            sF64;
 
 //
 #ifdef _DEBUG
-extern void __cdecl printf2(const char *format, ...);
+extern void  printf2(const char *format, ...);
 #else
 #define printf2
 #endif

@@ -336,7 +336,7 @@ namespace FRIED
     v += u >> 1;
   }
 
-  static void __forceinline irot_pp(sInt &ur,sInt &vr)
+  static void __attribute__((always_inline)) inline irot_pp(sInt &ur,sInt &vr)
   {
     sInt u,v;
 

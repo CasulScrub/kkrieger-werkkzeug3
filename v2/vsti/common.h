@@ -55,29 +55,29 @@ these are the old style entry functions. new functions should be added to IV2Hos
 
 */
 
-typedef AEffEditor* (__cdecl *V2VSTI_INIT_FUNC)(AudioEffectX* effect);
-typedef void (__cdecl *V2VSTI_SHUTDOWN_FUNC)(AEffEditor* editor);
-typedef void (__cdecl *V2VSTI_PROCESS_FUNC)(float** inputs, float** outputs, long sampleframes);
-typedef void (__cdecl *V2VSTI_PROCESS_REPLACING_FUNC)(float** inputs, float** outputs, long sampleframes);
-typedef long (__cdecl *V2VSTI_PROCESS_EVENTS_FUNC)(VstEvents* events);
-typedef long (__cdecl *V2VSTI_GET_CHUNK_FUNC)(void** data, bool isPreset);
-typedef long (__cdecl *V2VSTI_SET_CHUNK_FUNC)(void* data, long byteSize, bool isPreset);
-typedef char* (__cdecl *V2VSTI_GET_PATCH_NAMES_FUNC)();
-typedef void (__cdecl *V2VSTI_SET_PROGRAM_FUNC)(AEffEditor* editor, UINT nr);
-typedef void (__cdecl *V2VSTI_GET_PARAM_DEFS_FUNC)
+typedef AEffEditor* ( *V2VSTI_INIT_FUNC)(AudioEffectX* effect);
+typedef void ( *V2VSTI_SHUTDOWN_FUNC)(AEffEditor* editor);
+typedef void ( *V2VSTI_PROCESS_FUNC)(float** inputs, float** outputs, long sampleframes);
+typedef void ( *V2VSTI_PROCESS_REPLACING_FUNC)(float** inputs, float** outputs, long sampleframes);
+typedef long ( *V2VSTI_PROCESS_EVENTS_FUNC)(VstEvents* events);
+typedef long ( *V2VSTI_GET_CHUNK_FUNC)(void** data, bool isPreset);
+typedef long ( *V2VSTI_SET_CHUNK_FUNC)(void* data, long byteSize, bool isPreset);
+typedef char* ( *V2VSTI_GET_PATCH_NAMES_FUNC)();
+typedef void ( *V2VSTI_SET_PROGRAM_FUNC)(AEffEditor* editor, UINT nr);
+typedef void ( *V2VSTI_GET_PARAM_DEFS_FUNC)
 	(V2TOPIC** topics, int* ntopics, V2PARAM** parms, int* nparms, 
 	 V2TOPIC** gtopics, int* ngtopics, V2PARAM** gparms, int* ngparms);
-typedef void (__cdecl *V2VSTI_GET_PARAMS_FUNC)(unsigned char** psoundmem, char** pglobals);
-typedef void (__cdecl *V2VSTI_UPDATE_UI_FUNC)(int program, int index);
-typedef void (__cdecl *V2VSTI_SET_SAMPLERATE_FUNC)(int newrate);
+typedef void ( *V2VSTI_GET_PARAMS_FUNC)(unsigned char** psoundmem, char** pglobals);
+typedef void ( *V2VSTI_UPDATE_UI_FUNC)(int program, int index);
+typedef void ( *V2VSTI_SET_SAMPLERATE_FUNC)(int newrate);
 
-typedef void (__cdecl *V2BUZZ_INIT_FUNC)();
-typedef void (__cdecl *V2BUZZ_SHUTDOWN_FUNC)();
-typedef void (__cdecl *V2BUZZ_PROCESS_EVENT)(DWORD dwOffset, DWORD dwMidiData);
-typedef void (__cdecl *V2BUZZ_WORK)(float* pSamples, int nSampleCount);
-typedef void (__cdecl *V2BUZZ_DESTROY_EDITOR)();
-typedef void (__cdecl *V2BUZZ_SHOW_EDITOR)(HWND hWndParent);
-typedef void (__cdecl *V2BUZZ_SET_CHANNEL)(int channel);
+typedef void ( *V2BUZZ_INIT_FUNC)();
+typedef void ( *V2BUZZ_SHUTDOWN_FUNC)();
+typedef void ( *V2BUZZ_PROCESS_EVENT)(DWORD dwOffset, DWORD dwMidiData);
+typedef void ( *V2BUZZ_WORK)(float* pSamples, int nSampleCount);
+typedef void ( *V2BUZZ_DESTROY_EDITOR)();
+typedef void ( *V2BUZZ_SHOW_EDITOR)(HWND hWndParent);
+typedef void ( *V2BUZZ_SET_CHANNEL)(int channel);
 
 // tired of entry points? me too
 

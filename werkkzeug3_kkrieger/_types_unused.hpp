@@ -45,11 +45,11 @@ struct sColor
     };
     sU8 bgra[4];
   };
-  __forceinline sColor(sU32 c) { Color = c; }
-  __forceinline sColor() {}
-  __forceinline operator unsigned long () { return Color; }
-  __forceinline void Init(sU8 R,sU8 G,sU8 B) { Color = B|(G<<8)|(R<<16)|0xff000000; };
-  __forceinline void Init(sU8 R,sU8 G,sU8 B,sU32 A) { Color = B|(G<<8)|(R<<16)|(A<<24); };
+  __attribute__((always_inline)) inline sColor(sU32 c) { Color = c; }
+  __attribute__((always_inline)) inline sColor() {}
+  __attribute__((always_inline)) inline operator unsigned long () { return Color; }
+  __attribute__((always_inline)) inline void Init(sU8 R,sU8 G,sU8 B) { Color = B|(G<<8)|(R<<16)|0xff000000; };
+  __attribute__((always_inline)) inline void Init(sU8 R,sU8 G,sU8 B,sU32 A) { Color = B|(G<<8)|(R<<16)|(A<<24); };
   void Fade(sF32 fade,sColor c0,sColor c1);
   void Fade(sInt fade,sColor c0,sColor c1);
 };

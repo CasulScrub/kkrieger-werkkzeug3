@@ -186,7 +186,7 @@ int msGetDevice()
 
 extern "C" extern int FICKEN;
 
-void __stdcall msAudioCallback(void *, float *outbuf, sU32 len)
+void  msAudioCallback(void *, float *outbuf, sU32 len)
 {
 	EnterCriticalSection(&cs);
 	midibuf[mbuflen]=0xFD;

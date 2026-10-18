@@ -527,13 +527,13 @@ void Chaos4(KOp *op,KEnvironment *kenv,sF323 a,sF323 b,sF323 c,sInt flags,sInt e
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_Chaos1(class GenMaterial *mtrl,sF323 a,sF323 b,sF323 c,sInt flags,sInt effect,sInt seed,sInt maxcount)
+KObject *  Init_Effect_Chaos1(class GenMaterial *mtrl,sF323 a,sF323 b,sF323 c,sInt flags,sInt effect,sInt seed,sInt maxcount)
 {
   if(mtrl) mtrl->Release();
   return new GenEffect;
 }
 
-void __stdcall Exec_Effect_Chaos1(KOp *op,KEnvironment *kenv,sF323 a,sF323 b,sF323 c,sInt flags,sInt effect,sInt seed,sInt maxcount)
+void  Exec_Effect_Chaos1(KOp *op,KEnvironment *kenv,sF323 a,sF323 b,sF323 c,sInt flags,sInt effect,sInt seed,sInt maxcount)
 {
   switch(effect)
   {
@@ -952,7 +952,7 @@ struct TourquePart
 
 static TourqueSimulator *TourqueSim[16];
 
-KObject * __stdcall Init_Effect_Tourque(class GenMaterial *mtrl,
+KObject *  Init_Effect_Tourque(class GenMaterial *mtrl,
   class GenMesh *mesh,sInt Seed,sInt maxcount,sInt Rate,sInt Flags,
   sF32 SizeF,sF32 SizeS,sF32 Speed,sF32 Damp,sF323 Pos,sF323 Range,sInt Slot)
 {
@@ -1075,7 +1075,7 @@ KObject * __stdcall Init_Effect_Tourque(class GenMaterial *mtrl,
   return new GenEffect;
 }
 
-void __stdcall Exec_Effect_Tourque(KOp *op,KEnvironment *kenv,
+void  Exec_Effect_Tourque(KOp *op,KEnvironment *kenv,
   sInt Seed,sInt maxcount,sInt Rate,sInt Flags,
   sF32 SizeF,sF32 SizeS,sF32 Speed,sF32 Damp,sF323 Pos,sF323 Range,sInt Slot)
 
@@ -1280,7 +1280,7 @@ static StreamPart StreamParts[0x10000];
 
 static sInt StreamPartInit;
 
-KObject * __stdcall Init_Effect_Stream(class GenMaterial *mtrl,StreamPara para)
+KObject *  Init_Effect_Stream(class GenMaterial *mtrl,StreamPara para)
 {
   if(!StreamPartInit)
   {
@@ -1300,7 +1300,7 @@ KObject * __stdcall Init_Effect_Stream(class GenMaterial *mtrl,StreamPara para)
 
 /****************************************************************************/
 
-void __stdcall Exec_Effect_Stream(KOp *op,KEnvironment *kenv,StreamPara para)
+void  Exec_Effect_Stream(KOp *op,KEnvironment *kenv,StreamPara para)
 {
   GenMaterial *mtrl;
   sInt geo;
@@ -1378,14 +1378,14 @@ void __stdcall Exec_Effect_Stream(KOp *op,KEnvironment *kenv,StreamPara para)
 
 #if !sINTRO
 
-KObject * __stdcall Init_Effect_BP06Spirit(class GenMaterial *mtrl,class GenMaterial *mtrl2,sF323 pos,sF32 radius,sF32 corerad,sF32 perlfreq,sF32 perlamp,sF32 perlanim,sU32 coli,sU32 colo,sU32 colc,sInt partcount,sF32 partrad,sF32 partspeed,sF32 partthick,sF32 partanim,sInt segments)
+KObject *  Init_Effect_BP06Spirit(class GenMaterial *mtrl,class GenMaterial *mtrl2,sF323 pos,sF32 radius,sF32 corerad,sF32 perlfreq,sF32 perlamp,sF32 perlanim,sU32 coli,sU32 colo,sU32 colc,sInt partcount,sF32 partrad,sF32 partspeed,sF32 partthick,sF32 partanim,sInt segments)
 {
   sRelease(mtrl2);
   return MakeEffect(mtrl);
 }
 
 
-void __stdcall   Exec_Effect_BP06Spirit(KOp *op,KEnvironment *kenv,sF323 pos,sF32 radius,sF32 corerad,sF32 perlfreq,sF32 perlamp,sF32 perlanim,sU32 coli,sU32 colo,sU32 colc,sInt partcount,sF32 partrad,sF32 partspeed,sF32 partthick,sF32 partanim,sInt segments)
+void    Exec_Effect_BP06Spirit(KOp *op,KEnvironment *kenv,sF323 pos,sF32 radius,sF32 corerad,sF32 perlfreq,sF32 perlamp,sF32 perlanim,sU32 coli,sU32 colo,sU32 colc,sInt partcount,sF32 partrad,sF32 partspeed,sF32 partthick,sF32 partanim,sInt segments)
 {
   GenMaterial *mtrl;
   GenMaterial *mtrl2;
@@ -1564,12 +1564,12 @@ void __stdcall   Exec_Effect_BP06Spirit(KOp *op,KEnvironment *kenv,sF323 pos,sF3
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_BP06Jungle(GenMaterial *mtrl,sInt segments,sInt slices,sF32 thickness,sF32 thickscale,sF32 length,sF32 lenscale,sF32 sangle,sF32 carfreq,sF32 caramp,sF32 modfreq,sF32 modamp,sF32 modphase)
+KObject *  Init_Effect_BP06Jungle(GenMaterial *mtrl,sInt segments,sInt slices,sF32 thickness,sF32 thickscale,sF32 length,sF32 lenscale,sF32 sangle,sF32 carfreq,sF32 caramp,sF32 modfreq,sF32 modamp,sF32 modphase)
 {
   return MakeEffect(mtrl);
 }
 
-void __stdcall Exec_Effect_BP06Jungle(KOp *op,KEnvironment *kenv,sInt segments,sInt slices,sF32 thickness,sF32 thickscale,sF32 length,sF32 lenscale,sF32 sangle,sF32 carfreq,sF32 caramp,sF32 modfreq,sF32 modamp,sF32 modphase)
+void  Exec_Effect_BP06Jungle(KOp *op,KEnvironment *kenv,sInt segments,sInt slices,sF32 thickness,sF32 thickscale,sF32 length,sF32 lenscale,sF32 sangle,sF32 carfreq,sF32 caramp,sF32 modfreq,sF32 modamp,sF32 modphase)
 {
   GenMaterial *mtrl;
   volatile sVertexTSpace3 *vp;

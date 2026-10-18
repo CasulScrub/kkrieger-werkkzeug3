@@ -117,19 +117,19 @@ sObject *FindLabel(sObject *obj,sInt label)
 /****************************************************************************/
 
 #if !sINTRO
-sInt __stdcall Sys_PrintDez(sInt i)
+sInt  Sys_PrintDez(sInt i)
 {
   sDPrintF("%d",i>>16);
   return 0;
 }
 
-sInt __stdcall Sys_PrintHex(sInt i)
+sInt  Sys_PrintHex(sInt i)
 {
   sDPrintF("%08x",i);
   return 0;
 }
 
-sInt __stdcall Sys_Print(sChar *str)
+sInt  Sys_Print(sChar *str)
 {
   sDPrintF("%s",str);
   return sTRUE;
@@ -138,7 +138,7 @@ sInt __stdcall Sys_Print(sChar *str)
 
 /****************************************************************************/
 
-sObject *__stdcall Sys_Copy(sObject *obj)
+sObject * Sys_Copy(sObject *obj)
 {
   sObject *no;
 #if !sINTRO
@@ -171,7 +171,7 @@ extern "C" sU8 V2MTune[],V2MEnd[];
 #endif
 
 #if !sINTRO
-void __stdcall Sys_LoadSound(GenPlayer *player,sChar *name,sInt mode)
+void  Sys_LoadSound(GenPlayer *player,sChar *name,sInt mode)
 {
   sMusicPlayer *mp;
 
@@ -206,7 +206,7 @@ void __stdcall Sys_LoadSound(GenPlayer *player,sChar *name,sInt mode)
 #endif
 
 #if !sINTRO
-void __stdcall Sys_PlaySound(GenPlayer *player,sInt song)
+void  Sys_PlaySound(GenPlayer *player,sInt song)
 {
   if(player->MP)
     player->MP->Start(song>>16);
@@ -215,7 +215,7 @@ void __stdcall Sys_PlaySound(GenPlayer *player,sInt song)
 #endif
 
 
-sObject * __stdcall Sys_FindLabel(sObject *obj,sInt label)
+sObject *  Sys_FindLabel(sObject *obj,sInt label)
 {
   if(obj)
     obj = FindLabel(obj,label);
@@ -224,7 +224,7 @@ sObject * __stdcall Sys_FindLabel(sObject *obj,sInt label)
   return obj;
 }
 
-sInt __stdcall Sys_Pow(sInt a,sInt b)
+sInt  Sys_Pow(sInt a,sInt b)
 {
 	return sFPow(a/65536.0f,b/65536.0f)*65536.0f;
 }
@@ -241,24 +241,24 @@ sInt __stdcall Sys_Pow(sInt a,sInt b)
 static sCamera sGlobal_Camera;
 static sMatrix sGlobal_Matrix;
 
-void __stdcall Global_CamFrustrum(sInt near_,sInt far_)
+void  Global_CamFrustrum(sInt near_,sInt far_)
 {
   sGlobal_Camera.FarClip = near_/65536.0f;
   sGlobal_Camera.NearClip = far_/65536.0f;
 }
 
-void __stdcall Global_CamPos(sInt3 t,sInt3 r)
+void  Global_CamPos(sInt3 t,sInt3 r)
 {
   sGlobal_Camera.CamPos.InitEuler(r.x/65536.0f,r.y/65536.0f,r.z/65536.0f);
   sGlobal_Camera.CamPos.l.Init(t);
 }
 
-void __stdcall Global_CamSet(void)
+void  Global_CamSet(void)
 {
   sSystem->SetCamera(sGlobal_Camera);
 }
 
-void __stdcall Global_ObjPos(sInt3 s,sInt3 r,sInt3 t)
+void  Global_ObjPos(sInt3 s,sInt3 r,sInt3 t)
 {
   sGlobal_Matrix.InitEuler(r.x/65536.0f,r.y/65536.0f,r.z/65536.0f);
   sGlobal_Matrix.i.Scale4(s.x);
@@ -267,21 +267,21 @@ void __stdcall Global_ObjPos(sInt3 s,sInt3 r,sInt3 t)
   sGlobal_Matrix.l.Init(t);
 }
 
-void __stdcall Global_ObjSet(void)
+void  Global_ObjSet(void)
 {
   sSystem->SetMatrix(sGlobal_Matrix);
 }
 */
 /****************************************************************************/
 /*
-void __stdcall Global_ObjMat(GenMatrix *m)
+void  Global_ObjMat(GenMatrix *m)
 {
   SCRIPTVERIFYVOID(m);
   m->Calc(sGlobal_Matrix);
   sSystem->SetMatrix(sGlobal_Matrix);
 }
 
-void __stdcall Global_CamMat(GenMatrix *m)
+void  Global_CamMat(GenMatrix *m)
 {
   SCRIPTVERIFYVOID(m);
   m->Calc(sGlobal_Matrix);
@@ -355,12 +355,12 @@ void GenMatrix::Calc(sMatrix &mat)
 /****************************************************************************/
 
 #if !sINTRO
-GenMatrix * __stdcall Matrix_Generate(sF323 s,sF323 r,sF323 t,sInt mode)
+GenMatrix *  Matrix_Generate(sF323 s,sF323 r,sF323 t,sInt mode)
 {
   return Matrix_Modify(0,s,r,t,mode);
 }
 
-GenMatrix * __stdcall Matrix_Modify(GenMatrix *in,sF323 s,sF323 r,sF323 t,sInt mode)
+GenMatrix *  Matrix_Modify(GenMatrix *in,sF323 s,sF323 r,sF323 t,sInt mode)
 {
   GenMatrix *mat;
 
@@ -371,7 +371,7 @@ GenMatrix * __stdcall Matrix_Modify(GenMatrix *in,sF323 s,sF323 r,sF323 t,sInt m
   return mat;
 }
 
-GenMatrix * __stdcall Matrix_Label(GenMatrix *mat,sInt label)
+GenMatrix *  Matrix_Label(GenMatrix *mat,sInt label)
 {
   mat->_Label = label;
   return mat;
@@ -521,7 +521,7 @@ void GenSpline::Calc(sF32 time,sF32 *val)
 
 /****************************************************************************/
 
-GenSpline * __stdcall Spline_New(sInt dimensions,sInt t,sInt c)
+GenSpline *  Spline_New(sInt dimensions,sInt t,sInt c)
 {
   GenSpline *spline;
 
@@ -533,14 +533,14 @@ GenSpline * __stdcall Spline_New(sInt dimensions,sInt t,sInt c)
   return spline;
 }
 
-GenSpline * __stdcall Spline_Sort(GenSpline *spline)
+GenSpline *  Spline_Sort(GenSpline *spline)
 {
   SCRIPTVERIFY(spline);
   spline->Sort();
   return spline;
 }
 
-GenSpline * __stdcall Spline_AddKey(GenSpline *spline,sInt time,sInt *val,sInt count)
+GenSpline *  Spline_AddKey(GenSpline *spline,sInt time,sInt *val,sInt count)
 {
   sInt i;
   GenSplineKey *key;
@@ -567,46 +567,46 @@ void Spline_Calc(GenSpline *spline,sInt time)
 
 /****************************************************************************/
 
-GenSpline * __stdcall Spline_AddKey1(GenSpline *spline,sInt time,sInt val)
+GenSpline *  Spline_AddKey1(GenSpline *spline,sInt time,sInt val)
 {
   return Spline_AddKey(spline,time,&val,1);
 }
 
-GenSpline * __stdcall Spline_AddKey2(GenSpline *spline,sInt time,sInt2 val)
+GenSpline *  Spline_AddKey2(GenSpline *spline,sInt time,sInt2 val)
 {
   return Spline_AddKey(spline,time,&val.x,2);
 }
 
-GenSpline * __stdcall Spline_AddKey3(GenSpline *spline,sInt time,sInt3 val)
+GenSpline *  Spline_AddKey3(GenSpline *spline,sInt time,sInt3 val)
 {
   return Spline_AddKey(spline,time,&val.x,3);
 }
 
-GenSpline * __stdcall Spline_AddKey4(GenSpline *spline,sInt time,sInt4 val)
+GenSpline *  Spline_AddKey4(GenSpline *spline,sInt time,sInt4 val)
 {
   return Spline_AddKey(spline,time,&val.x,4);
 }
 
 
-void __stdcall Spline_Calc1(GenSpline *spline,sInt time)
+void  Spline_Calc1(GenSpline *spline,sInt time)
 {
   sVERIFY(spline->Dimensions==1);
   Spline_Calc(spline,time);
 }
 
-void __stdcall Spline_Calc2(GenSpline *spline,sInt time)
+void  Spline_Calc2(GenSpline *spline,sInt time)
 {
   sVERIFY(spline->Dimensions==2);
   Spline_Calc(spline,time);
 }
 
-void __stdcall Spline_Calc3(GenSpline *spline,sInt time)
+void  Spline_Calc3(GenSpline *spline,sInt time)
 {
   sVERIFY(spline->Dimensions==3);
   Spline_Calc(spline,time);
 }
 
-void __stdcall Spline_Calc4(GenSpline *spline,sInt time)
+void  Spline_Calc4(GenSpline *spline,sInt time)
 {
   sVERIFY(spline->Dimensions==4);
   Spline_Calc(spline,time);

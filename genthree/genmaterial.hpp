@@ -215,33 +215,33 @@ private:
 
 //sBool Scene_New(class ScriptRuntime *);  // obsolete
 
-GenScene * __stdcall Scene_Mesh(GenMesh *,sF323 s,sF323 r,sF323 t);
-GenScene * __stdcall Scene_Add(GenScene *,GenScene *);
-GenScene * __stdcall Scene_Trans(GenScene *,sF323 s,sF323 r,sF323 t);
-GenScene * __stdcall Scene_Multiply(GenScene *,sF323 s,sF323 r,sF323 t,sInt count);
-GenScene * __stdcall Scene_Paint(GenScene *);
-GenScene * __stdcall Scene_Label(GenScene *,sInt string);
-GenScene * __stdcall Scene_Light(sF323 s,sF323 r,sF323 t,sInt mode,sInt mask,sInt label,sF32 range,sF32 rangecut,sF32 amplify,sF32 spotfalloff,sF32 spotinner,sF32 spotouter,sInt4 diff,sInt4 amb,sInt4 spec);
-//GenScene * __stdcall Scene_PaintLater(GenScene *sa);
-GenScene * __stdcall Scene_PartScene(GenParticles *p);
+GenScene *  Scene_Mesh(GenMesh *,sF323 s,sF323 r,sF323 t);
+GenScene *  Scene_Add(GenScene *,GenScene *);
+GenScene *  Scene_Trans(GenScene *,sF323 s,sF323 r,sF323 t);
+GenScene *  Scene_Multiply(GenScene *,sF323 s,sF323 r,sF323 t,sInt count);
+GenScene *  Scene_Paint(GenScene *);
+GenScene *  Scene_Label(GenScene *,sInt string);
+GenScene *  Scene_Light(sF323 s,sF323 r,sF323 t,sInt mode,sInt mask,sInt label,sF32 range,sF32 rangecut,sF32 amplify,sF32 spotfalloff,sF32 spotinner,sF32 spotouter,sInt4 diff,sInt4 amb,sInt4 spec);
+//GenScene *  Scene_PaintLater(GenScene *sa);
+GenScene *  Scene_PartScene(GenParticles *p);
 
-GenMaterial * __stdcall Material_NewMaterial();
-sObject * __stdcall MatPass_MatBase(sObject *obj,sInt pass,sInt flags,sInt mode,sInt rp,sInt4 color);
-sObject * __stdcall MatPass_MatTexture(sObject *obj,GenBitmap *bm,sInt pass,sInt stage,sInt flags);
-sObject * __stdcall MatPass_MatFinalizer(sObject *obj,sInt pass,sInt program,sF32 aspect,sF32 size,sF32 enlarge);
-sObject * __stdcall MatPass_MatLabel(sObject *obj,sInt label,sInt pass);
-sObject * __stdcall MatPass_MatTexTrans(sObject *obj,sInt label,sInt pass,sInt stage,sF323 s,sF323 r,sF323 t);
+GenMaterial *  Material_NewMaterial();
+sObject *  MatPass_MatBase(sObject *obj,sInt pass,sInt flags,sInt mode,sInt rp,sInt4 color);
+sObject *  MatPass_MatTexture(sObject *obj,GenBitmap *bm,sInt pass,sInt stage,sInt flags);
+sObject *  MatPass_MatFinalizer(sObject *obj,sInt pass,sInt program,sF32 aspect,sF32 size,sF32 enlarge);
+sObject *  MatPass_MatLabel(sObject *obj,sInt label,sInt pass);
+sObject *  MatPass_MatTexTrans(sObject *obj,sInt label,sInt pass,sInt stage,sF323 s,sF323 r,sF323 t);
 
-sObject * __stdcall MatPass_MatDX7(sObject *obj,sInt pass,sInt color0,sInt color1,sInt alpha0,sInt alpha1);
-sObject * __stdcall MatPass_MatBlend(sObject *obj,sInt pass,sInt alphatest,sInt alpharef,sInt source,sInt op,sInt dest);
-sObject * __stdcall MatPass_MatStencil(sObject *obj,sInt pass,sInt stenciltest,sInt stencilref,sInt sfail,sInt zfail,sInt zpass);
-sObject * __stdcall MatPass_MatLight(sObject *obj,sInt pass,sInt ds,sInt ss,sInt as,sInt es,sInt4 d,sInt4 s,sInt4 a,sInt4 e,sF32 specularity,sInt specularadd,sInt mask);
+sObject *  MatPass_MatDX7(sObject *obj,sInt pass,sInt color0,sInt color1,sInt alpha0,sInt alpha1);
+sObject *  MatPass_MatBlend(sObject *obj,sInt pass,sInt alphatest,sInt alpharef,sInt source,sInt op,sInt dest);
+sObject *  MatPass_MatStencil(sObject *obj,sInt pass,sInt stenciltest,sInt stencilref,sInt sfail,sInt zfail,sInt zpass);
+sObject *  MatPass_MatLight(sObject *obj,sInt pass,sInt ds,sInt ss,sInt as,sInt es,sInt4 d,sInt4 s,sInt4 a,sInt4 e,sF32 specularity,sInt specularadd,sInt mask);
 
-GenParticles * __stdcall Part_New(GenMaterial *mtrl,sF32 rate,sF32 jitter,sInt maxpart,sF32 life,sF323 gravity);
-GenParticles * __stdcall Part_Emitter(GenParticles *sys,sF323 s,sF323 r,sF323 t,sInt flags,sF32 surface,sF32 scatter,sF32 speed,sF32 speedrand);
-GenParticles * __stdcall Part_Rotate(GenParticles *sys,sF32 rotstart,sF32 rotrand,sF32 rotspeed);
-GenParticles * __stdcall Part_Life(GenParticles *sys,sF322 size,sF322 sizetime,sF32 aspect,sInt4 col0,sInt4 col1,sInt4 col2,sF323 coltime);
-GenParticles * __stdcall Part_Spline(GenParticles *sys,GenSpline *spline,sInt mode,sF32 force);
+GenParticles *  Part_New(GenMaterial *mtrl,sF32 rate,sF32 jitter,sInt maxpart,sF32 life,sF323 gravity);
+GenParticles *  Part_Emitter(GenParticles *sys,sF323 s,sF323 r,sF323 t,sInt flags,sF32 surface,sF32 scatter,sF32 speed,sF32 speedrand);
+GenParticles *  Part_Rotate(GenParticles *sys,sF32 rotstart,sF32 rotrand,sF32 rotspeed);
+GenParticles *  Part_Life(GenParticles *sys,sF322 size,sF322 sizetime,sF32 aspect,sInt4 col0,sInt4 col1,sInt4 col2,sF323 coltime);
+GenParticles *  Part_Spline(GenParticles *sys,GenSpline *spline,sInt mode,sF32 force);
 
 /****************************************************************************/
 /****************************************************************************/

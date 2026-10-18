@@ -155,33 +155,33 @@ public:
   ~GenIPP();
 };
 
-GenIPP * __stdcall Init_IPP_Viewport(GenScene *scene,GenSpline *,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount);
-GenIPP * __stdcall Init_IPP_Blur(GenIPP *in,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount);
-GenIPP * __stdcall Init_IPP_Copy(GenIPP *in,sInt size,sU32 color,sF32 zoom,sInt ocount);
-GenIPP * __stdcall Init_IPP_Crashzoom(GenIPP *in,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount);
-GenIPP * __stdcall Init_IPP_Sharpen(GenIPP *in,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount);
-GenIPP * __stdcall Init_IPP_Color(GenIPP *in,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount);
-GenIPP * __stdcall Init_IPP_Merge(GenIPP *in,GenIPP *in2,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount);
-GenIPP * __stdcall Init_IPP_Mask(GenIPP *in,GenIPP *in2,GenIPP *in3,sInt size,sInt ocount);
-GenIPP * __stdcall Init_IPP_Layer2D(GenIPP *in,GenMaterial *mtrl,sInt size,sF324 screen,sF324 uv,sF32 z,sInt clear,sInt ocount);
-GenIPP * __stdcall Init_IPP_Select(sInt count,GenIPP *in,...);
-GenIPP * __stdcall Init_IPP_RenderTarget(GenIPP *in,GenBitmap *rt);
-GenIPP * __stdcall Init_IPP_HSCB(GenIPP *in,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount);
-GenIPP * __stdcall Init_IPP_JPEG(GenIPP *in,sInt size,sInt dir,sF32 strength,sInt ocount);
+GenIPP *  Init_IPP_Viewport(GenScene *scene,GenSpline *,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount);
+GenIPP *  Init_IPP_Blur(GenIPP *in,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount);
+GenIPP *  Init_IPP_Copy(GenIPP *in,sInt size,sU32 color,sF32 zoom,sInt ocount);
+GenIPP *  Init_IPP_Crashzoom(GenIPP *in,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount);
+GenIPP *  Init_IPP_Sharpen(GenIPP *in,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount);
+GenIPP *  Init_IPP_Color(GenIPP *in,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount);
+GenIPP *  Init_IPP_Merge(GenIPP *in,GenIPP *in2,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount);
+GenIPP *  Init_IPP_Mask(GenIPP *in,GenIPP *in2,GenIPP *in3,sInt size,sInt ocount);
+GenIPP *  Init_IPP_Layer2D(GenIPP *in,GenMaterial *mtrl,sInt size,sF324 screen,sF324 uv,sF32 z,sInt clear,sInt ocount);
+GenIPP *  Init_IPP_Select(sInt count,GenIPP *in,...);
+GenIPP *  Init_IPP_RenderTarget(GenIPP *in,GenBitmap *rt);
+GenIPP *  Init_IPP_HSCB(GenIPP *in,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount);
+GenIPP *  Init_IPP_JPEG(GenIPP *in,sInt size,sInt dir,sF32 strength,sInt ocount);
 
-void __stdcall Exec_IPP_Viewport(KOp *op,KEnvironment *kenv,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount);
-void __stdcall Exec_IPP_Blur(KOp *op,KEnvironment *kenv,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount);
-void __stdcall Exec_IPP_Copy(KOp *op,KEnvironment *kenv,sInt size,sU32 color,sF32 zoom,sInt ocount);
-void __stdcall Exec_IPP_Crashzoom(KOp *op,KEnvironment *kenv,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount);
-void __stdcall Exec_IPP_Sharpen(KOp *op,KEnvironment *kenv,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount);
-void __stdcall Exec_IPP_Color(KOp *op,KEnvironment *kenv,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount);
-void __stdcall Exec_IPP_Merge(KOp *op,KEnvironment *kenv,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount);
-void __stdcall Exec_IPP_Mask(KOp *op,KEnvironment *kenv,sInt size,sInt ocount);
-void __stdcall Exec_IPP_Layer2D(KOp *op,KEnvironment *kenv,sInt size,sFRect oxy,sFRect ouv,sF32 z,sInt clear,sInt ocount);
-void __stdcall Exec_IPP_Select(KOp *op,KEnvironment *kenv,sInt count);
-void __stdcall Exec_IPP_RenderTarget(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_IPP_HSCB(KOp *op,KEnvironment *kenv,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount);
-void __stdcall Exec_IPP_JPEG(KOp *op,KEnvironment *kenv,sInt size,sInt dir,sF32 strength,sInt ocount);
+void  Exec_IPP_Viewport(KOp *op,KEnvironment *kenv,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount);
+void  Exec_IPP_Blur(KOp *op,KEnvironment *kenv,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount);
+void  Exec_IPP_Copy(KOp *op,KEnvironment *kenv,sInt size,sU32 color,sF32 zoom,sInt ocount);
+void  Exec_IPP_Crashzoom(KOp *op,KEnvironment *kenv,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount);
+void  Exec_IPP_Sharpen(KOp *op,KEnvironment *kenv,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount);
+void  Exec_IPP_Color(KOp *op,KEnvironment *kenv,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount);
+void  Exec_IPP_Merge(KOp *op,KEnvironment *kenv,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount);
+void  Exec_IPP_Mask(KOp *op,KEnvironment *kenv,sInt size,sInt ocount);
+void  Exec_IPP_Layer2D(KOp *op,KEnvironment *kenv,sInt size,sFRect oxy,sFRect ouv,sF32 z,sInt clear,sInt ocount);
+void  Exec_IPP_Select(KOp *op,KEnvironment *kenv,sInt count);
+void  Exec_IPP_RenderTarget(KOp *op,KEnvironment *kenv);
+void  Exec_IPP_HSCB(KOp *op,KEnvironment *kenv,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount);
+void  Exec_IPP_JPEG(KOp *op,KEnvironment *kenv,sInt size,sInt dir,sF32 strength,sInt ocount);
 
 /****************************************************************************/
 

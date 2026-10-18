@@ -1162,7 +1162,7 @@ void KKriegerGame::FireShot(KEnvironment *kenv,sInt weapon,KKriegerMonster *mons
 }
 
 extern "C" int __cdecl wsprintfA(sChar *buffer,const sChar *format,...);
-extern "C" void __stdcall OutputDebugStringA(const sChar *str);
+extern "C" void  OutputDebugStringA(const sChar *str);
 
 void KKriegerGame::OnTick(KEnvironment *kenv,sInt slices)
 {
@@ -3365,7 +3365,7 @@ void KKriegerCellAdd::DeleteFaces()
 
 #pragma lekktor(on)
 
-void __stdcall Exec_KKrieger_Para(KOp *op,KEnvironment *kenv)
+void  Exec_KKrieger_Para(KOp *op,KEnvironment *kenv)
 {
   sU32 *du;
   sF32 *df;
@@ -3420,7 +3420,7 @@ void __stdcall Exec_KKrieger_Para(KOp *op,KEnvironment *kenv)
   op->ExecInputs(kenv);
 }
 
-void __stdcall Exec_KKrieger_Events(KOp *op,KEnvironment *kenv)
+void  Exec_KKrieger_Events(KOp *op,KEnvironment *kenv)
 {
   KOp **ptr;
   sInt i;
@@ -3448,7 +3448,7 @@ void __stdcall Exec_KKrieger_Events(KOp *op,KEnvironment *kenv)
   op->ExecInputs(kenv);
 }
 
-class KObject * __stdcall Init_KKrieger_Para(KOp *op,KEnvironment *kenv)
+class KObject *  Init_KKrieger_Para(KOp *op,KEnvironment *kenv)
 {
   sF32 *df;
 
@@ -3461,7 +3461,7 @@ class KObject * __stdcall Init_KKrieger_Para(KOp *op,KEnvironment *kenv)
     return new GenScene;
 }
 
-class KObject * __stdcall Init_KKrieger_Events(KOp *op)
+class KObject *  Init_KKrieger_Events(KOp *op)
 {
   if(op->GetInput(0))
     return op->GetInput(0)->Cache;
@@ -3476,7 +3476,7 @@ struct MonsterMem : public KInstanceMem
   KKriegerMonster Monster;
 };
 
-void __stdcall Exec_KKrieger_Monster(KOp *op,KEnvironment *kenv)
+void  Exec_KKrieger_Monster(KOp *op,KEnvironment *kenv)
 {
   KKriegerMonster *mon;
   sF32 *fp;
@@ -3589,7 +3589,7 @@ void __stdcall Exec_KKrieger_Monster(KOp *op,KEnvironment *kenv)
   }
 }
 
-class KObject * __stdcall Init_KKrieger_Monster(KOp *op)
+class KObject *  Init_KKrieger_Monster(KOp *op)
 {
   sInt i;
 
@@ -3604,7 +3604,7 @@ class KObject * __stdcall Init_KKrieger_Monster(KOp *op)
 
 /****************************************************************************/
 
-void __stdcall Exec_KKrieger_MonsterFlags(KOp *op,KEnvironment *kenv,sInt kill,sInt spawn,sInt flags)
+void  Exec_KKrieger_MonsterFlags(KOp *op,KEnvironment *kenv,sInt kill,sInt spawn,sInt flags)
 {
   kenv->NextMonsterOverride = 1;
   kenv->NextMonsterKillSwitch = kill;
@@ -3616,7 +3616,7 @@ void __stdcall Exec_KKrieger_MonsterFlags(KOp *op,KEnvironment *kenv,sInt kill,s
   kenv->NextMonsterOverride = 0;
 }
 
-class KObject * __stdcall Init_KKrieger_MonsterFlags(KOp *op)
+class KObject *  Init_KKrieger_MonsterFlags(KOp *op)
 {
   sVERIFY(op->GetInput(0));
   sVERIFY(op->GetInput(0)->Cache);
@@ -3627,12 +3627,12 @@ class KObject * __stdcall Init_KKrieger_MonsterFlags(KOp *op)
 
 /****************************************************************************/
 
-class KObject * __stdcall Init_KKrieger_Respawn(sF323 pos,sInt zone,sF32 dir)
+class KObject *  Init_KKrieger_Respawn(sF323 pos,sInt zone,sF32 dir)
 {
   return new GenScene;
 }
 
-void __stdcall Exec_KKrieger_Respawn(KOp *op,KEnvironment *kenv,sF323 pos,sInt zone,sF32 dir)
+void  Exec_KKrieger_Respawn(KOp *op,KEnvironment *kenv,sF323 pos,sInt zone,sF32 dir)
 {
   kenv->Game->Respawn[zone].Valid = 1;
   kenv->Game->Respawn[zone].Pos.Init(pos.x,pos.y,pos.z);
@@ -3641,7 +3641,7 @@ void __stdcall Exec_KKrieger_Respawn(KOp *op,KEnvironment *kenv,sF323 pos,sInt z
 
 /****************************************************************************/
 
-class KObject * __stdcall Init_KKrieger_SplashDamage(sInt hits,sF32 range,sF32 enable)
+class KObject *  Init_KKrieger_SplashDamage(sInt hits,sF32 range,sF32 enable)
 {
   return new GenScene;
 }
@@ -3651,7 +3651,7 @@ struct SplashDamageMem : public KInstanceMem
   sInt old;
 };
 
-void __stdcall Exec_KKrieger_SplashDamage(KOp *op,KEnvironment *kenv,sInt hits,sF32 range,sF32 enable)
+void  Exec_KKrieger_SplashDamage(KOp *op,KEnvironment *kenv,sInt hits,sF32 range,sF32 enable)
 {
   SplashDamageMem *mem;
   sBool ok;

@@ -25,7 +25,7 @@ sInt MemoryUsedCount;
 #if _DEBUG
 #if !sINTRO
 #undef new
-void * __cdecl operator new(unsigned int size,const char *file,int line)
+void *  operator new(unsigned int size,const char *file,int line)
 {
   void *p;
   p = _malloc_dbg(size,_NORMAL_BLOCK,file,line);
@@ -48,40 +48,40 @@ void operator delete(void *p)
 
 #if sINTRO
 #if !_DEBUG
-void * __cdecl malloc(unsigned int size)
+void *  malloc(unsigned int size)
 {
 	return HeapAlloc(GetProcessHeap(),HEAP_NO_SERIALIZE,size);
 }
 
-void __cdecl free(void *ptr)
+void  free(void *ptr)
 {
 	HeapFree(GetProcessHeap(),HEAP_NO_SERIALIZE,ptr);
 }
 #endif
 
-void * __cdecl operator new(unsigned int size)
+void *  operator new(unsigned int size)
 {
 	return malloc(size);
 }
 
-void * __cdecl operator new[](unsigned int size)
+void *  operator new[](unsigned int size)
 {
 	return malloc(size);
 }
 
-void __cdecl operator delete(void *ptr)
+void  operator delete(void *ptr)
 {
 	if(ptr)
 		free(ptr);
 }
 
-void __cdecl operator delete[](void *ptr)
+void  operator delete[](void *ptr)
 {
 	if(ptr)
 		free(ptr);
 }
 
-int __cdecl _purecall()
+int  _purecall()
 {
 	return 0;
 }

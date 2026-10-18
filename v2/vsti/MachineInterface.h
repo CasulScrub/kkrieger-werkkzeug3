@@ -482,20 +482,20 @@ private:
 
 #ifdef STATIC_BUILD
 
-	typedef CMachineInfo const *(__cdecl *GET_INFO)();												
-	typedef CMachineInterface *(__cdecl *CREATE_MACHINE)();										
+	typedef CMachineInfo const *( *GET_INFO)();												
+	typedef CMachineInterface *( *CREATE_MACHINE)();										
 
 	extern void RegisterMachine(CMachineInfo const *pmi, GET_INFO gi, CREATE_MACHINE cm);	
 
 #define DLL_EXPORTS(INIT_FUNC)															\
-	static CMachineInfo const * __cdecl GetInfo() { return &MacInfo; }					\
-	static CMachineInterface * __cdecl CreateMachine() { return new mi; }				\
+	static CMachineInfo const *  GetInfo() { return &MacInfo; }					\
+	static CMachineInterface *  CreateMachine() { return new mi; }				\
 	void INIT_FUNC() { RegisterMachine(&MacInfo, GetInfo, CreateMachine); }				\
 
 
 #define DLL_EXPORTS_NS(NS, INIT_FUNC) /* namespaced version */ 								\
-	static CMachineInfo const * __cdecl GetInfo() { return &NS::MacInfo; }					\
-	static CMachineInterface * __cdecl CreateMachine() { return new NS::mi; }				\
+	static CMachineInfo const *  GetInfo() { return &NS::MacInfo; }					\
+	static CMachineInterface *  CreateMachine() { return new NS::mi; }				\
 	void INIT_FUNC() { RegisterMachine(&NS::MacInfo, GetInfo, CreateMachine); }				\
 
 
@@ -503,11 +503,11 @@ private:
 #else
 
 	#define DLL_EXPORTS extern "C" { \
-	__declspec(dllexport) CMachineInfo const * __cdecl GetInfo() \
+	 CMachineInfo const *  GetInfo() \
 	{ \
 		return &MacInfo; \
 	} \
-	__declspec(dllexport) CMachineInterface * __cdecl CreateMachine() \
+	 CMachineInterface *  CreateMachine() \
 	{ \
 		return new mi; \
 	} \

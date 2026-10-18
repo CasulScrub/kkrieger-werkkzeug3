@@ -39,13 +39,13 @@
 #if _DEBUG                          // fix memory management
 #if !sINTRO
 #define _MFC_OVERRIDES_NEW
-void * sDLLSYSTEM __cdecl operator new(unsigned int,const char *,int);
-inline void __cdecl operator delete(void *p, const char *, int s) { ::operator delete(p); }
+void * sDLLSYSTEM  operator new(unsigned int,const char *,int);
+inline void  operator delete(void *p, const char *, int s) { ::operator delete(p); }
 #define new new(__FILE__,__LINE__)
 #endif
 #endif
 
-#define sNORETURN __declspec(noreturn)  // use this for dead end funtions
+#define sNORETURN __attribute__((noreturn))  // use this for dead end funtions
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -197,13 +197,13 @@ typedef const void*               sCPtr;
 
 /****************************************************************************/
 
-template <class Type> __forceinline Type sMin(Type a,Type b)            {return (a<b) ? a : b;}
-template <class Type> __forceinline Type sMax(Type a,Type b)            {return (a>b) ? a : b;}
-template <class Type> __forceinline Type sSign(Type a)                  {return (a==0) ? 0 : (a>0) ? 1 : -1;}
-template <class Type> __forceinline Type sRange(Type a,Type b,Type c)   {return (a>=b) ? b : (a<=c) ? c : a;}
-template <class Type> __forceinline void sSwap(Type &a,Type &b)         {Type s; s=a; a=b; b=s;}
-template <class Type> __forceinline Type sAlign(Type &a,sInt b)         {return (Type)((((sInt)a)+b-1)&(~(b-1)));}
-__forceinline sF32 sFade(sF32 a,sF32 b,sF32 fade)												{return a+(b-a)*fade;}
+template <class Type> __attribute__((always_inline)) inline Type sMin(Type a,Type b)            {return (a<b) ? a : b;}
+template <class Type> __attribute__((always_inline)) inline Type sMax(Type a,Type b)            {return (a>b) ? a : b;}
+template <class Type> __attribute__((always_inline)) inline Type sSign(Type a)                  {return (a==0) ? 0 : (a>0) ? 1 : -1;}
+template <class Type> __attribute__((always_inline)) inline Type sRange(Type a,Type b,Type c)   {return (a>=b) ? b : (a<=c) ? c : a;}
+template <class Type> __attribute__((always_inline)) inline void sSwap(Type &a,Type &b)         {Type s; s=a; a=b; b=s;}
+template <class Type> __attribute__((always_inline)) inline Type sAlign(Type &a,sInt b)         {return (Type)((((sInt)a)+b-1)&(~(b-1)));}
+__attribute__((always_inline)) inline sF32 sFade(sF32 a,sF32 b,sF32 fade)												{return a+(b-a)*fade;}
 
 sU32 sDLLSYSTEM sGetRnd();
 sU32 sDLLSYSTEM sGetRnd(sU32 max);
@@ -227,31 +227,31 @@ sF32 sRangeF32(sF32 a,sF32 b,sF32 c);
 typedef unsigned int size_t;
 extern "C"
 {
-  int __cdecl abs(int);
+  int  abs(int);
 
-  double __cdecl atan(double);
-  double __cdecl atan2(double,double);
-  double __cdecl cos(double);
-  double __cdecl exp(double);
-  double __cdecl fabs(double);
-  double __cdecl log(double);
-  double __cdecl log10(double);
-  double __cdecl sin(double);
-  double __cdecl sqrt(double);
-  double __cdecl tan(double); 
+  double  atan(double);
+  double  atan2(double,double);
+  double  cos(double);
+  double  exp(double);
+  double  fabs(double);
+  double  log(double);
+  double  log10(double);
+  double  sin(double);
+  double  sqrt(double);
+  double  tan(double); 
 
-  double __cdecl acos(double);
-  double __cdecl asin(double);
-  double __cdecl cosh(double);
-  double __cdecl fmod(double,double);
-  double __cdecl pow(double,double);
-  double __cdecl sinh(double);
-  double __cdecl tanh(double);
+  double  acos(double);
+  double  asin(double);
+  double  cosh(double);
+  double  fmod(double,double);
+  double  pow(double,double);
+  double  sinh(double);
+  double  tanh(double);
 
-  void * __cdecl memset( void *dest, int c, size_t count );
-  void * __cdecl memcpy( void *dest, const void *src, size_t count );
-  int __cdecl memcmp( const void *buf1, const void *buf2, size_t count );
-  size_t __cdecl strlen( const char *string );
+  void *  memset( void *dest, int c, size_t count );
+  void *  memcpy( void *dest, const void *src, size_t count );
+  int  memcmp( const void *buf1, const void *buf2, size_t count );
+  size_t  strlen( const char *string );
 }
 
 #pragma intrinsic (abs)                                       // int intrinsic
@@ -259,34 +259,34 @@ extern "C"
 #pragma intrinsic (atan,atan2,cos,exp,log,log10,sin,sqrt,tan,fabs) // true intrinsic
 #pragma intrinsic (acos,asin,cosh,fmod,pow,sinh,tanh)         // fake intrinsic
 
-__forceinline sInt sAbs(sInt i)           { return abs(i); }
-__forceinline void sSetMem(sPtr dd,sInt s,sInt c)        { memset(dd,s,c); }
-__forceinline void sCopyMem(sPtr dd,sCPtr ss,sInt c)     { memcpy(dd,ss,c); }
-__forceinline sInt sCmpMem(sCPtr dd,sCPtr ss,sInt c)     { return memcmp(dd,ss,c); }
-__forceinline sInt sGetStringLen(const sChar *s)         { return (sInt) strlen(s); }
+__attribute__((always_inline)) inline sInt sAbs(sInt i)           { return abs(i); }
+__attribute__((always_inline)) inline void sSetMem(sPtr dd,sInt s,sInt c)        { memset(dd,s,c); }
+__attribute__((always_inline)) inline void sCopyMem(sPtr dd,sCPtr ss,sInt c)     { memcpy(dd,ss,c); }
+__attribute__((always_inline)) inline sInt sCmpMem(sCPtr dd,sCPtr ss,sInt c)     { return memcmp(dd,ss,c); }
+__attribute__((always_inline)) inline sInt sGetStringLen(const sChar *s)         { return (sInt) strlen(s); }
 
 
-__forceinline sF64 sFATan(sF64 f)         { return atan(f); }
-__forceinline sF64 sFATan2(sF64 a,sF64 b) { return atan2(a,b); }
-__forceinline sF64 sFCos(sF64 f)          { return cos(f); }
-__forceinline sF64 sFAbs(sF64 f)          { return fabs(f); }
-__forceinline sF64 sFLog(sF64 f)          { return log(f); }
-__forceinline sF64 sFLog10(sF64 f)        { return log10(f); }
-__forceinline sF64 sFSin(sF64 f)          { return sin(f); }
-__forceinline sF64 sFSqrt(sF64 f)         { return sqrt(f); }
+__attribute__((always_inline)) inline sF64 sFATan(sF64 f)         { return atan(f); }
+__attribute__((always_inline)) inline sF64 sFATan2(sF64 a,sF64 b) { return atan2(a,b); }
+__attribute__((always_inline)) inline sF64 sFCos(sF64 f)          { return cos(f); }
+__attribute__((always_inline)) inline sF64 sFAbs(sF64 f)          { return fabs(f); }
+__attribute__((always_inline)) inline sF64 sFLog(sF64 f)          { return log(f); }
+__attribute__((always_inline)) inline sF64 sFLog10(sF64 f)        { return log10(f); }
+__attribute__((always_inline)) inline sF64 sFSin(sF64 f)          { return sin(f); }
+__attribute__((always_inline)) inline sF64 sFSqrt(sF64 f)         { return sqrt(f); }
 
-__forceinline sF64 sFACos(sF64 f)         { return acos(f); }
-__forceinline sF64 sFASin(sF64 f)         { return asin(f); }
-__forceinline sF64 sFCosH(sF64 f)         { return cosh(f); }
-__forceinline sF64 sFSinH(sF64 f)         { return sinh(f); }
-__forceinline sF64 sFTanH(sF64 f)         { return tanh(f); }
+__attribute__((always_inline)) inline sF64 sFACos(sF64 f)         { return acos(f); }
+__attribute__((always_inline)) inline sF64 sFASin(sF64 f)         { return asin(f); }
+__attribute__((always_inline)) inline sF64 sFCosH(sF64 f)         { return cosh(f); }
+__attribute__((always_inline)) inline sF64 sFSinH(sF64 f)         { return sinh(f); }
+__attribute__((always_inline)) inline sF64 sFTanH(sF64 f)         { return tanh(f); }
 
-__forceinline sF64 sFInvSqrt(sF64 f)      { return 1.0/sqrt(f); }
+__attribute__((always_inline)) inline sF64 sFInvSqrt(sF64 f)      { return 1.0/sqrt(f); }
 
 #if !sINTRO 
-__forceinline sF64 sFMod(sF64 a,sF64 b)   { return fmod(a,b); }
-__forceinline sF64 sFExp(sF64 f)          { return exp(f); }
-__forceinline sF64 sFPow(sF64 a,sF64 b)   { return pow(a,b); }
+__attribute__((always_inline)) inline sF64 sFMod(sF64 a,sF64 b)   { return fmod(a,b); }
+__attribute__((always_inline)) inline sF64 sFExp(sF64 f)          { return exp(f); }
+__attribute__((always_inline)) inline sF64 sFPow(sF64 a,sF64 b)   { return pow(a,b); }
 #endif
 
 #if sINTRO
@@ -303,7 +303,7 @@ sF64 sFExp(sF64 f);
 
 #pragma warning (disable : 4035) 
 
-__forceinline sInt sFtol (const float f)
+__attribute__((always_inline)) inline sInt sFtol (const float f)
 {
   __asm 
   {
@@ -314,7 +314,7 @@ __forceinline sInt sFtol (const float f)
   }
 }
 
-__forceinline sF32 sFRound (const float f)
+__attribute__((always_inline)) inline sF32 sFRound (const float f)
 {
   __asm 
   {
@@ -323,7 +323,7 @@ __forceinline sF32 sFRound (const float f)
   }
 }
 
-__forceinline sInt sMulDiv(sInt var_a,sInt var_b,sInt var_c)
+__attribute__((always_inline)) inline sInt sMulDiv(sInt var_a,sInt var_b,sInt var_c)
 {
   __asm
   {
@@ -335,7 +335,7 @@ __forceinline sInt sMulDiv(sInt var_a,sInt var_b,sInt var_c)
   }
 }
 
-__forceinline sInt sMulShift(sInt var_a,sInt var_b)
+__attribute__((always_inline)) inline sInt sMulShift(sInt var_a,sInt var_b)
 {
   __asm
   {
@@ -345,7 +345,7 @@ __forceinline sInt sMulShift(sInt var_a,sInt var_b)
   }
 }
 
-__forceinline sInt sDivShift(sInt var_a,sInt var_b)
+__attribute__((always_inline)) inline sInt sDivShift(sInt var_a,sInt var_b)
 {
   __asm
   {
@@ -368,10 +368,10 @@ __forceinline sInt sDivShift(sInt var_a,sInt var_b)
 /****************************************************************************/
 
 
-__forceinline void sSetMem1(sU8  *d,sInt s,sInt c)    {while(c--)*d++=s;}
-__forceinline void sSetMem2(sU16 *d,sU16 s,sInt c)    {while(c--)*d++=s;}
-__forceinline void sSetMem4(sU32 *d,sU32 s,sInt c)    {while(c--)*d++=s;}
-__forceinline void sSetMem8(sU64 *d,sU64 s,sInt c)    {while(c--)*d++=s;}
+__attribute__((always_inline)) inline void sSetMem1(sU8  *d,sInt s,sInt c)    {while(c--)*d++=s;}
+__attribute__((always_inline)) inline void sSetMem2(sU16 *d,sU16 s,sInt c)    {while(c--)*d++=s;}
+__attribute__((always_inline)) inline void sSetMem4(sU32 *d,sU32 s,sInt c)    {while(c--)*d++=s;}
+__attribute__((always_inline)) inline void sSetMem8(sU64 *d,sU64 s,sInt c)    {while(c--)*d++=s;}
 void sCopyMem4(sU32 *d,const sU32 *s,sInt c);
 void sCopyMem8(sU64 *d,const sU64 *s,sInt c);
 
@@ -385,7 +385,7 @@ sDLLSYSTEM sInt sCmpStringI(const sChar *a,const sChar *b);
 sDLLSYSTEM const sChar *sFindString(const sChar *s,const sChar *f);
 sDLLSYSTEM const sChar *sFindStringI(const sChar *s,const sChar *f);
 
-sDLLSYSTEM void __cdecl sSPrintF(sChar *buffer,sInt size,const sChar *format,...); 
+sDLLSYSTEM void  sSPrintF(sChar *buffer,sInt size,const sChar *format,...); 
 
 sDLLSYSTEM sInt sScanInt(sChar *&scan);
 sDLLSYSTEM sInt sScanHex(sChar *&scan);
@@ -444,8 +444,8 @@ sBool sReadEnd(sU32 *&);
 sDLLSYSTEM sNORETURN void sVerifyFalse(sChar *file,sInt line);
 #if !sINTRO || _DEBUG
 sDLLSYSTEM void sDPrint(sChar *text);
-sDLLSYSTEM void __cdecl sDPrintF(sChar *format,...);
-sDLLSYSTEM sNORETURN void __cdecl sFatal(sChar *format,...);
+sDLLSYSTEM void  sDPrintF(sChar *format,...);
+sDLLSYSTEM sNORETURN void  sFatal(sChar *format,...);
 #endif
 
 #ifdef _DEBUG
@@ -463,7 +463,7 @@ sDLLSYSTEM sNORETURN void __cdecl sFatal(sChar *format,...);
 #endif
 
 #if sINTRO && !_DEBUG
-inline void __cdecl sFatal(char *format,...)
+inline void  sFatal(char *format,...)
 {
 }
 #endif
@@ -517,10 +517,10 @@ struct sF324
 struct sDLLSYSTEM sRect
 {
   sInt x0,y0,x1,y1;
-  __forceinline void Init() {x0=y0=x1=y1=0;}
-  __forceinline void Init(sInt X0,sInt Y0,sInt X1,sInt Y1) {x0=X0;y0=Y0;x1=X1;y1=Y1;}
-  __forceinline sInt XSize() const {return x1-x0;}
-  __forceinline sInt YSize() const {return y1-y0;}
+  __attribute__((always_inline)) inline void Init() {x0=y0=x1=y1=0;}
+  __attribute__((always_inline)) inline void Init(sInt X0,sInt Y0,sInt X1,sInt Y1) {x0=X0;y0=Y0;x1=X1;y1=Y1;}
+  __attribute__((always_inline)) inline sInt XSize() const {return x1-x0;}
+  __attribute__((always_inline)) inline sInt YSize() const {return y1-y0;}
     void Init(struct sFRect &r);
 #if !sINTRO
   sBool Hit(sInt x,sInt y);
@@ -538,10 +538,10 @@ struct sDLLSYSTEM sRect
 struct sDLLSYSTEM sFRect
 {
   sF32 x0,y0,x1,y1;
-  __forceinline void Init() {x0=y0=x1=y1=0;}
-  __forceinline void Init(sF32 X0,sF32 Y0,sF32 X1,sF32 Y1) {x0=X0;y0=Y0;x1=X1;y1=Y1;}
-  __forceinline sF32 XSize() const {return x1-x0;}
-  __forceinline sF32 YSize() const {return y1-y0;}
+  __attribute__((always_inline)) inline void Init() {x0=y0=x1=y1=0;}
+  __attribute__((always_inline)) inline void Init(sF32 X0,sF32 Y0,sF32 X1,sF32 Y1) {x0=X0;y0=Y0;x1=X1;y1=Y1;}
+  __attribute__((always_inline)) inline sF32 XSize() const {return x1-x0;}
+  __attribute__((always_inline)) inline sF32 YSize() const {return y1-y0;}
   void Init(struct sRect &r);
 #if !sINTRO
   sBool Hit(sF32 x,sF32 y);
@@ -566,11 +566,11 @@ struct sDLLSYSTEM sColor
     };
     sU8 bgra[4];
   };
-  __forceinline sColor(sU32 c) { Color = c; }
-  __forceinline sColor() {}
-  __forceinline operator unsigned long () { return Color; }
-  __forceinline void Init(sU8 R,sU8 G,sU8 B) { Color = B|(G<<8)|(R<<16)|0xff000000; };
-  __forceinline void Init(sU8 R,sU8 G,sU8 B,sU32 A) { Color = B|(G<<8)|(R<<16)|(A<<24); };
+  __attribute__((always_inline)) inline sColor(sU32 c) { Color = c; }
+  __attribute__((always_inline)) inline sColor() {}
+  __attribute__((always_inline)) inline operator unsigned long () { return Color; }
+  __attribute__((always_inline)) inline void Init(sU8 R,sU8 G,sU8 B) { Color = B|(G<<8)|(R<<16)|0xff000000; };
+  __attribute__((always_inline)) inline void Init(sU8 R,sU8 G,sU8 B,sU32 A) { Color = B|(G<<8)|(R<<16)|(A<<24); };
   void Fade(sF32 fade,sColor c0,sColor c1);
   void Fade(sInt fade,sColor c0,sColor c1);
 };
@@ -624,14 +624,14 @@ struct sDLLSYSTEM sVector
 {
   sF32 x,y,z,w;
 
-  __forceinline void Init()                                         {x=0; y=0; z=0; w=0;}
-  __forceinline void Init(sInt3 &v)                                 {x=v.x/65536.0f; y=v.y/65536.0f; z=v.z/65536.0f; w=0.0f;}
-	__forceinline void Init(sInt4 &v)																	{x=v.x/65536.0f; y=v.y/65536.0f; z=v.z/65536.0f; w=v.w/65536.0f;}
-  __forceinline void Init(sF32 xx,sF32 yy,sF32 zz)                  {x=xx; y=yy; z=zz; w=0;}
-  __forceinline void Init(sF32 xx,sF32 yy,sF32 zz,sF32 ww)          {x=xx; y=yy; z=zz; w=ww;}
-  __forceinline void InitColorWithBug(sU32 col)                     {x=((col>>0)&0xff)/255.0f;y=((col>>8)&0xff)/255.0f;z=((col>>16)&0xff)/255.0f;w=((col>>24)&0xff)/255.0f;}
-  __forceinline void InitColor(sU32 col)                            {x=((col>>16)&0xff)/255.0f;y=((col>>8)&0xff)/255.0f;z=((col>>0)&0xff)/255.0f;w=((col>>24)&0xff)/255.0f;}
-  __forceinline sU32 GetColor()                                     {return sRange<sInt>(x*255,255,0)|(sRange<sInt>(y*255,255,0)<<8)|(sRange<sInt>(z*255,255,0)<<16)|(sRange<sInt>(w*255,255,0)<<24);}
+  __attribute__((always_inline)) inline void Init()                                         {x=0; y=0; z=0; w=0;}
+  __attribute__((always_inline)) inline void Init(sInt3 &v)                                 {x=v.x/65536.0f; y=v.y/65536.0f; z=v.z/65536.0f; w=0.0f;}
+	__attribute__((always_inline)) inline void Init(sInt4 &v)																	{x=v.x/65536.0f; y=v.y/65536.0f; z=v.z/65536.0f; w=v.w/65536.0f;}
+  __attribute__((always_inline)) inline void Init(sF32 xx,sF32 yy,sF32 zz)                  {x=xx; y=yy; z=zz; w=0;}
+  __attribute__((always_inline)) inline void Init(sF32 xx,sF32 yy,sF32 zz,sF32 ww)          {x=xx; y=yy; z=zz; w=ww;}
+  __attribute__((always_inline)) inline void InitColorWithBug(sU32 col)                     {x=((col>>0)&0xff)/255.0f;y=((col>>8)&0xff)/255.0f;z=((col>>16)&0xff)/255.0f;w=((col>>24)&0xff)/255.0f;}
+  __attribute__((always_inline)) inline void InitColor(sU32 col)                            {x=((col>>16)&0xff)/255.0f;y=((col>>8)&0xff)/255.0f;z=((col>>0)&0xff)/255.0f;w=((col>>24)&0xff)/255.0f;}
+  __attribute__((always_inline)) inline sU32 GetColor()                                     {return sRange<sInt>(x*255,255,0)|(sRange<sInt>(y*255,255,0)<<8)|(sRange<sInt>(z*255,255,0)<<16)|(sRange<sInt>(w*255,255,0)<<24);}
   void InitRnd();
 
   void Write(sU32 *&p);
@@ -641,21 +641,21 @@ struct sDLLSYSTEM sVector
   void Read3(sU32 *&p);
   void Read3U(sU32 *&p);
 
-  __forceinline void Init3()                                        {x=0; y=0; z=0;}
-  __forceinline void Init3(sF32 xx,sF32 yy,sF32 zz)                 {x=xx; y=yy; z=zz;}
-  __forceinline void Add3(const sVector &a,const sVector &b)        {x=a.x+b.x; y=a.y+b.y; z=a.z+b.z;}
-  __forceinline void Sub3(const sVector &a,const sVector &b)        {x=a.x-b.x; y=a.y-b.y; z=a.z-b.z;}
-  __forceinline void Mul3(const sVector &a,const sVector &b)        {x=a.x*b.x; y=a.y*b.y; z=a.z*b.z;}
-  __forceinline void Neg3(const sVector &a)                         {x=-a.x; y=-a.y; z=-a.z;}
-  __forceinline void Add3(const sVector &a)                         {x+=a.x; y+=a.y; z+=a.z;}
-  __forceinline void Sub3(const sVector &a)                         {x-=a.x; y-=a.y; z-=a.z;}
-  __forceinline void Mul3(const sVector &a)                         {x*=a.x; y*=a.y; z*=a.z;}
-  __forceinline sF32 Dot3(const sVector &a) const                   {return x*a.x+y*a.y+z*a.z;}
-  __forceinline void Neg3()                                         {x=-x; y=-y; z=-z;}
-  __forceinline void AddMul3(const sVector &a,const sVector &b)     {x+=a.x*b.x; y+=a.y*b.y; z+=a.z*b.z;}
-  __forceinline void Scale3(sF32 s)                                 {x*=s; y*=s; z*=s;}
-  __forceinline void Scale3(const sVector &a,sF32 s)                {x=a.x*s; y=a.y*s; z=a.z*s;}
-  __forceinline void AddScale3(const sVector &a,sF32 s)             {x+=a.x*s; y+=a.y*s; z+=a.z*s;}
+  __attribute__((always_inline)) inline void Init3()                                        {x=0; y=0; z=0;}
+  __attribute__((always_inline)) inline void Init3(sF32 xx,sF32 yy,sF32 zz)                 {x=xx; y=yy; z=zz;}
+  __attribute__((always_inline)) inline void Add3(const sVector &a,const sVector &b)        {x=a.x+b.x; y=a.y+b.y; z=a.z+b.z;}
+  __attribute__((always_inline)) inline void Sub3(const sVector &a,const sVector &b)        {x=a.x-b.x; y=a.y-b.y; z=a.z-b.z;}
+  __attribute__((always_inline)) inline void Mul3(const sVector &a,const sVector &b)        {x=a.x*b.x; y=a.y*b.y; z=a.z*b.z;}
+  __attribute__((always_inline)) inline void Neg3(const sVector &a)                         {x=-a.x; y=-a.y; z=-a.z;}
+  __attribute__((always_inline)) inline void Add3(const sVector &a)                         {x+=a.x; y+=a.y; z+=a.z;}
+  __attribute__((always_inline)) inline void Sub3(const sVector &a)                         {x-=a.x; y-=a.y; z-=a.z;}
+  __attribute__((always_inline)) inline void Mul3(const sVector &a)                         {x*=a.x; y*=a.y; z*=a.z;}
+  __attribute__((always_inline)) inline sF32 Dot3(const sVector &a) const                   {return x*a.x+y*a.y+z*a.z;}
+  __attribute__((always_inline)) inline void Neg3()                                         {x=-x; y=-y; z=-z;}
+  __attribute__((always_inline)) inline void AddMul3(const sVector &a,const sVector &b)     {x+=a.x*b.x; y+=a.y*b.y; z+=a.z*b.z;}
+  __attribute__((always_inline)) inline void Scale3(sF32 s)                                 {x*=s; y*=s; z*=s;}
+  __attribute__((always_inline)) inline void Scale3(const sVector &a,sF32 s)                {x=a.x*s; y=a.y*s; z=a.z*s;}
+  __attribute__((always_inline)) inline void AddScale3(const sVector &a,sF32 s)             {x+=a.x*s; y+=a.y*s; z+=a.z*s;}
 	void               Lin3(const sVector &a,const sVector &b,sF32 t) ;
                 sF32 Abs3() const                                   ;
                 void Unit3()                                        ;
@@ -664,23 +664,23 @@ struct sDLLSYSTEM sVector
                 void Rotate3(const sMatrix &m);                     ;
                 void RotateT3(const sMatrix &m,const sVector &v)    ;
                 void RotateT3(const sMatrix &m);                    ;
-  __forceinline void Cross3(const sVector &a,const sVector &b)      ;
+  __attribute__((always_inline)) inline void Cross3(const sVector &a,const sVector &b)      ;
 
-  __forceinline void Init4()                                        {x=0; y=0; z=0; w=0;}
-  __forceinline void Init4(sF32 xx,sF32 yy,sF32 zz,sF32 ww)         {x=xx; y=yy; z=zz; w=ww;}
-  __forceinline void Add4(const sVector &a,const sVector &b)        {x=a.x+b.x; y=a.y+b.y; z=a.z+b.z; w=a.w+b.w;}
-  __forceinline void Sub4(const sVector &a,const sVector &b)        {x=a.x-b.x; y=a.y-b.y; z=a.z-b.z; w=a.w-b.w;}
-  __forceinline void Mul4(const sVector &a,const sVector &b)        {x=a.x*b.x; y=a.y*b.y; z=a.z*b.z; w=a.w*b.w;}
-  __forceinline void Neg4(const sVector &a)                         {x=-a.x; y=-a.y; z=-a.z; w=-a.w;}
-  __forceinline void Add4(const sVector &a)                         {x+=a.x; y+=a.y; z+=a.z; w+=a.w;}
-  __forceinline void Sub4(const sVector &a)                         {x-=a.x; y-=a.y; z-=a.z; w-=a.w;}
-  __forceinline void Mul4(const sVector &a)                         {x*=a.x; y*=a.y; z*=a.z; w*=a.w;}
-  __forceinline void Neg4()                                         {x=-x; y=-y; z=-z; w=-w;}
-  __forceinline void AddMul4(const sVector &a,const sVector &b)     {x+=a.x*b.x; y+=a.y*b.y; z+=a.z*b.z; w+=a.w*b.w;}
-  __forceinline sF32 Dot4(const sVector &a) const                   {return x*a.x + y*a.y + z*a.z * w*a.w;}
-  __forceinline void Scale4(sF32 s)                                 {x*=s; y*=s; z*=s; w*=s;}
-  __forceinline void Scale4(const sVector &a,sF32 s)                {x=a.x*s; y=a.y*s; z=a.z*s; w=a.w*s;}
-  __forceinline void AddScale4(const sVector &a,sF32 s)             {x+=a.x*s; y+=a.y*s; z+=a.z*s; w+=a.w*s;}
+  __attribute__((always_inline)) inline void Init4()                                        {x=0; y=0; z=0; w=0;}
+  __attribute__((always_inline)) inline void Init4(sF32 xx,sF32 yy,sF32 zz,sF32 ww)         {x=xx; y=yy; z=zz; w=ww;}
+  __attribute__((always_inline)) inline void Add4(const sVector &a,const sVector &b)        {x=a.x+b.x; y=a.y+b.y; z=a.z+b.z; w=a.w+b.w;}
+  __attribute__((always_inline)) inline void Sub4(const sVector &a,const sVector &b)        {x=a.x-b.x; y=a.y-b.y; z=a.z-b.z; w=a.w-b.w;}
+  __attribute__((always_inline)) inline void Mul4(const sVector &a,const sVector &b)        {x=a.x*b.x; y=a.y*b.y; z=a.z*b.z; w=a.w*b.w;}
+  __attribute__((always_inline)) inline void Neg4(const sVector &a)                         {x=-a.x; y=-a.y; z=-a.z; w=-a.w;}
+  __attribute__((always_inline)) inline void Add4(const sVector &a)                         {x+=a.x; y+=a.y; z+=a.z; w+=a.w;}
+  __attribute__((always_inline)) inline void Sub4(const sVector &a)                         {x-=a.x; y-=a.y; z-=a.z; w-=a.w;}
+  __attribute__((always_inline)) inline void Mul4(const sVector &a)                         {x*=a.x; y*=a.y; z*=a.z; w*=a.w;}
+  __attribute__((always_inline)) inline void Neg4()                                         {x=-x; y=-y; z=-z; w=-w;}
+  __attribute__((always_inline)) inline void AddMul4(const sVector &a,const sVector &b)     {x+=a.x*b.x; y+=a.y*b.y; z+=a.z*b.z; w+=a.w*b.w;}
+  __attribute__((always_inline)) inline sF32 Dot4(const sVector &a) const                   {return x*a.x + y*a.y + z*a.z * w*a.w;}
+  __attribute__((always_inline)) inline void Scale4(sF32 s)                                 {x*=s; y*=s; z*=s; w*=s;}
+  __attribute__((always_inline)) inline void Scale4(const sVector &a,sF32 s)                {x=a.x*s; y=a.y*s; z=a.z*s; w=a.w*s;}
+  __attribute__((always_inline)) inline void AddScale4(const sVector &a,sF32 s)             {x+=a.x*s; y+=a.y*s; z+=a.z*s; w+=a.w*s;}
 	void               Lin4(const sVector &a,const sVector &b,sF32 t)	;
                 sF32 Abs4() const                                   ;
                 void Unit4()                                        ;
@@ -741,13 +741,13 @@ struct sDLLSYSTEM sMatrix
   void MulR(const sMatrix &b)                                       {sMatrix a;a=*this;MulR(a,b);}
 };
 /*
-__forceinline sF32 sVector::Abs3() const                                   {return sFSqrt(Dot3(*this));}
-__forceinline void sVector::Unit3()                                        {Scale3(sFInvSqrt(Dot3(*this)));}
-__forceinline void sVector::UnitSafe3()                                    {sF32 e=Dot3(*this); if(e>0.00001) Scale3(sFInvSqrt(e)); else Init3(1,0,0);}
+__attribute__((always_inline)) inline sF32 sVector::Abs3() const                                   {return sFSqrt(Dot3(*this));}
+__attribute__((always_inline)) inline void sVector::Unit3()                                        {Scale3(sFInvSqrt(Dot3(*this)));}
+__attribute__((always_inline)) inline void sVector::UnitSafe3()                                    {sF32 e=Dot3(*this); if(e>0.00001) Scale3(sFInvSqrt(e)); else Init3(1,0,0);}
 
-__forceinline sF32 sVector::Abs4() const                                   {return Dot4(*this);}
-__forceinline void sVector::Unit4()                                        {Scale4(sFInvSqrt(Dot4(*this)));}
-__forceinline void sVector::UnitSafe4()                                    {sF32 e=Dot4(*this); if(e>0.00001) Scale4(sFInvSqrt(e)); else Init4(1,0,0,0);}
+__attribute__((always_inline)) inline sF32 sVector::Abs4() const                                   {return Dot4(*this);}
+__attribute__((always_inline)) inline void sVector::Unit4()                                        {Scale4(sFInvSqrt(Dot4(*this)));}
+__attribute__((always_inline)) inline void sVector::UnitSafe4()                                    {sF32 e=Dot4(*this); if(e>0.00001) Scale4(sFInvSqrt(e)); else Init4(1,0,0,0);}
 */
 /****************************************************************************/
 /***                                                                      ***/
@@ -1019,17 +1019,17 @@ template <class Type> struct sArray
   sInt Alloc;
   sInt TypeSize;
 
-  __forceinline void Init()                     { sArrayInit((sArrayBase *)this,sizeof(Type),0); }
-  __forceinline void Init(sInt c)               { sArrayInit((sArrayBase *)this,sizeof(Type),c); }
-  __forceinline void Exit()                     { delete[] Array; }
-  __forceinline void SetMax(sInt c)             { sArraySetMax((sArrayBase *)this,c); }
-  __forceinline void AtLeast(sInt c)            { sArrayAtLeast((sArrayBase *)this,c); }
-  __forceinline Type Get(sInt i)                { return Array[i]; }
-  __forceinline void Set(sInt i,Type o)         { Array[i] = o; }
-  __forceinline Type &operator[](sInt i)        { return Array[i]; }
-  __forceinline const Type &operator[](sInt i) const { return Array[i]; }
-  __forceinline void Copy(sArray<Type> &a)      { sArrayCopy((sArrayBase *)this,(sArrayBase *)&a); }
-  __forceinline Type *Add()                     { return (Type *)sArrayAdd((sArrayBase *)this); }
+  __attribute__((always_inline)) inline void Init()                     { sArrayInit((sArrayBase *)this,sizeof(Type),0); }
+  __attribute__((always_inline)) inline void Init(sInt c)               { sArrayInit((sArrayBase *)this,sizeof(Type),c); }
+  __attribute__((always_inline)) inline void Exit()                     { delete[] Array; }
+  __attribute__((always_inline)) inline void SetMax(sInt c)             { sArraySetMax((sArrayBase *)this,c); }
+  __attribute__((always_inline)) inline void AtLeast(sInt c)            { sArrayAtLeast((sArrayBase *)this,c); }
+  __attribute__((always_inline)) inline Type Get(sInt i)                { return Array[i]; }
+  __attribute__((always_inline)) inline void Set(sInt i,Type o)         { Array[i] = o; }
+  __attribute__((always_inline)) inline Type &operator[](sInt i)        { return Array[i]; }
+  __attribute__((always_inline)) inline const Type &operator[](sInt i) const { return Array[i]; }
+  __attribute__((always_inline)) inline void Copy(sArray<Type> &a)      { sArrayCopy((sArrayBase *)this,(sArrayBase *)&a); }
+  __attribute__((always_inline)) inline Type *Add()                     { return (Type *)sArrayAdd((sArrayBase *)this); }
 };
 
 /****************************************************************************/

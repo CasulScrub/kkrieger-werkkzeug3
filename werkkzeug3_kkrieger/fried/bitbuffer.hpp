@@ -151,7 +151,7 @@ namespace FRIED
 
     sU32 Mask[25];
 
-    __forceinline void Refill()
+    __attribute__((always_inline)) inline void Refill()
     {
       while(BitFill <= 24)
       {
@@ -179,28 +179,28 @@ namespace FRIED
         Mask[i] = (1 << i) - 1;
     }
 
-    __forceinline void SkipBitsNoCheck(sInt nBits)
+    __attribute__((always_inline)) inline void SkipBitsNoCheck(sInt nBits)
     {
       BitFill -= nBits;
     }
 
-    __forceinline void SkipBits(sInt nBits)
+    __attribute__((always_inline)) inline void SkipBits(sInt nBits)
     {
       SkipBitsNoCheck(nBits);
       Refill();
     }
 
-    __forceinline sU32 PeekBits(sInt nBits)
+    __attribute__((always_inline)) inline sU32 PeekBits(sInt nBits)
     {
       return (Bits >> (BitFill - nBits)) & Mask[nBits];
     }
 
-    __forceinline sU32 GetBitsNoCheck(sInt nBits)
+    __attribute__((always_inline)) inline sU32 GetBitsNoCheck(sInt nBits)
     {
       return (Bits >> (BitFill -= nBits)) & Mask[nBits];
     }
 
-    __forceinline sU32 GetBits(sInt nBits)
+    __attribute__((always_inline)) inline sU32 GetBits(sInt nBits)
     {
       sU32 val = (Bits >> (BitFill -= nBits)) & Mask[nBits];
       Refill();

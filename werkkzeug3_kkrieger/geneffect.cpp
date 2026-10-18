@@ -105,12 +105,12 @@ void SetVert(sF32 *fp,sF32 x,sF32 y,sF32 z,sF32 u,sF32 v,sU64 col)
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_Dummy(GenMaterial *mtrl,sF323 size)
+KObject *  Init_Effect_Dummy(GenMaterial *mtrl,sF323 size)
 {
   return MakeEffect(mtrl);
 }
 
-void __stdcall Exec_Effect_Dummy(KOp *op,KEnvironment *kenv,sF323 size)
+void  Exec_Effect_Dummy(KOp *op,KEnvironment *kenv,sF323 size)
 {
   GenMaterial *mtrl;
   sInt geo;
@@ -216,7 +216,7 @@ void __stdcall Exec_Effect_Dummy(KOp *op,KEnvironment *kenv,sF323 size)
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_Print(class GenMaterial *mtrl,sInt flags,sF32 sizex,sF32 sizey,sF32 spacex,sF32 spacey,sF32 radius,sChar *text)
+KObject *  Init_Effect_Print(class GenMaterial *mtrl,sInt flags,sF32 sizex,sF32 sizey,sF32 spacex,sF32 spacey,sF32 radius,sChar *text)
 {
   /*if(mtrl) mtrl->Release();
   return new GenEffect;*/
@@ -314,7 +314,7 @@ sF32 EffectPrintInfo::Width(sChar *text,sInt maxcount)
 
 /****************************************************************************/
 
-void __stdcall Exec_Effect_Print(KOp *op,KEnvironment *kenv,sInt flags,sF32 sizex,sF32 sizey,sF32 spacex,sF32 spacey,sF32 radius,sChar *text)
+void  Exec_Effect_Print(KOp *op,KEnvironment *kenv,sInt flags,sF32 sizex,sF32 sizey,sF32 spacex,sF32 spacey,sF32 radius,sChar *text)
 {
   GenMaterial *mat;
   sInt geo;
@@ -601,7 +601,7 @@ void FreeParticles()
 
 /*
 
-KObject * __stdcall Init_Effect_Particles(class GenMaterial *mtrl,
+KObject *  Init_Effect_Particles(class GenMaterial *mtrl,
   sInt mode,sInt count,sF32 time,sF32 rate,sF324 speed,
   sU32 col0,sU32 col1,sU32 col2,sF323 size,
   sF32 middle,sF32 fade,sF324 rpos,sF324 rspeed)
@@ -613,7 +613,7 @@ KObject * __stdcall Init_Effect_Particles(class GenMaterial *mtrl,
   return effect;
 }
 
-void __stdcall Exec_Effect_Particles(KOp *op,KEnvironment *kenv,sInt mode,
+void  Exec_Effect_Particles(KOp *op,KEnvironment *kenv,sInt mode,
   sInt count,sF32 time,sF32 rate,sF324 speed,
   sU32 col0,sU32 col1,sU32 col2,sF323 size,
   sF32 fmiddle,sF32 ffade,sF324 rpos,sF324 rspeed)
@@ -793,14 +793,14 @@ void __stdcall Exec_Effect_Particles(KOp *op,KEnvironment *kenv,sInt mode,
 /****************************************************************************/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_PartEmitter(
+KObject *  Init_Effect_PartEmitter(
   sInt slot,sInt mode,sInt count,sF32 time,sF32 rate,
   sF324 speed,sF324 rpos,sF324 rspeed)
 {
   return new GenScene;
 }
 
-KObject * __stdcall Init_Effect_PartSystem(class GenMaterial *mtrl,
+KObject *  Init_Effect_PartSystem(class GenMaterial *mtrl,
   sInt slot,sInt count,sU32 col0,sU32 col1,sU32 col2,sF323 size,sF32 middle,sF32 fade,sF32 gravity,sInt flags)
 {
   GenEffect *effect;
@@ -824,7 +824,7 @@ KObject * __stdcall Init_Effect_PartSystem(class GenMaterial *mtrl,
 
 /****************************************************************************/
 
-void __stdcall Exec_Effect_PartEmitter(KOp *op,KEnvironment *kenv,
+void  Exec_Effect_PartEmitter(KOp *op,KEnvironment *kenv,
   sInt slot,sInt mode,sInt burst,sF32 time,sF32 rate,
   sF324 speed,sF324 rpos,sF324 rspeed)
 {
@@ -903,7 +903,7 @@ void __stdcall Exec_Effect_PartEmitter(KOp *op,KEnvironment *kenv,
   }
 }
 
-void __stdcall Exec_Effect_PartSystem(KOp *op,KEnvironment *kenv,
+void  Exec_Effect_PartSystem(KOp *op,KEnvironment *kenv,
   sInt slot,sInt count,sU32 col0,sU32 col1,sU32 col2,sF323 size,sF32 fmiddle,sF32 ffade,sF32 gravity,sInt flags)
 {
   ParticleSystem *psys;
@@ -1021,7 +1021,7 @@ void __stdcall Exec_Effect_PartSystem(KOp *op,KEnvironment *kenv,
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_Billboards(GenMinMesh *mesh,GenMaterial *mtrl,sF32 size,sF32 aspect,sF32 maxdist,sInt mode)
+KObject *  Init_Effect_Billboards(GenMinMesh *mesh,GenMaterial *mtrl,sF32 size,sF32 aspect,sF32 maxdist,sInt mode)
 {
   if(mtrl) mtrl->Release();
   if(mesh) mesh->Release();
@@ -1030,7 +1030,7 @@ KObject * __stdcall Init_Effect_Billboards(GenMinMesh *mesh,GenMaterial *mtrl,sF
 
 /****************************************************************************/
 
-void __stdcall Exec_Effect_Billboards(KOp *op,KEnvironment *kenv,sF32 size,sF32 aspect,sF32 maxdist,sInt mode)
+void  Exec_Effect_Billboards(KOp *op,KEnvironment *kenv,sF32 size,sF32 aspect,sF32 maxdist,sInt mode)
 {
   GenMaterial *mtrl;
   GenMinMesh *mesh;
@@ -1339,7 +1339,7 @@ struct ImageLayerData
   sInt XSize,YSize;
 };
 
-KObject * __stdcall Init_Effect_ImageLayer(KOp *op,GenBitmap *alpha,sInt pass,sInt quality,sF32 fade,sInt flags,sChar *filename)
+KObject *  Init_Effect_ImageLayer(KOp *op,GenBitmap *alpha,sInt pass,sInt quality,sF32 fade,sInt flags,sChar *filename)
 {
   const sU8 *data;
   sInt size,xs,ys;
@@ -1454,7 +1454,7 @@ KObject * __stdcall Init_Effect_ImageLayer(KOp *op,GenBitmap *alpha,sInt pass,sI
   return fx;
 }
 
-void __stdcall Exec_Effect_ImageLayer(KOp *op,KEnvironment *kenv,sInt pass,sInt quality,sF32 fade,sInt flags,sChar *filename)
+void  Exec_Effect_ImageLayer(KOp *op,KEnvironment *kenv,sInt pass,sInt quality,sF32 fade,sInt flags,sChar *filename)
 {
   GenEffect *fx = (GenEffect *) op->Cache;
   sVertexDouble *vert;

@@ -4267,7 +4267,7 @@ void GenMesh::ReadCompact(sU8 *&pp,sU32 dgmf)
 /****************************************************************************/
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Cube(GenMesh *mesh,sInt tx,sInt ty,sInt tz,sInt crease)
+sObject *  Mesh_Cube(GenMesh *mesh,sInt tx,sInt ty,sInt tz,sInt crease)
 {
 	sInt tess[3],i,j;
   sInt bm;
@@ -4377,7 +4377,7 @@ sObject * __stdcall Mesh_Cube(GenMesh *mesh,sInt tx,sInt ty,sInt tz,sInt crease)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_SelectAll(GenMesh *mesh,sU32 dmask1,sU32 dmask0)
+sObject *  Mesh_SelectAll(GenMesh *mesh,sU32 dmask1,sU32 dmask0)
 {
   mesh->All2Mask(dmask1,dmask0);
 	return mesh;
@@ -4385,7 +4385,7 @@ sObject * __stdcall Mesh_SelectAll(GenMesh *mesh,sU32 dmask1,sU32 dmask0)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_SelectCube(GenMesh *mesh,sF323 center,sF323 size,sInt flags,sU32 dmask1,sU32 dmask0)
+sObject *  Mesh_SelectCube(GenMesh *mesh,sF323 center,sF323 size,sInt flags,sU32 dmask1,sU32 dmask0)
 {
 	SCRIPTVERIFY(mesh);
 	mesh->SelectCube((sVector&)center.x,(sVector&)size.x,flags>>16,dmask1,dmask0);
@@ -4395,7 +4395,7 @@ sObject * __stdcall Mesh_SelectCube(GenMesh *mesh,sF323 center,sF323 size,sInt f
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Subdivide(GenMesh *mesh,sInt mask,sF32 alpha,sInt count)
+sObject *  Mesh_Subdivide(GenMesh *mesh,sInt mask,sF32 alpha,sInt count)
 {
 	SCRIPTVERIFY(mesh);
 	count >>= 16;
@@ -4413,7 +4413,7 @@ sObject * __stdcall Mesh_Subdivide(GenMesh *mesh,sInt mask,sF32 alpha,sInt count
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Extrude(GenMesh *mesh,sInt smask,sInt mode,sInt dmask)
+sObject *  Mesh_Extrude(GenMesh *mesh,sInt smask,sInt mode,sInt dmask)
 {
 	SCRIPTVERIFY(mesh);
 
@@ -4431,7 +4431,7 @@ sObject * __stdcall Mesh_Extrude(GenMesh *mesh,sInt smask,sInt mode,sInt dmask)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Transform(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323 t)
+sObject *  Mesh_Transform(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323 t)
 {
 	sMatrix mat;
 	SCRIPTVERIFY(mesh);
@@ -4449,7 +4449,7 @@ sObject * __stdcall Mesh_Transform(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Cylinder(GenMesh *mesh,sInt tx,sInt ty)
+sObject *  Mesh_Cylinder(GenMesh *mesh,sInt tx,sInt ty)
 {
   sInt i,sj,e;
   sMatrix mat,matuv;
@@ -4523,7 +4523,7 @@ sObject * __stdcall Mesh_Cylinder(GenMesh *mesh,sInt tx,sInt ty)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_NewMesh(sInt colorSets,sInt uvSets)
+sObject *  Mesh_NewMesh(sInt colorSets,sInt uvSets)
 {
 	GenMesh *mesh;
 
@@ -4535,7 +4535,7 @@ sObject * __stdcall Mesh_NewMesh(sInt colorSets,sInt uvSets)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Material(GenMesh *mesh,GenMaterial *mat,sInt id,sInt mask)
+sObject *  Mesh_Material(GenMesh *mesh,GenMaterial *mat,sInt id,sInt mask)
 {
 	SCRIPTVERIFY(mesh);
 	SCRIPTVERIFY(mat);
@@ -4551,7 +4551,7 @@ sObject * __stdcall Mesh_Material(GenMesh *mesh,GenMaterial *mat,sInt id,sInt ma
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_TransformEx(GenMesh *mesh,sInt mask,sInt sj,sInt dj,sF323 s,sF323 r,sF323 t)
+sObject *  Mesh_TransformEx(GenMesh *mesh,sInt mask,sInt sj,sInt dj,sF323 s,sF323 r,sF323 t)
 {
 	sMatrix mat;
 
@@ -4570,7 +4570,7 @@ sObject * __stdcall Mesh_TransformEx(GenMesh *mesh,sInt mask,sInt sj,sInt dj,sF3
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
+sObject *  Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 {
 	SCRIPTVERIFY(mesh);
 	what >>= 16;
@@ -4587,7 +4587,7 @@ sObject * __stdcall Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
+sObject *  Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 {
 	SCRIPTVERIFY(mesh);
 	what >>= 16;
@@ -4604,7 +4604,7 @@ sObject * __stdcall Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt calcWhat)
+sObject *  Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt calcWhat)
 {
 	SCRIPTVERIFY(mesh);
 
@@ -4619,7 +4619,7 @@ sObject * __stdcall Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt calc
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Torus(GenMesh *mesh,sInt tx,sInt ty,sF32 ri,sInt phase,sF32 arclen)
+sObject *  Mesh_Torus(GenMesh *mesh,sInt tx,sInt ty,sF32 ri,sInt phase,sF32 arclen)
 {
 	sInt i,n,e,f,t;
 	sInt sj;
@@ -4724,7 +4724,7 @@ sObject * __stdcall Mesh_Torus(GenMesh *mesh,sInt tx,sInt ty,sF32 ri,sInt phase,
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Sphere(GenMesh *mesh,sInt tx,sInt ty)
+sObject *  Mesh_Sphere(GenMesh *mesh,sInt tx,sInt ty)
 {
 	sInt i,j,v,sj;
 	sMatrix mat,matuv;
@@ -4816,7 +4816,7 @@ sObject * __stdcall Mesh_Sphere(GenMesh *mesh,sInt tx,sInt ty)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Triangulate(GenMesh *mesh,sInt thres,sInt mask,sInt type)
+sObject *  Mesh_Triangulate(GenMesh *mesh,sInt thres,sInt mask,sInt type)
 {
 	SCRIPTVERIFY(mesh);
 
@@ -4829,7 +4829,7 @@ sObject * __stdcall Mesh_Triangulate(GenMesh *mesh,sInt thres,sInt mask,sInt typ
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
+sObject *  Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
 {
 	sMatrix mat;
 	sVector plane;
@@ -4846,7 +4846,7 @@ sObject * __stdcall Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_ExtrudeNormal(GenMesh *mesh,sF32 distance,sInt mask)
+sObject *  Mesh_ExtrudeNormal(GenMesh *mesh,sF32 distance,sInt mask)
 {
 	SCRIPTVERIFY(mesh);
 	if(mask)
@@ -4859,7 +4859,7 @@ sObject * __stdcall Mesh_ExtrudeNormal(GenMesh *mesh,sF32 distance,sInt mask)
 /****************************************************************************/
 
 #if !sINTRO_X
-sObject * __stdcall Mesh_Displace(GenMesh *mesh,GenBitmap *bmp,sF32 ampli,sInt mask)
+sObject *  Mesh_Displace(GenMesh *mesh,GenBitmap *bmp,sF32 ampli,sInt mask)
 {
 	SCRIPTVERIFY(mesh);
 	SCRIPTVERIFY(bmp);
@@ -4874,7 +4874,7 @@ sObject * __stdcall Mesh_Displace(GenMesh *mesh,GenBitmap *bmp,sF32 ampli,sInt m
 /****************************************************************************/
 
 #if !sINTRO_X
-sObject * __stdcall Mesh_Bevel(GenMesh *mesh,sF32 elev,sF32 pull,sInt mask,sInt mode,sInt dmask)
+sObject *  Mesh_Bevel(GenMesh *mesh,sF32 elev,sF32 pull,sInt mask,sInt mode,sInt dmask)
 {
 	SCRIPTVERIFY(mesh);
 
@@ -4893,7 +4893,7 @@ sObject * __stdcall Mesh_Bevel(GenMesh *mesh,sF32 elev,sF32 pull,sInt mask,sInt 
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Perlin(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323 t,sF323 ampl)
+sObject *  Mesh_Perlin(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323 t,sF323 ampl)
 {
 	sMatrix mat;
 
@@ -4908,7 +4908,7 @@ sObject * __stdcall Mesh_Perlin(GenMesh *mesh,sInt mask,sF323 s,sF323 r,sF323 t,
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Add(GenMesh *mesh,GenMesh *mesh2)
+sObject *  Mesh_Add(GenMesh *mesh,GenMesh *mesh2)
 {
 	SCRIPTVERIFY(mesh);
 	SCRIPTVERIFY(mesh2);
@@ -4922,7 +4922,7 @@ sObject * __stdcall Mesh_Add(GenMesh *mesh,GenMesh *mesh2)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
+sObject *  Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
 {
 	SCRIPTVERIFY(mesh);
 
@@ -4941,7 +4941,7 @@ sObject * __stdcall Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
 extern "C" sU8 BabeMesh[];
 #endif
 
-sObject * __stdcall Mesh_Babe(sChar *filename,sInt dummy,sInt anim0,sInt anim1,sInt phase,sInt flags)
+sObject *  Mesh_Babe(sChar *filename,sInt dummy,sInt anim0,sInt anim1,sInt phase,sInt flags)
 {
 	GenMesh *mesh;
 	sU8 *data,*origData;
@@ -4977,14 +4977,14 @@ sObject * __stdcall Mesh_Babe(sChar *filename,sInt dummy,sInt anim0,sInt anim1,s
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_BeginRecord(GenMesh *mesh)
+sObject *  Mesh_BeginRecord(GenMesh *mesh)
 {
   SCRIPTVERIFY(mesh->RecMode==0);
   mesh->RecStoreMode();
   return mesh;
 }
 
-sObject * __stdcall Mesh_AnimLabel(GenMesh *mesh,sInt label,sU32 flags)
+sObject *  Mesh_AnimLabel(GenMesh *mesh,sInt label,sU32 flags)
 {
   mesh->SetAnimLabel(label,flags>>16);
   return mesh;
@@ -4992,7 +4992,7 @@ sObject * __stdcall Mesh_AnimLabel(GenMesh *mesh,sInt label,sU32 flags)
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_SelectRandom(GenMesh *mesh,sU32 ratio,sInt seed,sU32 dmask1,sU32 dmask0)
+sObject *  Mesh_SelectRandom(GenMesh *mesh,sU32 ratio,sInt seed,sU32 dmask1,sU32 dmask0)
 {
 	sInt i;
   volatile sInt dummy;
@@ -5035,7 +5035,7 @@ sObject * __stdcall Mesh_SelectRandom(GenMesh *mesh,sU32 ratio,sInt seed,sU32 dm
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Multiply(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sInt count)
+sObject *  Mesh_Multiply(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sInt count)
 {
 	sInt i;
 	GenMesh *out;
@@ -5065,7 +5065,7 @@ sObject * __stdcall Mesh_Multiply(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sInt cou
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_SelectAngle(GenMesh *mesh,sF32 angle,sU32 dmask1,sU32 dmask0)
+sObject *  Mesh_SelectAngle(GenMesh *mesh,sF32 angle,sU32 dmask1,sU32 dmask0)
 {
   sInt i;
   sVector f0,f1;
@@ -5085,7 +5085,7 @@ sObject * __stdcall Mesh_SelectAngle(GenMesh *mesh,sF32 angle,sU32 dmask1,sU32 d
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_ExtrudeWK(GenMesh *mesh,sInt mask,sInt mode,sInt count,sF32 distance,sF323 s,sF323 r,sInt scalemode)
+sObject *  Mesh_ExtrudeWK(GenMesh *mesh,sInt mask,sInt mode,sInt count,sF32 distance,sF323 s,sF323 r,sInt scalemode)
 {
   sInt i,j,grp,e,ee,mi;
   sU32 *data;

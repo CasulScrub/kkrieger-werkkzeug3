@@ -87,40 +87,40 @@ static sU32 MouseButtonsSave;
 /****************************************************************************/
 
 #if !_DEBUG
-void * __cdecl malloc(unsigned int size)
+void *  malloc(unsigned int size)
 {
 	return HeapAlloc(GetProcessHeap(),HEAP_NO_SERIALIZE,size);
 }
 
-void __cdecl free(void *ptr)
+void  free(void *ptr)
 {
 	HeapFree(GetProcessHeap(),HEAP_NO_SERIALIZE,ptr);
 }
 #endif
 
-void * __cdecl operator new(unsigned int size)
+void *  operator new(unsigned int size)
 {
 	return malloc(size);
 }
 
-void * __cdecl operator new[](unsigned int size)
+void *  operator new[](unsigned int size)
 {
 	return malloc(size);
 }
 
-void __cdecl operator delete(void *ptr)
+void  operator delete(void *ptr)
 {
 	if(ptr)
 		free(ptr);
 }
 
-void __cdecl operator delete[](void *ptr)
+void  operator delete[](void *ptr)
 {
 	if(ptr)
 		free(ptr);
 }
 
-int __cdecl _purecall()
+int  _purecall()
 {
 	return 0;
 }
@@ -446,7 +446,7 @@ static CRITICAL_SECTION DXSLock;
 static HANDLE DXSEvent;
 static sInt DXSCurrentSample;
 
-unsigned long __stdcall ThreadCode(void *);
+unsigned long  ThreadCode(void *);
 void IntroRenderHandler(sS16 *stream,sInt samples);
 
 /****************************************************************************/
@@ -462,7 +462,7 @@ static const GUID IID_IDirectSoundBuffer8 = { 0x6825a449, 0x7524, 0x4d82, 0x92, 
 /***                                                                      ***/
 /****************************************************************************/
 
-unsigned long __stdcall ThreadCode(void *);
+unsigned long  ThreadCode(void *);
 
 void sSystem_::InitDS()
 {
@@ -650,7 +650,7 @@ void sSystem_::FillDS()
 
 /****************************************************************************/
 /*
-unsigned long __stdcall ThreadCode(void *)
+unsigned long  ThreadCode(void *)
 {
   HRESULT hr;
   sInt play,write;
@@ -839,7 +839,7 @@ void sSystem_::FillDS()
 void IntroRenderHandler(sS16 *stream,sInt samples);
 extern GenPlayer *CurrentGenPlayer;
 
-unsigned long __stdcall ThreadCode(void *)
+unsigned long  ThreadCode(void *)
 {
   HRESULT hr;
   sInt play,write;

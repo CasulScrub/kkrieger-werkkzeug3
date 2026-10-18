@@ -169,7 +169,7 @@ struct MultiPara
   sF32 MultiTScale[4];      // 60..63
 };
 
-GenMaterial * __stdcall Init_Material_Material(KOp *op)
+GenMaterial *  Init_Material_Material(KOp *op)
 {
   GenMaterial *gm;
   sInt texhandle[8];
@@ -406,7 +406,7 @@ GenMaterial * __stdcall Init_Material_Material(KOp *op)
     return gm;
 }
 
-void __stdcall Exec_Material_Material(KOp *op,KEnvironment *kenv)
+void  Exec_Material_Material(KOp *op,KEnvironment *kenv)
 {
   sInt i,use;
   GenMaterial *mat;
@@ -463,7 +463,7 @@ void __stdcall Exec_Material_Material(KOp *op,KEnvironment *kenv)
   }
 }
 
-GenMesh * __stdcall Mesh_MatLink(GenMesh *mesh,GenMaterial *mtrl,sInt mask,sInt pass)
+GenMesh *  Mesh_MatLink(GenMesh *mesh,GenMaterial *mtrl,sInt mask,sInt pass)
 {
   sInt i,j;
   GenMeshMtrl *mm;
@@ -485,7 +485,7 @@ GenMesh * __stdcall Mesh_MatLink(GenMesh *mesh,GenMaterial *mtrl,sInt mask,sInt 
   return mesh;
 }
 
-GenMaterial * __stdcall Material_Add(sInt count,GenMaterial *m0,...)
+GenMaterial *  Material_Add(sInt count,GenMaterial *m0,...)
 {
   sInt i,j;
   GenMaterial **mp,*mtrl,*madd;
@@ -516,7 +516,7 @@ GenMaterial * __stdcall Material_Add(sInt count,GenMaterial *m0,...)
 
 #if sLINK_MTRL20
 
-GenMaterial * __stdcall Init_Material_Material20(KOp *op)
+GenMaterial *  Init_Material_Material20(KOp *op)
 {
   GenBitmap *bitmaps[7];
   sInt handles[7];

@@ -241,55 +241,55 @@ public:
 
 // generators
 
-GenMinMesh * __stdcall MinMesh_SingleVert();
-GenMinMesh * __stdcall MinMesh_Grid(sInt mode,sInt tesu,sInt tesv);
-GenMinMesh * __stdcall MinMesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt);
-GenMinMesh * __stdcall MinMesh_Torus(sInt x,sInt y,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags);
-GenMinMesh * __stdcall MinMesh_Sphere(sInt x,sInt y);
-GenMinMesh * __stdcall MinMesh_Cylinder(sInt tx,sInt ty,sInt,sInt tz,sInt arc);
-GenMinMesh * __stdcall MinMesh_XSI(sChar *filename);
-GenMinMesh * __stdcall MinMesh_Kopuli();
+GenMinMesh *  MinMesh_SingleVert();
+GenMinMesh *  MinMesh_Grid(sInt mode,sInt tesu,sInt tesv);
+GenMinMesh *  MinMesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt);
+GenMinMesh *  MinMesh_Torus(sInt x,sInt y,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags);
+GenMinMesh *  MinMesh_Sphere(sInt x,sInt y);
+GenMinMesh *  MinMesh_Cylinder(sInt tx,sInt ty,sInt,sInt tz,sInt arc);
+GenMinMesh *  MinMesh_XSI(sChar *filename);
+GenMinMesh *  MinMesh_Kopuli();
 
 // special
 
-GenMinMesh * __stdcall MinMesh_MatLink(GenMinMesh *mesh,GenMaterial *mtrl,sInt mask,sInt pass);
-GenMinMesh * __stdcall MinMesh_Add(sInt count,GenMinMesh *msh,...);
-GenMinMesh * __stdcall MinMesh_SelectAll(GenMinMesh *msh,sU32 mode);
-GenMinMesh * __stdcall MinMesh_SelectCube(GenMinMesh *msh,sInt dmode,sF323 center,sF323 size);
-GenMinMesh * __stdcall MinMesh_DeleteFaces(GenMinMesh *msh);
-GenMinMesh * __stdcall MinMesh_Invert(GenMinMesh *msh);
-GenMinMesh * __stdcall MinMesh_MatLinkId(GenMinMesh *mesh,GenMaterial *mtrl,sInt id,sInt pass);
-GenMinMesh * __stdcall MinMesh_Pipe(GenSpline *spline_,GenMinMesh *mesh0_,GenMinMesh *mesh1_,GenMinMesh *mesh2_,sInt flags,sF32 texzoom,sF32 ringdist);
-GenMinMesh * __stdcall MinMesh_Multiply(KOp *,GenMinMesh *msh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude);
-GenMinMesh * __stdcall MinMesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMinMesh *inMesh,...);
-GenMinMesh * __stdcall MinMesh_SelectLogic(GenMinMesh *msh,sInt mode);
+GenMinMesh *  MinMesh_MatLink(GenMinMesh *mesh,GenMaterial *mtrl,sInt mask,sInt pass);
+GenMinMesh *  MinMesh_Add(sInt count,GenMinMesh *msh,...);
+GenMinMesh *  MinMesh_SelectAll(GenMinMesh *msh,sU32 mode);
+GenMinMesh *  MinMesh_SelectCube(GenMinMesh *msh,sInt dmode,sF323 center,sF323 size);
+GenMinMesh *  MinMesh_DeleteFaces(GenMinMesh *msh);
+GenMinMesh *  MinMesh_Invert(GenMinMesh *msh);
+GenMinMesh *  MinMesh_MatLinkId(GenMinMesh *mesh,GenMaterial *mtrl,sInt id,sInt pass);
+GenMinMesh *  MinMesh_Pipe(GenSpline *spline_,GenMinMesh *mesh0_,GenMinMesh *mesh1_,GenMinMesh *mesh2_,sInt flags,sF32 texzoom,sF32 ringdist);
+GenMinMesh *  MinMesh_Multiply(KOp *,GenMinMesh *msh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude);
+GenMinMesh *  MinMesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMinMesh *inMesh,...);
+GenMinMesh *  MinMesh_SelectLogic(GenMinMesh *msh,sInt mode);
 
 // geometry modifiers
 
-GenMinMesh * __stdcall MinMesh_TransformEx(GenMinMesh *msh,sInt mask,sFSRT srt);
-GenMinMesh * __stdcall MinMesh_ScaleAnim(GenMinMesh *mesh,sF32 scale);
-GenMinMesh * __stdcall MinMesh_Displace(GenMinMesh *msh,class GenBitmap *bmp,sInt mask,sF323 ampli);
-GenMinMesh * __stdcall MinMesh_Perlin(GenMinMesh *msh,sInt mask,sFSRT srt,sF323 ampl);
-GenMinMesh * __stdcall MinMesh_ExtrudeNormal(GenMinMesh *msh,sInt mask,sF32 distance);
-GenMinMesh * __stdcall MinMesh_Bend2(GenMinMesh *msh,sF323 center,sF323 rotate,sF32 len,sF32 axis);
-GenMinMesh * __stdcall MinMesh_BakeAnimation(GenMinMesh *msh,sF32 fade,sF32 metamorph);
-GenMinMesh * __stdcall MinMesh_BoneChain(GenMinMesh *msh,sF323 p0,sF323 p1,sInt count,sInt flags);
-GenMinMesh * __stdcall MinMesh_BoneTrain(GenMinMesh *mesh,class GenSpline *spline,sF32 delta,sInt mode);
-GenMinMesh * __stdcall MinMesh_Center(GenMinMesh *msh,sInt which);
-GenMinMesh * __stdcall MinMesh_RenderAutoMap(GenMinMesh *msh,sInt flags);
+GenMinMesh *  MinMesh_TransformEx(GenMinMesh *msh,sInt mask,sFSRT srt);
+GenMinMesh *  MinMesh_ScaleAnim(GenMinMesh *mesh,sF32 scale);
+GenMinMesh *  MinMesh_Displace(GenMinMesh *msh,class GenBitmap *bmp,sInt mask,sF323 ampli);
+GenMinMesh *  MinMesh_Perlin(GenMinMesh *msh,sInt mask,sFSRT srt,sF323 ampl);
+GenMinMesh *  MinMesh_ExtrudeNormal(GenMinMesh *msh,sInt mask,sF32 distance);
+GenMinMesh *  MinMesh_Bend2(GenMinMesh *msh,sF323 center,sF323 rotate,sF32 len,sF32 axis);
+GenMinMesh *  MinMesh_BakeAnimation(GenMinMesh *msh,sF32 fade,sF32 metamorph);
+GenMinMesh *  MinMesh_BoneChain(GenMinMesh *msh,sF323 p0,sF323 p1,sInt count,sInt flags);
+GenMinMesh *  MinMesh_BoneTrain(GenMinMesh *mesh,class GenSpline *spline,sF32 delta,sInt mode);
+GenMinMesh *  MinMesh_Center(GenMinMesh *msh,sInt which);
+GenMinMesh *  MinMesh_RenderAutoMap(GenMinMesh *msh,sInt flags);
 
 // hack
-GenMinMesh * __stdcall MinMesh_MTetra(sF32 isoValue);
+GenMinMesh *  MinMesh_MTetra(sF32 isoValue);
 
 // topology modifiers
 
-GenMinMesh * __stdcall MinMesh_Triangulate(GenMinMesh *msh);
-GenMinMesh * __stdcall MinMesh_Subdivide(GenMinMesh *msh,sInt mask,sF32 alpha,sInt count);
-GenMinMesh * __stdcall MinMesh_Extrude(GenMinMesh *mesh,sInt mode,sInt count,sF323 distance);
+GenMinMesh *  MinMesh_Triangulate(GenMinMesh *msh);
+GenMinMesh *  MinMesh_Subdivide(GenMinMesh *msh,sInt mask,sF32 alpha,sInt count);
+GenMinMesh *  MinMesh_Extrude(GenMinMesh *mesh,sInt mode,sInt count,sF323 distance);
 
 // compressed meshes
 
-GenMinMesh * __stdcall MinMesh_Compress(GenMinMesh *msh);
+GenMinMesh *  MinMesh_Compress(GenMinMesh *msh);
 
 /****************************************************************************/
 /****************************************************************************/

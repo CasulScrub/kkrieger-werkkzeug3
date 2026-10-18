@@ -17,27 +17,27 @@ extern "C"
   extern int ssCPUUsage;
 #endif
 
-	extern void __stdcall ssRender(sF32 *outbuf, sU32 len);
+	extern void  ssRender(sF32 *outbuf, sU32 len);
 
 	// init sound system
 	// data: pointer to V2M file
 	// hWnd: your window handle
-  extern void __stdcall ssInit(sU8 *data, void *hWnd);
+  extern void  ssInit(sU8 *data, void *hWnd);
 
 	// close sound system
-  extern void __stdcall ssClose();
+  extern void  ssClose();
 
 	// start playing (from song start)
-	extern void __stdcall ssPlay();
+	extern void  ssPlay();
 
 	// stop playing
-	extern void __stdcall ssStop();
+	extern void  ssStop();
 
 	// get the timer value (will be reset when starting)
 	// Note: The timer value is synchronized with the sound
 	//			 output and will thus start at a negative value
 	//       while the sound system fills up the first buffer!
-	extern sS32 __stdcall ssGetTime();
+	extern sS32  ssGetTime();
 
 
 	// Does a fade-out of the music within "time" milliseconds.
@@ -45,11 +45,11 @@ extern "C"
 	//       some msecs later than you called this function, so
 	//       make sure you wait a certain amount of time to
 	//       not interrupt a running fade... or so...
-	extern void __stdcall ssFadeOut(sU32 time);
+	extern void  ssFadeOut(sU32 time);
 
   // make the sound system render the next block
   // put this in your frame loop
-  extern void __stdcall ssDoTick();
+  extern void  ssDoTick();
 
 #ifdef RULESYNC
 	// Get current song position (being played actually)
@@ -60,7 +60,7 @@ extern "C"
 	// TT   is the number of the 32th tick within the current bar
 	// NN   is the total number of 32th ticks a the current bar has (32, normally, may change with
 	//      different time signatures than 4/4)
-	extern sS32 __stdcall ssGetPos();
+	extern sS32  ssGetPos();
 
 
 	// Retrieve an array of timer<->song position 
@@ -72,7 +72,7 @@ extern "C"
 	//       ... and so on for every found position
 	// otherv2m: NULL to get positions of song used with ssInit, ptr to v2m data otherwise
 	// NOTE: it is your responsibility to free the array again.
-	extern sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m=0);
+	extern sU32  ssCalcPositions(sS32 **dest, sU8 *otherv2m=0);
 
 	// Starts playing at a certain timer position
 	// time: the timer value you want to play from
@@ -80,12 +80,12 @@ extern "C"
 	//       value you specified, but will be as close as possible.
 	//       Use ssGetPos()/ssGetSongTime() to determine where
 	//       you really are.
-	extern void __stdcall ssPlayFrom(sS32 time);
+	extern void  ssPlayFrom(sS32 time);
 
 	// get the song timer value
 	// Just as ssGetTime(), but it will reflect the song position even
 	// after ssPlayFrom() calls.
-	extern sS32 __stdcall ssGetSongTime();
+	extern sS32  ssGetSongTime();
 
 #endif
 }

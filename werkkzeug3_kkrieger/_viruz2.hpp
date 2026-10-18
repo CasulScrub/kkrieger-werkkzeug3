@@ -72,7 +72,7 @@ public:
 	// a_this   : void ptr to instance
 	// rest as in Render()
 	//
-	static sU32 __stdcall RenderProxy(void *a_this, sF32 *a_buffer, sU32 a_len) 
+	static sU32  RenderProxy(void *a_this, sF32 *a_buffer, sU32 a_len) 
 	{ 
 		return static_cast<sU32>(reinterpret_cast<CV2MPlayer*>(a_this)->Render(a_buffer,a_len));
 	}

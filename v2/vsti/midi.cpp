@@ -146,9 +146,9 @@ void msSetProgram1(int p)
 #endif
 }
 
-extern "C" extern unsigned long* __stdcall  ficken();
+extern "C" extern unsigned long*   ficken();
 
-void __stdcall msAudioCallback(float *left, float *right, unsigned int len, int mixwithsource)
+void  msAudioCallback(float *left, float *right, unsigned int len, int mixwithsource)
 {
 	LARGE_INTEGER ta,tb;
 	QueryPerformanceCounter(&ta);

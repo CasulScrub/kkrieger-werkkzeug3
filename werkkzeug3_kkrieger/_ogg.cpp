@@ -150,64 +150,64 @@ typedef struct {
 
 /* Ogg BITSTREAM PRIMITIVES: bitstream ************************/
 
-extern void  __cdecl oggpack_writeinit(oggpack_buffer *b);
-extern void  __cdecl oggpack_reset(oggpack_buffer *b);
-extern void  __cdecl oggpack_writeclear(oggpack_buffer *b);
-extern void  __cdecl oggpack_readinit(oggpack_buffer *b,unsigned char *buf,int bytes);
-extern void  __cdecl oggpack_write(oggpack_buffer *b,unsigned long value,int bits);
-extern long  __cdecl oggpack_look(oggpack_buffer *b,int bits);
-extern long  __cdecl oggpack_look_huff(oggpack_buffer *b,int bits);
-extern long  __cdecl oggpack_look1(oggpack_buffer *b);
-extern void  __cdecl oggpack_adv(oggpack_buffer *b,int bits);
-extern int   __cdecl oggpack_adv_huff(oggpack_buffer *b,int bits);
-extern void  __cdecl oggpack_adv1(oggpack_buffer *b);
-extern long  __cdecl oggpack_read(oggpack_buffer *b,int bits);
-extern long  __cdecl oggpack_read1(oggpack_buffer *b);
-extern long  __cdecl oggpack_bytes(oggpack_buffer *b);
-extern long  __cdecl oggpack_bits(oggpack_buffer *b);
-extern unsigned char *__cdecl oggpack_get_buffer(oggpack_buffer *b);
+extern void   oggpack_writeinit(oggpack_buffer *b);
+extern void   oggpack_reset(oggpack_buffer *b);
+extern void   oggpack_writeclear(oggpack_buffer *b);
+extern void   oggpack_readinit(oggpack_buffer *b,unsigned char *buf,int bytes);
+extern void   oggpack_write(oggpack_buffer *b,unsigned long value,int bits);
+extern long   oggpack_look(oggpack_buffer *b,int bits);
+extern long   oggpack_look_huff(oggpack_buffer *b,int bits);
+extern long   oggpack_look1(oggpack_buffer *b);
+extern void   oggpack_adv(oggpack_buffer *b,int bits);
+extern int    oggpack_adv_huff(oggpack_buffer *b,int bits);
+extern void   oggpack_adv1(oggpack_buffer *b);
+extern long   oggpack_read(oggpack_buffer *b,int bits);
+extern long   oggpack_read1(oggpack_buffer *b);
+extern long   oggpack_bytes(oggpack_buffer *b);
+extern long   oggpack_bits(oggpack_buffer *b);
+extern unsigned char * oggpack_get_buffer(oggpack_buffer *b);
 
 /* Ogg BITSTREAM PRIMITIVES: encoding **************************/
 
-extern int      __cdecl ogg_stream_packetin(ogg_stream_state *os, ogg_packet *op);
-extern int      __cdecl ogg_stream_pageout(ogg_stream_state *os, ogg_page *og);
-extern int      __cdecl ogg_stream_flush(ogg_stream_state *os, ogg_page *og);
+extern int       ogg_stream_packetin(ogg_stream_state *os, ogg_packet *op);
+extern int       ogg_stream_pageout(ogg_stream_state *os, ogg_page *og);
+extern int       ogg_stream_flush(ogg_stream_state *os, ogg_page *og);
 
 /* Ogg BITSTREAM PRIMITIVES: decoding **************************/
 
-extern int      __cdecl ogg_sync_init(ogg_sync_state *oy);
-extern int      __cdecl ogg_sync_clear(ogg_sync_state *oy);
-extern int      __cdecl ogg_sync_reset(ogg_sync_state *oy);
-extern int	    __cdecl ogg_sync_destroy(ogg_sync_state *oy);
+extern int       ogg_sync_init(ogg_sync_state *oy);
+extern int       ogg_sync_clear(ogg_sync_state *oy);
+extern int       ogg_sync_reset(ogg_sync_state *oy);
+extern int	     ogg_sync_destroy(ogg_sync_state *oy);
 
-extern char    *__cdecl ogg_sync_buffer(ogg_sync_state *oy, long size);
-extern int      __cdecl ogg_sync_wrote(ogg_sync_state *oy, long bytes);
-extern long     __cdecl ogg_sync_pageseek(ogg_sync_state *oy,ogg_page *og);
-extern int      __cdecl ogg_sync_pageout(ogg_sync_state *oy, ogg_page *og);
-extern int      __cdecl ogg_stream_pagein(ogg_stream_state *os, ogg_page *og);
-extern int      __cdecl ogg_stream_packetout(ogg_stream_state *os,ogg_packet *op);
-extern int      __cdecl ogg_stream_packetpeek(ogg_stream_state *os,ogg_packet *op);
+extern char    * ogg_sync_buffer(ogg_sync_state *oy, long size);
+extern int       ogg_sync_wrote(ogg_sync_state *oy, long bytes);
+extern long      ogg_sync_pageseek(ogg_sync_state *oy,ogg_page *og);
+extern int       ogg_sync_pageout(ogg_sync_state *oy, ogg_page *og);
+extern int       ogg_stream_pagein(ogg_stream_state *os, ogg_page *og);
+extern int       ogg_stream_packetout(ogg_stream_state *os,ogg_packet *op);
+extern int       ogg_stream_packetpeek(ogg_stream_state *os,ogg_packet *op);
 
 /* Ogg BITSTREAM PRIMITIVES: general ***************************/
 
-extern int      __cdecl ogg_stream_init(ogg_stream_state *os,int serialno);
-extern int      __cdecl ogg_stream_clear(ogg_stream_state *os);
-extern int      __cdecl ogg_stream_reset(ogg_stream_state *os);
-extern int      __cdecl ogg_stream_destroy(ogg_stream_state *os);
-extern int      __cdecl ogg_stream_eos(ogg_stream_state *os);
+extern int       ogg_stream_init(ogg_stream_state *os,int serialno);
+extern int       ogg_stream_clear(ogg_stream_state *os);
+extern int       ogg_stream_reset(ogg_stream_state *os);
+extern int       ogg_stream_destroy(ogg_stream_state *os);
+extern int       ogg_stream_eos(ogg_stream_state *os);
 
-extern void     __cdecl ogg_page_checksum_set(ogg_page *og);
+extern void      ogg_page_checksum_set(ogg_page *og);
 
-extern int      __cdecl ogg_page_version(ogg_page *og);
-extern int      __cdecl ogg_page_continued(ogg_page *og);
-extern int      __cdecl ogg_page_bos(ogg_page *og);
-extern int      __cdecl ogg_page_eos(ogg_page *og);
-extern ogg_int64_t  __cdecl ogg_page_granulepos(ogg_page *og);
-extern int      __cdecl ogg_page_serialno(ogg_page *og);
-extern long     __cdecl ogg_page_pageno(ogg_page *og);
-extern int      __cdecl ogg_page_packets(ogg_page *og);
+extern int       ogg_page_version(ogg_page *og);
+extern int       ogg_page_continued(ogg_page *og);
+extern int       ogg_page_bos(ogg_page *og);
+extern int       ogg_page_eos(ogg_page *og);
+extern ogg_int64_t   ogg_page_granulepos(ogg_page *og);
+extern int       ogg_page_serialno(ogg_page *og);
+extern long      ogg_page_pageno(ogg_page *og);
+extern int       ogg_page_packets(ogg_page *og);
 
-extern void     __cdecl ogg_packet_clear(ogg_packet *op);
+extern void      ogg_packet_clear(ogg_packet *op);
 
 
 #ifdef __cplusplus
@@ -379,49 +379,49 @@ typedef struct vorbis_comment{
 
 /* Vorbis PRIMITIVES: general ***************************************/
 
-extern void     __cdecl vorbis_info_init(vorbis_info *vi);
-extern void     __cdecl vorbis_info_clear(vorbis_info *vi);
-extern int      __cdecl vorbis_info_blocksize(vorbis_info *vi,int zo);
-extern void     __cdecl vorbis_comment_init(vorbis_comment *vc);
-extern void     __cdecl vorbis_comment_add(vorbis_comment *vc, char *comment); 
-extern void     __cdecl vorbis_comment_add_tag(vorbis_comment *vc, 
+extern void      vorbis_info_init(vorbis_info *vi);
+extern void      vorbis_info_clear(vorbis_info *vi);
+extern int       vorbis_info_blocksize(vorbis_info *vi,int zo);
+extern void      vorbis_comment_init(vorbis_comment *vc);
+extern void      vorbis_comment_add(vorbis_comment *vc, char *comment); 
+extern void      vorbis_comment_add_tag(vorbis_comment *vc, 
 				       char *tag, char *contents);
-extern char    *__cdecl vorbis_comment_query(vorbis_comment *vc, char *tag, int count);
-extern int      __cdecl vorbis_comment_query_count(vorbis_comment *vc, char *tag);
-extern void     __cdecl vorbis_comment_clear(vorbis_comment *vc);
+extern char    * vorbis_comment_query(vorbis_comment *vc, char *tag, int count);
+extern int       vorbis_comment_query_count(vorbis_comment *vc, char *tag);
+extern void      vorbis_comment_clear(vorbis_comment *vc);
 
-extern int      __cdecl vorbis_block_init(vorbis_dsp_state *v, vorbis_block *vb);
-extern int      __cdecl vorbis_block_clear(vorbis_block *vb);
-extern void     __cdecl vorbis_dsp_clear(vorbis_dsp_state *v);
+extern int       vorbis_block_init(vorbis_dsp_state *v, vorbis_block *vb);
+extern int       vorbis_block_clear(vorbis_block *vb);
+extern void      vorbis_dsp_clear(vorbis_dsp_state *v);
 
 /* Vorbis PRIMITIVES: analysis/DSP layer ****************************/
 
-extern int      __cdecl vorbis_analysis_init(vorbis_dsp_state *v,vorbis_info *vi);
-extern int      __cdecl vorbis_commentheader_out(vorbis_comment *vc, ogg_packet *op);
-extern int      __cdecl vorbis_analysis_headerout(vorbis_dsp_state *v,
+extern int       vorbis_analysis_init(vorbis_dsp_state *v,vorbis_info *vi);
+extern int       vorbis_commentheader_out(vorbis_comment *vc, ogg_packet *op);
+extern int       vorbis_analysis_headerout(vorbis_dsp_state *v,
 					  vorbis_comment *vc,
 					  ogg_packet *op,
 					  ogg_packet *op_comm,
 					  ogg_packet *op_code);
-extern float  **__cdecl vorbis_analysis_buffer(vorbis_dsp_state *v,int vals);
-extern int      __cdecl vorbis_analysis_wrote(vorbis_dsp_state *v,int vals);
-extern int      __cdecl vorbis_analysis_blockout(vorbis_dsp_state *v,vorbis_block *vb);
-extern int      __cdecl vorbis_analysis(vorbis_block *vb,ogg_packet *op);
+extern float  ** vorbis_analysis_buffer(vorbis_dsp_state *v,int vals);
+extern int       vorbis_analysis_wrote(vorbis_dsp_state *v,int vals);
+extern int       vorbis_analysis_blockout(vorbis_dsp_state *v,vorbis_block *vb);
+extern int       vorbis_analysis(vorbis_block *vb,ogg_packet *op);
 
-extern int      __cdecl vorbis_bitrate_addblock(vorbis_block *vb);
-extern int      __cdecl vorbis_bitrate_flushpacket(vorbis_dsp_state *vd,
+extern int       vorbis_bitrate_addblock(vorbis_block *vb);
+extern int       vorbis_bitrate_flushpacket(vorbis_dsp_state *vd,
 					   ogg_packet *op);
 
 /* Vorbis PRIMITIVES: synthesis layer *******************************/
-extern int      __cdecl vorbis_synthesis_headerin(vorbis_info *vi,vorbis_comment *vc,
+extern int       vorbis_synthesis_headerin(vorbis_info *vi,vorbis_comment *vc,
 					  ogg_packet *op);
 
-extern int      __cdecl vorbis_synthesis_init(vorbis_dsp_state *v,vorbis_info *vi);
-extern int      __cdecl vorbis_synthesis(vorbis_block *vb,ogg_packet *op);
-extern int      __cdecl vorbis_synthesis_blockin(vorbis_dsp_state *v,vorbis_block *vb);
-extern int      __cdecl vorbis_synthesis_pcmout(vorbis_dsp_state *v,float ***pcm);
-extern int      __cdecl vorbis_synthesis_read(vorbis_dsp_state *v,int samples);
-extern long     __cdecl vorbis_packet_blocksize(vorbis_info *vi,ogg_packet *op);
+extern int       vorbis_synthesis_init(vorbis_dsp_state *v,vorbis_info *vi);
+extern int       vorbis_synthesis(vorbis_block *vb,ogg_packet *op);
+extern int       vorbis_synthesis_blockin(vorbis_dsp_state *v,vorbis_block *vb);
+extern int       vorbis_synthesis_pcmout(vorbis_dsp_state *v,float ***pcm);
+extern int       vorbis_synthesis_read(vorbis_dsp_state *v,int samples);
+extern long      vorbis_packet_blocksize(vorbis_info *vi,ogg_packet *op);
 
 /* Vorbis ERRORS and return codes ***********************************/
 

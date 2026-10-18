@@ -3095,7 +3095,7 @@ sBool CheckMesh(GenMesh *&mesh,sU32 mask)
 /****************************************************************************/
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
+GenMesh *  Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
 {
 	sInt i,j;
   sInt bm;
@@ -3237,7 +3237,7 @@ GenMesh * __stdcall Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectAll(GenMesh *mesh,sU32 mask,sInt mode)
+GenMesh *  Mesh_SelectAll(GenMesh *mesh,sU32 mask,sInt mode)
 {
   if(CheckMesh(mesh)) return 0;
 
@@ -3247,7 +3247,7 @@ GenMesh * __stdcall Mesh_SelectAll(GenMesh *mesh,sU32 mask,sInt mode)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectCube(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 center,sF323 size)
+GenMesh *  Mesh_SelectCube(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 center,sF323 size)
 {
   if(CheckMesh(mesh)) return 0;
   size.x *= 0.5f;
@@ -3263,7 +3263,7 @@ GenMesh * __stdcall Mesh_SelectCube(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 ce
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Subdivide(KOp *upd,GenMesh *mesh,sInt mask,sF32 alpha,sInt count)
+GenMesh *  Mesh_Subdivide(KOp *upd,GenMesh *mesh,sInt mask,sF32 alpha,sInt count)
 {
   if(CheckMesh(mesh,mask<<8)) return 0;
 
@@ -3277,7 +3277,7 @@ GenMesh * __stdcall Mesh_Subdivide(KOp *upd,GenMesh *mesh,sInt mask,sF32 alpha,s
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Extrude(KOp *upd,GenMesh *mesh,sInt smask,sInt dmask,sInt mode,sInt count,sF323 dist,sF323 s,sF323 r)
+GenMesh *  Mesh_Extrude(KOp *upd,GenMesh *mesh,sInt smask,sInt dmask,sInt mode,sInt count,sF323 dist,sF323 s,sF323 r)
 {
   sInt i,j,grp,e,ee;
   static sInt stk[4096];
@@ -3507,7 +3507,7 @@ GenMesh * __stdcall Mesh_Extrude(KOp *upd,GenMesh *mesh,sInt smask,sInt dmask,sI
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Transform(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt)
+GenMesh *  Mesh_Transform(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt)
 {
 	sMatrix mat;
   if(CheckMesh(mesh,mask<<16)) return 0;
@@ -3526,7 +3526,7 @@ GenMesh * __stdcall Mesh_Transform(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_TransformEx(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,sInt sj,sInt dj)
+GenMesh *  Mesh_TransformEx(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,sInt sj,sInt dj)
 {
 	sMatrix mat;
 
@@ -3549,7 +3549,7 @@ GenMesh * __stdcall Mesh_TransformEx(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Cylinder(sInt tx,sInt ty,sInt mode,sInt tz,sInt arc)
+GenMesh *  Mesh_Cylinder(sInt tx,sInt ty,sInt mode,sInt tz,sInt arc)
 {
   sInt i,sj,e;
   sMatrix mat,matuv;
@@ -3674,7 +3674,7 @@ GenMesh * __stdcall Mesh_Cylinder(sInt tx,sInt ty,sInt mode,sInt tz,sInt arc)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
+GenMesh *  Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 {
   if(CheckMesh(mesh,mask<<(selType ? 0 : 8))) return 0;
 
@@ -3689,7 +3689,7 @@ GenMesh * __stdcall Mesh_Crease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
+GenMesh *  Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType)
 {
 	SCRIPTVERIFY(what);
   if(CheckMesh(mesh,mask<<8)) return 0;
@@ -3702,7 +3702,7 @@ GenMesh * __stdcall Mesh_UnCrease(GenMesh *mesh,sInt mask,sInt what,sInt selType
 /****************************************************************************/
 
 
-GenMesh * __stdcall Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt what)
+GenMesh *  Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt what)
 {
   if(CheckMesh(mesh,mask<<8)) return 0;
 
@@ -3712,7 +3712,7 @@ GenMesh * __stdcall Mesh_CalcNormals(GenMesh *mesh,sInt mode,sInt mask,sInt what
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags)
+GenMesh *  Mesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags)
 {
 	sInt i,n,e,f,t;
 	sInt sj;
@@ -3830,7 +3830,7 @@ GenMesh * __stdcall Mesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,sF32 a
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Sphere(sInt tx,sInt ty)
+GenMesh *  Mesh_Sphere(sInt tx,sInt ty)
 {
 	sInt i,j,v,sj;
 	sMatrix mat,matuv;
@@ -3924,7 +3924,7 @@ GenMesh * __stdcall Mesh_Sphere(sInt tx,sInt ty)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Triangulate(GenMesh *mesh,sInt mask,sInt thres,sInt type)
+GenMesh *  Mesh_Triangulate(GenMesh *mesh,sInt mask,sInt thres,sInt type)
 {
   if(CheckMesh(mesh,mask<<8)) return 0;
 
@@ -3935,7 +3935,7 @@ GenMesh * __stdcall Mesh_Triangulate(GenMesh *mesh,sInt mask,sInt thres,sInt typ
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
+GenMesh *  Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
 {
 	sMatrix mat;
 	sVector plane;
@@ -3953,7 +3953,7 @@ GenMesh * __stdcall Mesh_Cut(GenMesh *mesh,sF322 dir,sF32 offs,sInt mode)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_ExtrudeNormal(KOp *upd,GenMesh *mesh,sInt mask,sF32 distance)
+GenMesh *  Mesh_ExtrudeNormal(KOp *upd,GenMesh *mesh,sInt mask,sF32 distance)
 {
   if(CheckMesh(mesh,mask<<16)) return 0;
 
@@ -3965,7 +3965,7 @@ GenMesh * __stdcall Mesh_ExtrudeNormal(KOp *upd,GenMesh *mesh,sInt mask,sF32 dis
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Displace(KOp *upd,GenMesh *mesh,GenBitmap *bmp,sInt mask,sF323 ampli)
+GenMesh *  Mesh_Displace(KOp *upd,GenMesh *mesh,GenBitmap *bmp,sInt mask,sF323 ampli)
 {
 	SCRIPTVERIFY(bmp);
   if(CheckMesh(mesh,mask<<16)) return 0;
@@ -3979,7 +3979,7 @@ GenMesh * __stdcall Mesh_Displace(KOp *upd,GenMesh *mesh,GenBitmap *bmp,sInt mas
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Bevel(KOp *upd,GenMesh *mesh,sInt mask,sF32 elev,sF32 pull,sInt mode)
+GenMesh *  Mesh_Bevel(KOp *upd,GenMesh *mesh,sInt mask,sF32 elev,sF32 pull,sInt mode)
 {
   if(CheckMesh(mesh,mask<<8)) return 0;
 
@@ -3993,7 +3993,7 @@ GenMesh * __stdcall Mesh_Bevel(KOp *upd,GenMesh *mesh,sInt mask,sF32 elev,sF32 p
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Perlin(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,sF323 ampl)
+GenMesh *  Mesh_Perlin(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,sF323 ampl)
 {
 	sMatrix mat;
 
@@ -4005,7 +4005,7 @@ GenMesh * __stdcall Mesh_Perlin(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt,sF323
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Add(sInt count,GenMesh *mesh,...)
+GenMesh *  Mesh_Add(sInt count,GenMesh *mesh,...)
 {
   sInt i;
   GenMesh *other;
@@ -4028,7 +4028,7 @@ GenMesh * __stdcall Mesh_Add(sInt count,GenMesh *mesh,...)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
+GenMesh *  Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
 {
   if(CheckMesh(mesh,mask<<8)) return 0;
 
@@ -4039,7 +4039,7 @@ GenMesh * __stdcall Mesh_DeleteFaces(GenMesh *mesh,sInt mask)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_BeginRecord(GenMesh *mesh)
+GenMesh *  Mesh_BeginRecord(GenMesh *mesh)
 {
   return mesh;
 /*
@@ -4051,7 +4051,7 @@ GenMesh * __stdcall Mesh_BeginRecord(GenMesh *mesh)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectRandom(GenMesh *mesh,sU32 dmask,sInt dmode,sU32 ratio,sInt seed)
+GenMesh *  Mesh_SelectRandom(GenMesh *mesh,sU32 dmask,sInt dmode,sU32 ratio,sInt seed)
 {
 	sInt i;
 
@@ -4074,7 +4074,7 @@ GenMesh * __stdcall Mesh_SelectRandom(GenMesh *mesh,sU32 dmask,sInt dmode,sU32 r
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Multiply(KOp *kop,GenMesh *mesh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude)
+GenMesh *  Mesh_Multiply(KOp *kop,GenMesh *mesh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude)
 {
 	sInt i,j;
 	GenMesh *out;
@@ -4136,7 +4136,7 @@ GenMesh * __stdcall Mesh_Multiply(KOp *kop,GenMesh *mesh,sFSRT srt,sInt count,sI
 
 /****************************************************************************/
 
-/*GenMesh * __stdcall Mesh_SelectAngle(GenMesh *mesh,sF32 angle,sU32 dmask1,sU32 dmask0)
+/*GenMesh *  Mesh_SelectAngle(GenMesh *mesh,sF32 angle,sU32 dmask1,sU32 dmask0)
 {
   sInt i;
   sVector f0,f1;
@@ -4158,7 +4158,7 @@ GenMesh * __stdcall Mesh_Multiply(KOp *kop,GenMesh *mesh,sFSRT srt,sInt count,sI
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Bend(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt1,sFSRT srt2,sF322 dir,sF322 yrange,sInt mode)
+GenMesh *  Mesh_Bend(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt1,sFSRT srt2,sF322 dir,sF322 yrange,sInt mode)
 {
   sMatrix mat1,mat2,matt;
 
@@ -4232,7 +4232,7 @@ GenMesh * __stdcall Mesh_Bend(KOp *upd,GenMesh *mesh,sInt mask,sFSRT srt1,sFSRT 
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_CollisionCube(GenMesh *input,KOp *event,KOp *event2,sF32 x0,sF32 x1,sF32 y0,sF32 y1,sF32 z0,sF32 z1,sInt mode,sInt tx,sInt ty,sInt tz,sInt eventa,sInt eventb,sInt eventc,sInt eventd)
+GenMesh *  Mesh_CollisionCube(GenMesh *input,KOp *event,KOp *event2,sF32 x0,sF32 x1,sF32 y0,sF32 y1,sF32 z0,sF32 z1,sInt mode,sInt tx,sInt ty,sInt tz,sInt eventa,sInt eventb,sInt eventc,sInt eventd)
 {
   GenMesh *mesh;
   sInt i,ix,iy,iz,max,count,index;
@@ -4395,7 +4395,7 @@ static void QuadSplit(GenMesh *mesh,sInt e,sInt splits,sInt offs,sInt offt)
   }
 }
 
-GenMesh * __stdcall Mesh_Grid(sInt mode,sInt tesu,sInt tesv)
+GenMesh *  Mesh_Grid(sInt mode,sInt tesu,sInt tesv)
 {
   GenMesh *mesh;
   sMatrix mat;
@@ -4484,7 +4484,7 @@ GenMesh * __stdcall Mesh_Grid(sInt mode,sInt tesu,sInt tesv)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectLogic(GenMesh *msh,sU32 smask1,sU32 smask2,sU32 dmask,sInt mode)
+GenMesh *  Mesh_SelectLogic(GenMesh *msh,sU32 smask1,sU32 smask2,sU32 dmask,sInt mode)
 {
   sInt i;
   sU32 smask;
@@ -4524,7 +4524,7 @@ GenMesh * __stdcall Mesh_SelectLogic(GenMesh *msh,sU32 smask1,sU32 smask2,sU32 d
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectGrow(GenMesh *msh,sU32 smask,sU32 dmask,sInt dmode,sInt amount)
+GenMesh *  Mesh_SelectGrow(GenMesh *msh,sU32 smask,sU32 dmask,sInt dmode,sInt amount)
 {
   if(CheckMesh(msh,smask<<8)) return 0;
 
@@ -4538,7 +4538,7 @@ GenMesh * __stdcall Mesh_SelectGrow(GenMesh *msh,sU32 smask,sU32 dmask,sInt dmod
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Invert(GenMesh *msh)
+GenMesh *  Mesh_Invert(GenMesh *msh)
 {
   sInt i;
   GenMeshEdge *edg;
@@ -4568,7 +4568,7 @@ GenMesh * __stdcall Mesh_Invert(GenMesh *msh)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SetPivot(GenMesh *msh,sInt attr,sF323 pivot)
+GenMesh *  Mesh_SetPivot(GenMesh *msh,sInt attr,sF323 pivot)
 {
   sInt j;
 
@@ -4583,7 +4583,7 @@ GenMesh * __stdcall Mesh_SetPivot(GenMesh *msh,sInt attr,sF323 pivot)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_UVProjection(GenMesh *msh,sInt mask,sFSRT srt,sInt type)
+GenMesh *  Mesh_UVProjection(GenMesh *msh,sInt mask,sFSRT srt,sInt type)
 {
   sInt i,sj;
   sVector n,*v0;
@@ -4687,7 +4687,7 @@ GenMesh * __stdcall Mesh_UVProjection(GenMesh *msh,sInt mask,sFSRT srt,sInt type
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Center(GenMesh *mesh,sInt mask,sInt which)
+GenMesh *  Mesh_Center(GenMesh *mesh,sInt mask,sInt which)
 {
   sMatrix mat;
   sAABox box;
@@ -4708,7 +4708,7 @@ GenMesh * __stdcall Mesh_Center(GenMesh *mesh,sInt mask,sInt which)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_AutoCollision(GenMesh *mesh,sF32 enlarge,sInt mode,sInt tx,sInt ty,sInt tz,sInt outmask)
+GenMesh *  Mesh_AutoCollision(GenMesh *mesh,sF32 enlarge,sInt mode,sInt tx,sInt ty,sInt tz,sInt outmask)
 {
   sAABox box;
   GenMesh *coll;
@@ -4729,7 +4729,7 @@ GenMesh * __stdcall Mesh_AutoCollision(GenMesh *mesh,sF32 enlarge,sInt mode,sInt
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectSphere(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 center,sF323 size)
+GenMesh *  Mesh_SelectSphere(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 center,sF323 size)
 {
   if(CheckMesh(mesh)) return 0;
   size.x *= 0.5f;
@@ -4745,7 +4745,7 @@ GenMesh * __stdcall Mesh_SelectSphere(GenMesh *mesh,sU32 dmask,sInt dmode,sF323 
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectFace(GenMesh *mesh,sU32 dmask,sInt dmode,sInt face)
+GenMesh *  Mesh_SelectFace(GenMesh *mesh,sU32 dmask,sInt dmode,sInt face)
 {
   if(CheckMesh(mesh)) return 0;
   
@@ -4759,7 +4759,7 @@ GenMesh * __stdcall Mesh_SelectFace(GenMesh *mesh,sU32 dmask,sInt dmode,sInt fac
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SelectAngle(GenMesh *mesh,sU32 dmask,sInt dmode,sF322 dir,sF32 thresh)
+GenMesh *  Mesh_SelectAngle(GenMesh *mesh,sU32 dmask,sInt dmode,sF322 dir,sF32 thresh)
 {
   sInt i;
   sMatrix mat;
@@ -4784,7 +4784,7 @@ GenMesh * __stdcall Mesh_SelectAngle(GenMesh *mesh,sU32 dmask,sInt dmode,sF322 d
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Bend2(GenMesh *mesh,sF323 center,sF323 rotate,sF32 len,sF32 angle)
+GenMesh *  Mesh_Bend2(GenMesh *mesh,sF323 center,sF323 rotate,sF32 len,sF32 angle)
 {
   sMatrix mt,mb;
   sVector vt,*vp;
@@ -4827,7 +4827,7 @@ GenMesh * __stdcall Mesh_Bend2(GenMesh *mesh,sF323 center,sF323 rotate,sF32 len,
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SmoothAngle(GenMesh *mesh,sF32 angle)
+GenMesh *  Mesh_SmoothAngle(GenMesh *mesh,sF32 angle)
 {
   sInt i;
   sVector n1,n2;
@@ -4850,7 +4850,7 @@ GenMesh * __stdcall Mesh_SmoothAngle(GenMesh *mesh,sF32 angle)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Color(GenMesh *mesh,sF323 pos,sF322 dir,sU32 color,sF32 amplify,sF32 range,sInt op)
+GenMesh *  Mesh_Color(GenMesh *mesh,sF323 pos,sF322 dir,sU32 color,sF32 amplify,sF32 range,sInt op)
 {
   sInt i,j,sc,sn;
   sMatrix mat;
@@ -4926,7 +4926,7 @@ GenMesh * __stdcall Mesh_Color(GenMesh *mesh,sF323 pos,sF322 dir,sU32 color,sF32
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_BendS(GenMesh *mesh,sF323 anchor,sF323 rotate,sF32 len,KSpline *spline)
+GenMesh *  Mesh_BendS(GenMesh *mesh,sF323 anchor,sF323 rotate,sF32 len,KSpline *spline)
 {
   sMatrix mt;
   static sMatrix mat[129];
@@ -4979,7 +4979,7 @@ GenMesh * __stdcall Mesh_BendS(GenMesh *mesh,sF323 anchor,sF323 rotate,sF32 len,
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_LightSlot(sF323 pos,sU32 color,sF32 amplify,sF32 range)
+GenMesh *  Mesh_LightSlot(sF323 pos,sU32 color,sF32 amplify,sF32 range)
 {
   GenMesh *mesh;
 
@@ -4998,7 +4998,7 @@ GenMesh * __stdcall Mesh_LightSlot(sF323 pos,sU32 color,sF32 amplify,sF32 range)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_ShadowEnable(GenMesh *mesh,sBool enable)
+GenMesh *  Mesh_ShadowEnable(GenMesh *mesh,sBool enable)
 {
   sInt i;
 
@@ -5012,7 +5012,7 @@ GenMesh * __stdcall Mesh_ShadowEnable(GenMesh *mesh,sBool enable)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMesh *inMesh,...)
+GenMesh *  Mesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMesh *inMesh,...)
 {
   if(!inCount)
     return 0;
@@ -5091,7 +5091,7 @@ GenMesh * __stdcall Mesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3
 
 /****************************************************************************/
 
-GenSimpleMesh * __stdcall Mesh_BSP(GenMesh *mesh)
+GenSimpleMesh *  Mesh_BSP(GenMesh *mesh)
 {
   GenSimpleBrush ba,bb;
   sAABox box;
@@ -5119,7 +5119,7 @@ GenSimpleMesh * __stdcall Mesh_BSP(GenMesh *mesh)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_XSI(sChar *filename)
+GenMesh *  Mesh_XSI(sChar *filename)
 {
   GenMesh *mesh;
 #if sLINK_XSI
@@ -5142,7 +5142,7 @@ GenMesh * __stdcall Mesh_XSI(sChar *filename)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_SingleVert()
+GenMesh *  Mesh_SingleVert()
 {
   GenMesh *mesh = new GenMesh;
   mesh->Init(sGMF_DEFAULT,3);
@@ -5173,7 +5173,7 @@ static void ToUV(sF32 *dst,const sVector &src)
 }
 
 #if sLINK_MINMESH
-GenMinMesh * __stdcall Mesh_ToMin(GenMesh *mesh)
+GenMinMesh *  Mesh_ToMin(GenMesh *mesh)
 {
   if(CheckMesh(mesh))
     return 0;

@@ -6,10 +6,10 @@
 #include "_start.hpp"
 #include <algorithm>
 
-typedef sU32 (__stdcall *PUnDecorateSymbolName)(sChar *name,sChar *buffer,sInt bufferLen,sU32 flasgs);
+typedef sU32 ( *PUnDecorateSymbolName)(sChar *name,sChar *buffer,sInt bufferLen,sU32 flasgs);
 
-extern "C" void * __stdcall LoadLibraryA(sChar *name);
-extern "C" void * __stdcall GetProcAddress(void *module,sChar *name);
+extern "C" void *  LoadLibraryA(sChar *name);
+extern "C" void *  GetProcAddress(void *module,sChar *name);
 
 // HACK: report buffer is 1mb fixed size
 

@@ -20,7 +20,7 @@ extern class ScriptRuntime *ScriptRuntimeInterpreter;
 #define SCRIPTVERIFY(x)
 #define SCRIPTVERIFYVOID(x)
 #endif
-#define SCRIPTCALL __stdcall
+#define SCRIPTCALL 
 
 #define RT_MAXGLOBAL  2048        // max global variable
 #define RT_MAXLOCAL   512        // max local variables per call
@@ -88,13 +88,13 @@ public:
   sObject *PopO();                // pop object from stack
   sObject *PopO(sU32 cid);        // pop object of specified type from stack
 #else
-  __forceinline void PushI(sInt v)        { IStack[++IIndex] = v; }
-  __forceinline void PushO(sObject *o)    { OStack[++OIndex] = o; }
-  __forceinline sInt PopI()               { return IStack[IIndex--]; }
-  __forceinline sF32 PopX()               { return IStack[IIndex--]/65536.0f; }
-  __forceinline sChar *PopS()             { return (sChar *) IStack[IIndex--]; }
-  __forceinline sObject *PopO()           { return OStack[OIndex--]; }
-  __forceinline sObject *PopO(sU32 cid)   { return OStack[OIndex--]; }
+  __attribute__((always_inline)) inline void PushI(sInt v)        { IStack[++IIndex] = v; }
+  __attribute__((always_inline)) inline void PushO(sObject *o)    { OStack[++OIndex] = o; }
+  __attribute__((always_inline)) inline sInt PopI()               { return IStack[IIndex--]; }
+  __attribute__((always_inline)) inline sF32 PopX()               { return IStack[IIndex--]/65536.0f; }
+  __attribute__((always_inline)) inline sChar *PopS()             { return (sChar *) IStack[IIndex--]; }
+  __attribute__((always_inline)) inline sObject *PopO()           { return OStack[OIndex--]; }
+  __attribute__((always_inline)) inline sObject *PopO(sU32 cid)   { return OStack[OIndex--]; }
 #endif
 /*
   void PushIV(sInt *v,sInt count);// push multiple integers on stack
@@ -102,10 +102,10 @@ public:
   void PopXV(sF32 *v,sInt count); // pop multiple fixed-points from stack
   void PopOV(sObject **v,sInt count); // pop multiple integers from stack
   */
-  __forceinline sInt GetGlobal(sInt nr);        // read global var
-  __forceinline void SetGlobal(sInt nr,sInt v); // write global var
-  __forceinline sObject *GetGlobalObject(sInt nr);       // read global var
-  __forceinline void SetGlobalObject(sInt nr,sObject *); // write global var
+  __attribute__((always_inline)) inline sInt GetGlobal(sInt nr);        // read global var
+  __attribute__((always_inline)) inline void SetGlobal(sInt nr,sInt v); // write global var
+  __attribute__((always_inline)) inline sObject *GetGlobalObject(sInt nr);       // read global var
+  __attribute__((always_inline)) inline void SetGlobalObject(sInt nr,sObject *); // write global var
   sU32 *GetUserWord(sInt nr)      { return (nr>=0 && nr<RT_MAXUSER) ? Bytecode+UserWords[nr] : 0; }
 
 #if !sINTRO
@@ -117,25 +117,25 @@ public:
 };
 
 
-__forceinline sInt ScriptRuntime::GetGlobal(sInt nr)
+__attribute__((always_inline)) inline sInt ScriptRuntime::GetGlobal(sInt nr)
 {
   sVERIFY(nr>=0 && nr<RT_MAXGLOBAL);
   return XVar[nr];
 }
 
-__forceinline void ScriptRuntime::SetGlobal(sInt nr,sInt v)
+__attribute__((always_inline)) inline void ScriptRuntime::SetGlobal(sInt nr,sInt v)
 {
   sVERIFY(nr>=0 && nr<RT_MAXGLOBAL);
   XVar[nr] = v;
 }
 
-__forceinline sObject *ScriptRuntime::GetGlobalObject(sInt nr)
+__attribute__((always_inline)) inline sObject *ScriptRuntime::GetGlobalObject(sInt nr)
 {
   sVERIFY(nr>=0 && nr<RT_MAXGLOBAL);
   return (sObject *)XVar[nr];
 }
 
-__forceinline void ScriptRuntime::SetGlobalObject(sInt nr,sObject *v)
+__attribute__((always_inline)) inline void ScriptRuntime::SetGlobalObject(sInt nr,sObject *v)
 {
   sVERIFY(nr>=0 && nr<RT_MAXGLOBAL);
   XVar[nr] = (sInt)v;

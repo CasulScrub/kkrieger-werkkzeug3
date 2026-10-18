@@ -275,9 +275,9 @@ public:
   sInt _VertMap[16];              // map to index;
 #endif
 
-  __forceinline sInt VertMask();
-  __forceinline sInt VertSize();
-  __forceinline sInt VertMap(sInt i);
+  __attribute__((always_inline)) inline sInt VertMask();
+  __attribute__((always_inline)) inline sInt VertSize();
+  __attribute__((always_inline)) inline sInt VertMap(sInt i);
 
 #if !sINTRO
   sArray<GenMeshMatrix> BoneMatrix;
@@ -426,17 +426,17 @@ sInt GenMesh::VertMap(sInt i)
 
 #else
 
-__forceinline sInt GenMesh::VertMask()
+__attribute__((always_inline)) inline sInt GenMesh::VertMask()
 {
   return sGMF_DEFAULT;
 }
 
-__forceinline sInt GenMesh::VertSize()
+__attribute__((always_inline)) inline sInt GenMesh::VertSize()
 {
   return 5;
 }
 
-__forceinline sInt GenMesh::VertMap(sInt i)
+__attribute__((always_inline)) inline sInt GenMesh::VertMap(sInt i)
 {
   static const sInt _VertMap[] =
   {
@@ -450,57 +450,57 @@ __forceinline sInt GenMesh::VertMap(sInt i)
 
 /****************************************************************************/
 
-GenMesh * __stdcall Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt);
-GenMesh * __stdcall Mesh_SelectAll(GenMesh *msh,sU32 mask,sInt mode);
-GenMesh * __stdcall Mesh_SelectCube(GenMesh *msh,sU32 dmask,sInt dmode,sF323 center,sF323 size);
-GenMesh * __stdcall Mesh_Subdivide(KOp *,GenMesh *msh,sInt mask,sF32 alpha,sInt count);
-GenMesh * __stdcall Mesh_Extrude(KOp *,GenMesh *mesh,sInt smask,sInt dmask,sInt mode,sInt count,sF323 dist,sF323 s,sF323 r);
-GenMesh * __stdcall Mesh_Transform(KOp *,GenMesh *msh,sInt mask,sFSRT srt);
-GenMesh * __stdcall Mesh_Cylinder(sInt tx,sInt ty,sInt mode,sInt tz,sInt arc);
-GenMesh * __stdcall Mesh_TransformEx(KOp *,GenMesh *msh,sInt mask,sFSRT srt,sInt sj,sInt dj);
-GenMesh * __stdcall Mesh_Crease(GenMesh *msh,sInt mask,sInt what,sInt selType);
-GenMesh * __stdcall Mesh_UnCrease(GenMesh *msh,sInt mask,sInt what,sInt selType);
-GenMesh * __stdcall Mesh_CalcNormals(GenMesh *msh,sInt mode,sInt mask,sInt what);
-GenMesh * __stdcall Mesh_Torus(sInt x,sInt y,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags);
-GenMesh * __stdcall Mesh_Sphere(sInt x,sInt y);
-GenMesh * __stdcall Mesh_Triangulate(GenMesh *msh,sInt mask,sInt threshold,sInt type);
-GenMesh * __stdcall Mesh_Cut(GenMesh *msh,sF322 dir,sF32 offset,sInt mode);
-GenMesh * __stdcall Mesh_ExtrudeNormal(KOp *,GenMesh *msh,sInt mask,sF32 distance);
-GenMesh * __stdcall Mesh_Displace(KOp *,GenMesh *msh,GenBitmap *bmp,sInt mask,sF323 ampli);
-GenMesh * __stdcall Mesh_Bevel(KOp *,GenMesh *msh,sInt mask,sF32 elev,sF32 pull,sInt mode);
-GenMesh * __stdcall Mesh_Perlin(KOp *,GenMesh *msh,sInt mask,sFSRT srt,sF323 ampl);
-GenMesh * __stdcall Mesh_Add(sInt count,GenMesh *msh,...);
-GenMesh * __stdcall Mesh_DeleteFaces(GenMesh *msh,sInt mask);
-GenMesh * __stdcall Mesh_BeginRecord(GenMesh *msh);
-GenMesh * __stdcall Mesh_SelectRandom(GenMesh *msh,sU32 dmask,sInt dmode,sU32 ratio,sInt seed);
-GenMesh * __stdcall Mesh_Multiply(KOp *,GenMesh *msh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude);
-GenMesh * __stdcall Mesh_Bend(KOp *,GenMesh *msh,sInt mask,sFSRT srt1,sFSRT srt2,sF322 dir,sF322 yrange,sInt mode);
-GenMesh * __stdcall Mesh_CollisionCube(GenMesh *input,KOp *event,KOp *event2,sF32 x0,sF32 x1,sF32 y0,sF32 y1,sF32 z0,sF32 z1,sInt mode,sInt tx,sInt ty,sInt tz,sInt eventa=0,sInt eventb=0,sInt eventc=0,sInt eventd=0);
-GenMesh * __stdcall Mesh_Grid(sInt mode,sInt tesu,sInt tesv);
-GenMesh * __stdcall Mesh_SelectLogic(GenMesh *msh,sU32 smask1,sU32 smask2,sU32 dmask,sInt mode);
-GenMesh * __stdcall Mesh_SelectGrow(GenMesh *msh,sU32 smask,sU32 dmask,sInt dmode,sInt amount);
-GenMesh * __stdcall Mesh_Invert(GenMesh *msh);
-GenMesh * __stdcall Mesh_SetPivot(GenMesh *msh,sInt attr,sF323 pivot);
-GenMesh * __stdcall Mesh_UVProjection(GenMesh *msh,sInt mask,sFSRT srt,sInt type);
-GenMesh * __stdcall Mesh_Center(GenMesh *msh,sInt mask,sInt which);
-GenMesh * __stdcall Mesh_AutoCollision(GenMesh *msh,sF32 enlarge,sInt mode,sInt tx,sInt ty,sInt tz,sInt outmask);
-GenMesh * __stdcall Mesh_SelectSphere(GenMesh *msh,sU32 dmask,sInt dmode,sF323 center,sF323 size);
-GenMesh * __stdcall Mesh_SelectFace(GenMesh *msh,sU32 dmask,sInt dmode,sInt face);
-GenMesh * __stdcall Mesh_SelectAngle(GenMesh *msh,sU32 dmask,sInt dmode,sF322 dir,sF32 thresh);
-GenMesh * __stdcall Mesh_Bend2(GenMesh *msh,sF323 center,sF323 rotate,sF32 len,sF32 axis);
-GenMesh * __stdcall Mesh_SmoothAngle(GenMesh *msh,sF32 angle);
-GenMesh * __stdcall Mesh_Color(GenMesh *msh,sF323 pos,sF322 dir,sU32 color,sF32 amplify,sF32 range,sInt op);
-GenMesh * __stdcall Mesh_BendS(GenMesh *msh,sF323 anchor,sF323 rotate,sF32 len,KSpline *spline);
-GenMesh * __stdcall Mesh_LightSlot(sF323 pos,sU32 color,sF32 amplify,sF32 range);
-GenMesh * __stdcall Mesh_ShadowEnable(GenMesh *mesh,sBool enable);
-GenMesh * __stdcall Mesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMesh *inMesh,...);
+GenMesh *  Mesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt);
+GenMesh *  Mesh_SelectAll(GenMesh *msh,sU32 mask,sInt mode);
+GenMesh *  Mesh_SelectCube(GenMesh *msh,sU32 dmask,sInt dmode,sF323 center,sF323 size);
+GenMesh *  Mesh_Subdivide(KOp *,GenMesh *msh,sInt mask,sF32 alpha,sInt count);
+GenMesh *  Mesh_Extrude(KOp *,GenMesh *mesh,sInt smask,sInt dmask,sInt mode,sInt count,sF323 dist,sF323 s,sF323 r);
+GenMesh *  Mesh_Transform(KOp *,GenMesh *msh,sInt mask,sFSRT srt);
+GenMesh *  Mesh_Cylinder(sInt tx,sInt ty,sInt mode,sInt tz,sInt arc);
+GenMesh *  Mesh_TransformEx(KOp *,GenMesh *msh,sInt mask,sFSRT srt,sInt sj,sInt dj);
+GenMesh *  Mesh_Crease(GenMesh *msh,sInt mask,sInt what,sInt selType);
+GenMesh *  Mesh_UnCrease(GenMesh *msh,sInt mask,sInt what,sInt selType);
+GenMesh *  Mesh_CalcNormals(GenMesh *msh,sInt mode,sInt mask,sInt what);
+GenMesh *  Mesh_Torus(sInt x,sInt y,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags);
+GenMesh *  Mesh_Sphere(sInt x,sInt y);
+GenMesh *  Mesh_Triangulate(GenMesh *msh,sInt mask,sInt threshold,sInt type);
+GenMesh *  Mesh_Cut(GenMesh *msh,sF322 dir,sF32 offset,sInt mode);
+GenMesh *  Mesh_ExtrudeNormal(KOp *,GenMesh *msh,sInt mask,sF32 distance);
+GenMesh *  Mesh_Displace(KOp *,GenMesh *msh,GenBitmap *bmp,sInt mask,sF323 ampli);
+GenMesh *  Mesh_Bevel(KOp *,GenMesh *msh,sInt mask,sF32 elev,sF32 pull,sInt mode);
+GenMesh *  Mesh_Perlin(KOp *,GenMesh *msh,sInt mask,sFSRT srt,sF323 ampl);
+GenMesh *  Mesh_Add(sInt count,GenMesh *msh,...);
+GenMesh *  Mesh_DeleteFaces(GenMesh *msh,sInt mask);
+GenMesh *  Mesh_BeginRecord(GenMesh *msh);
+GenMesh *  Mesh_SelectRandom(GenMesh *msh,sU32 dmask,sInt dmode,sU32 ratio,sInt seed);
+GenMesh *  Mesh_Multiply(KOp *,GenMesh *msh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude);
+GenMesh *  Mesh_Bend(KOp *,GenMesh *msh,sInt mask,sFSRT srt1,sFSRT srt2,sF322 dir,sF322 yrange,sInt mode);
+GenMesh *  Mesh_CollisionCube(GenMesh *input,KOp *event,KOp *event2,sF32 x0,sF32 x1,sF32 y0,sF32 y1,sF32 z0,sF32 z1,sInt mode,sInt tx,sInt ty,sInt tz,sInt eventa=0,sInt eventb=0,sInt eventc=0,sInt eventd=0);
+GenMesh *  Mesh_Grid(sInt mode,sInt tesu,sInt tesv);
+GenMesh *  Mesh_SelectLogic(GenMesh *msh,sU32 smask1,sU32 smask2,sU32 dmask,sInt mode);
+GenMesh *  Mesh_SelectGrow(GenMesh *msh,sU32 smask,sU32 dmask,sInt dmode,sInt amount);
+GenMesh *  Mesh_Invert(GenMesh *msh);
+GenMesh *  Mesh_SetPivot(GenMesh *msh,sInt attr,sF323 pivot);
+GenMesh *  Mesh_UVProjection(GenMesh *msh,sInt mask,sFSRT srt,sInt type);
+GenMesh *  Mesh_Center(GenMesh *msh,sInt mask,sInt which);
+GenMesh *  Mesh_AutoCollision(GenMesh *msh,sF32 enlarge,sInt mode,sInt tx,sInt ty,sInt tz,sInt outmask);
+GenMesh *  Mesh_SelectSphere(GenMesh *msh,sU32 dmask,sInt dmode,sF323 center,sF323 size);
+GenMesh *  Mesh_SelectFace(GenMesh *msh,sU32 dmask,sInt dmode,sInt face);
+GenMesh *  Mesh_SelectAngle(GenMesh *msh,sU32 dmask,sInt dmode,sF322 dir,sF32 thresh);
+GenMesh *  Mesh_Bend2(GenMesh *msh,sF323 center,sF323 rotate,sF32 len,sF32 axis);
+GenMesh *  Mesh_SmoothAngle(GenMesh *msh,sF32 angle);
+GenMesh *  Mesh_Color(GenMesh *msh,sF323 pos,sF322 dir,sU32 color,sF32 amplify,sF32 range,sInt op);
+GenMesh *  Mesh_BendS(GenMesh *msh,sF323 anchor,sF323 rotate,sF32 len,KSpline *spline);
+GenMesh *  Mesh_LightSlot(sF323 pos,sU32 color,sF32 amplify,sF32 range);
+GenMesh *  Mesh_ShadowEnable(GenMesh *mesh,sBool enable);
+GenMesh *  Mesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMesh *inMesh,...);
 
-GenSimpleMesh * __stdcall Mesh_BSP(GenMesh *mesh);
+GenSimpleMesh *  Mesh_BSP(GenMesh *mesh);
 
-GenMesh * __stdcall Mesh_XSI(sChar *filename);
-GenMesh * __stdcall Mesh_SingleVert();
+GenMesh *  Mesh_XSI(sChar *filename);
+GenMesh *  Mesh_SingleVert();
 
-GenMinMesh * __stdcall Mesh_ToMin(GenMesh *mesh);
+GenMinMesh *  Mesh_ToMin(GenMesh *mesh);
 
 /****************************************************************************/
 

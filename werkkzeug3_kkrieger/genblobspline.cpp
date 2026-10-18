@@ -608,7 +608,7 @@ void GenSplineMeta::Eval(sF32 time,sF32 phase,sMatrix &mat,sF32 &zoom)
 /***                                                                      ***/
 /****************************************************************************/
 
-KObject * __stdcall Init_Misc_Spline(KOp *op)
+KObject *  Init_Misc_Spline(KOp *op)
 {
   GenSplineSpline *gs = new GenSplineSpline;
   gs->Init((BlobSpline *)op->GetBlobData());
@@ -625,7 +625,7 @@ KObject * __stdcall Init_Misc_Spline(KOp *op)
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Misc_Shaker(KOp *op,GenSpline *parent,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center)
+KObject *  Init_Misc_Shaker(KOp *op,GenSpline *parent,sInt mode,sF323 ta,sF323 ra,sF323 tf,sF323 rf,sF32 time,sF323 center)
 {
   GenSplineShaker *gs = new GenSplineShaker;
 
@@ -653,7 +653,7 @@ KObject * __stdcall Init_Misc_Shaker(KOp *op,GenSpline *parent,sInt mode,sF323 t
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Misc_PipeSpline(KOp *op)
+KObject *  Init_Misc_PipeSpline(KOp *op)
 {
   sQuaternion quat;
   sVector v,d,p,ax;
@@ -737,7 +737,7 @@ KObject * __stdcall Init_Misc_PipeSpline(KOp *op)
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Misc_MetaSpline(Init_Misc_MetaSplinePara para)
+KObject *  Init_Misc_MetaSpline(Init_Misc_MetaSplinePara para)
 {
   GenSplineMeta *gs = new GenSplineMeta;
 

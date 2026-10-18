@@ -231,7 +231,7 @@ void Mult16(sU16 *r,sU16 *c0,sU16 *c1)
 /****************************************************************************/
 
 #if !sINTRO_X
-void __stdcall Bitmap_SetSize(sInt x,sInt y)
+void  Bitmap_SetSize(sInt x,sInt y)
 {
   BitmapYSize = 1<<(x>>16);
   BitmapXSize = 1<<(y>>16);
@@ -240,7 +240,7 @@ void __stdcall Bitmap_SetSize(sInt x,sInt y)
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_MakeTexture(GenBitmap *bm)
+GenBitmap *  Bitmap_MakeTexture(GenBitmap *bm)
 {
   sInt i,c;
   sU16 *s;
@@ -274,7 +274,7 @@ GenBitmap * __stdcall Bitmap_MakeTexture(GenBitmap *bm)
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Flat(sInt4 color)
+GenBitmap *  Bitmap_Flat(sInt4 color)
 {
   GenBitmap *bm;
   sU64 col;
@@ -289,7 +289,7 @@ GenBitmap * __stdcall Bitmap_Flat(sInt4 color)
 
 /****************************************************************************/
 
-void __stdcall Bitmap_Inner(sU64 *d,sU64 *s,sInt count,sInt mode)
+void  Bitmap_Inner(sU64 *d,sU64 *s,sInt count,sInt mode)
 {
   __asm
   {
@@ -462,7 +462,7 @@ ende:
   }
 }
 
-GenBitmap * __stdcall Bitmap_Merge(GenBitmap *bm,GenBitmap *bb,sInt mode)
+GenBitmap *  Bitmap_Merge(GenBitmap *bm,GenBitmap *bb,sInt mode)
 {
   SCRIPTVERIFY(bm);
   SCRIPTVERIFY(bb);
@@ -474,7 +474,7 @@ GenBitmap * __stdcall Bitmap_Merge(GenBitmap *bm,GenBitmap *bb,sInt mode)
   return bm;
 }
 
-GenBitmap * __stdcall Bitmap_Color(GenBitmap *bm,sInt mode,sInt4 col)
+GenBitmap *  Bitmap_Color(GenBitmap *bm,sInt mode,sInt4 col)
 {
   sU64 color;
 
@@ -489,7 +489,7 @@ GenBitmap * __stdcall Bitmap_Color(GenBitmap *bm,sInt mode,sInt4 col)
 }
 
 /*
-GenBitmap * __stdcall Bitmap_Merge(GenBitmap *bm,GenBitmap *bb,sInt mode)
+GenBitmap *  Bitmap_Merge(GenBitmap *bm,GenBitmap *bb,sInt mode)
 {
   sU16 *d,*s;
   sInt _size;
@@ -666,7 +666,7 @@ malphlp:
 */
 /****************************************************************************/
 /*
-GenBitmap * __stdcall Bitmap_Color(GenBitmap *bm,sInt mode,sInt4 col)
+GenBitmap *  Bitmap_Color(GenBitmap *bm,sInt mode,sInt4 col)
 {
   sU16 *d;
 	sU64 color;
@@ -881,7 +881,7 @@ sclclp:
 */
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_GlowRect(GenBitmap *bm,sF32 cx,sF32 cy,sF32 rx,sF32 ry,sF32 sx,sF32 sy,sInt4 color,sF32 alpha,sF32 power)
+GenBitmap *  Bitmap_GlowRect(GenBitmap *bm,sF32 cx,sF32 cy,sF32 rx,sF32 ry,sF32 sx,sF32 sy,sInt4 color,sF32 alpha,sF32 power)
 {
   sU64 *d;
   sInt x,y;
@@ -950,7 +950,7 @@ GenBitmap * __stdcall Bitmap_GlowRect(GenBitmap *bm,sF32 cx,sF32 cy,sF32 rx,sF32
 /****************************************************************************/
 
 #if !sINTRO
-void __stdcall Bitmap_SetTexture(GenBitmap *bm,sInt stage)
+void  Bitmap_SetTexture(GenBitmap *bm,sInt stage)
 {
   SCRIPTVERIFYVOID(bm);
 
@@ -962,7 +962,7 @@ void __stdcall Bitmap_SetTexture(GenBitmap *bm,sInt stage)
 /****************************************************************************/
 
 #if !sINTRO
-GenBitmap * __stdcall Bitmap_Dots(GenBitmap *bm,sInt4 color0,sInt4 color1,sInt count,sInt seed)
+GenBitmap *  Bitmap_Dots(GenBitmap *bm,sInt4 color0,sInt4 color1,sInt count,sInt seed)
 {
   sU64 *d;
   sInt f;
@@ -1000,7 +1000,7 @@ GenBitmap * __stdcall Bitmap_Dots(GenBitmap *bm,sInt4 color0,sInt4 color1,sInt c
 /****************************************************************************/
 
 //#if !sINTRO
-GenBitmap * __stdcall Bitmap_HSCB(GenBitmap *bm,sInt h,sInt s,sInt c,sInt b)
+GenBitmap *  Bitmap_HSCB(GenBitmap *bm,sInt h,sInt s,sInt c,sInt b)
 {
   SCRIPTVERIFY(bm);
 
@@ -1124,7 +1124,7 @@ GenBitmap * __stdcall Bitmap_HSCB(GenBitmap *bm,sInt h,sInt s,sInt c,sInt b)
 /****************************************************************************/
 
 #if !sINTRO
-GenBitmap * __stdcall Bitmap_Wavelet(GenBitmap *bm,sInt mode,sInt count)
+GenBitmap *  Bitmap_Wavelet(GenBitmap *bm,sInt mode,sInt count)
 {
   sU64 *mem;
   sU16 *s,*d;
@@ -1236,7 +1236,7 @@ GenBitmap * __stdcall Bitmap_Wavelet(GenBitmap *bm,sInt mode,sInt count)
 /****************************************************************************/
 
 #define SMALLBLUR 1
-GenBitmap * __stdcall Bitmap_Blur(GenBitmap *bm,sInt order,sInt sx,sInt sy,sInt _amp)
+GenBitmap *  Bitmap_Blur(GenBitmap *bm,sInt order,sInt sx,sInt sy,sInt _amp)
 {
   SCRIPTVERIFY(bm);
   
@@ -1399,7 +1399,7 @@ repeatlabel:
 /***                                                                      ***/
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Mask(GenBitmap *bm,GenBitmap *bb,GenBitmap *bc)
+GenBitmap *  Bitmap_Mask(GenBitmap *bm,GenBitmap *bb,GenBitmap *bc)
 {
   sInt size;
 
@@ -1425,7 +1425,7 @@ GenBitmap * __stdcall Bitmap_Mask(GenBitmap *bm,GenBitmap *bb,GenBitmap *bc)
 /***                                                                      ***/
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Rotate(GenBitmap *bm,sF32 angle,sF32 sx,sF32 sy,sInt tx,sInt ty,sInt border)
+GenBitmap *  Bitmap_Rotate(GenBitmap *bm,sF32 angle,sF32 sx,sF32 sy,sInt tx,sInt ty,sInt border)
 {
   sInt x,y;
   sU16 *s,*d;
@@ -1476,7 +1476,7 @@ GenBitmap * __stdcall Bitmap_Rotate(GenBitmap *bm,sF32 angle,sF32 sx,sF32 sy,sIn
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Distort(GenBitmap *bm,GenBitmap *bb,sInt dist,sInt border)
+GenBitmap *  Bitmap_Distort(GenBitmap *bm,GenBitmap *bb,sInt dist,sInt border)
 {
   sInt x,y;
   sU16 *t,*d;
@@ -1524,7 +1524,7 @@ static sInt filterbump(sU16 *s,sInt pos,sInt mask,sInt step)
        - s[(pos+step     )&mask]*1;
 }
 
-GenBitmap * __stdcall Bitmap_Normals(GenBitmap *bm,sInt dist,sInt mode)
+GenBitmap *  Bitmap_Normals(GenBitmap *bm,sInt dist,sInt mode)
 {
   sInt shiftx,shifty;
   sInt xs,ys;
@@ -1613,14 +1613,14 @@ GenBitmap * __stdcall Bitmap_Normals(GenBitmap *bm,sInt dist,sInt mode)
 
 void BumpLight(GenBitmap *bm,GenBitmap *bb,sS32 *para);
 
-GenBitmap * __stdcall Bitmap_Light(GenBitmap *bm,sInt subcode,sF32 px,sF32 py,sF32 pz,sF32 da,sF32 db,
+GenBitmap *  Bitmap_Light(GenBitmap *bm,sInt subcode,sF32 px,sF32 py,sF32 pz,sF32 da,sF32 db,
                                    sInt4 diff,sInt4 ambi,sF32 outer,sF32 falloff,sF32 amp)
 {
   return Bitmap_Bump(bm,0,subcode,px,py,pz,da,db,diff,ambi,outer,falloff,amp,ambi,0,0);
 }
 
 
-GenBitmap * __stdcall Bitmap_Bump(GenBitmap *bm,GenBitmap *bb,sInt subcode,sF32 px,sF32 py,sF32 pz,sF32 da,sF32 db,
+GenBitmap *  Bitmap_Bump(GenBitmap *bm,GenBitmap *bb,sInt subcode,sF32 px,sF32 py,sF32 pz,sF32 da,sF32 db,
                                   sInt4 _diff,sInt4 _ambi,sF32 outer,sF32 falloff,sF32 amp,
                                   sInt4 _spec,sF32 spow,sInt samp)
 {
@@ -1758,7 +1758,7 @@ GenBitmap * __stdcall Bitmap_Bump(GenBitmap *bm,GenBitmap *bb,sInt subcode,sF32 
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Text(GenBitmap *bm,sInt x,sInt y,sInt width,sInt height,sInt4 col,sChar *text)
+GenBitmap *  Bitmap_Text(GenBitmap *bm,sInt x,sInt y,sInt width,sInt height,sInt4 col,sChar *text)
 {
 #if sINTRO
   sU32 *data;
@@ -1879,7 +1879,7 @@ static sF32 noise2(sInt x,sInt y,sInt mask,sInt seed)
   return f;
 }
 
-GenBitmap * __stdcall Bitmap_Perlin(sInt freq,sInt oct,sF32 fadeoff,sInt seed,sInt mode,sF32 amp,sF32 gamma,sInt4 col0,sInt4 col1)
+GenBitmap *  Bitmap_Perlin(sInt freq,sInt oct,sF32 fadeoff,sInt seed,sInt mode,sF32 amp,sF32 gamma,sInt4 col0,sInt4 col1)
 {
   GenBitmap *bm;
   sInt i;
@@ -1938,7 +1938,7 @@ GenBitmap * __stdcall Bitmap_Perlin(sInt freq,sInt oct,sF32 fadeoff,sInt seed,sI
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Cell(sInt4 col0,sInt4 col1,sInt4 col2,sInt count,sInt seed,sF32 amp,sF32 gamma,sInt mode)
+GenBitmap *  Bitmap_Cell(sInt4 col0,sInt4 col1,sInt4 col2,sInt count,sInt seed,sF32 amp,sF32 gamma,sInt mode)
 {
   GenBitmap *bm;
   sInt cells[256][3];
@@ -2027,7 +2027,7 @@ GenBitmap * __stdcall Bitmap_Cell(sInt4 col0,sInt4 col1,sInt4 col2,sInt count,sI
 
 /****************************************************************************/
 
-GenBitmap * __stdcall Bitmap_Gradient(sInt4 col0,sInt4 col1,sInt pos,sF32 a,sF32 length)
+GenBitmap *  Bitmap_Gradient(sInt4 col0,sInt4 col1,sInt pos,sF32 a,sF32 length)
 {
 	GenBitmap *bm;
   sU64 c0,c1;

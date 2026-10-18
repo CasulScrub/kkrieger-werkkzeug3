@@ -115,7 +115,7 @@ public:
 	// a_this   : void ptr to instance
 	// rest as in Render()
 	//
-	static void __stdcall RenderProxy(void *a_this, sF32 *a_buffer, sU32 a_len) 
+	static void  RenderProxy(void *a_this, sF32 *a_buffer, sU32 a_len) 
 	{ 
 		reinterpret_cast<V2MPlayer*>(a_this)->Render(a_buffer,a_len);
 	}

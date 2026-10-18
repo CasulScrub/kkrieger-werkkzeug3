@@ -184,7 +184,7 @@ namespace FRIED
     }
   }
 
-  static sInt __forceinline GRdecodenew(BitDecoder &coder,sInt &krp)
+  static sInt __attribute__((always_inline)) inline GRdecodenew(BitDecoder &coder,sInt &krp)
   {
     // table-based version for small k (<6), rather fast
     if(krp < 48)

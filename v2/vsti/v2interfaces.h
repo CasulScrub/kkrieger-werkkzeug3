@@ -60,7 +60,7 @@ namespace V2
 
 	// function is not a factory but returns
 	// an existing instance. 
-	typedef IHost& (__cdecl *GetHostFunc)();
+	typedef IHost& ( *GetHostFunc)();
 
 
 	/// templates

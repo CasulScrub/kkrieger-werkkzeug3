@@ -474,7 +474,7 @@ sBool Scene_New(class ScriptRuntime *sr) // obsolete
 */
 /****************************************************************************/
 
-GenScene * __stdcall Scene_Mesh(GenMesh *mesh,sF323 s,sF323 r,sF323 t)
+GenScene *  Scene_Mesh(GenMesh *mesh,sF323 s,sF323 r,sF323 t)
 {
   GenScene *scene;
 
@@ -487,7 +487,7 @@ GenScene * __stdcall Scene_Mesh(GenMesh *mesh,sF323 s,sF323 r,sF323 t)
   return scene;
 }
 
-GenScene * __stdcall Scene_Add(GenScene *s1,GenScene *s2)
+GenScene *  Scene_Add(GenScene *s1,GenScene *s2)
 {
   GenScene *sb;
 
@@ -508,7 +508,7 @@ GenScene * __stdcall Scene_Add(GenScene *s1,GenScene *s2)
   return sb;
 }
 
-GenScene * __stdcall Scene_Trans(GenScene *sa,sF323 s,sF323 r,sF323 t)
+GenScene *  Scene_Trans(GenScene *sa,sF323 s,sF323 r,sF323 t)
 {
   GenScene *scene;
 
@@ -520,7 +520,7 @@ GenScene * __stdcall Scene_Trans(GenScene *sa,sF323 s,sF323 r,sF323 t)
   return scene;
 }
 
-GenScene * __stdcall Scene_Multiply(GenScene *sa,sF323 s,sF323 r,sF323 t,sInt count)
+GenScene *  Scene_Multiply(GenScene *sa,sF323 s,sF323 r,sF323 t,sInt count)
 {
   GenScene *scene;
 
@@ -533,7 +533,7 @@ GenScene * __stdcall Scene_Multiply(GenScene *sa,sF323 s,sF323 r,sF323 t,sInt co
   return scene;
 }
 
-GenScene * __stdcall Scene_Paint(GenScene *sa)
+GenScene *  Scene_Paint(GenScene *sa)
 {
   sMatrix mat;
   SCRIPTVERIFY(sa);
@@ -543,13 +543,13 @@ GenScene * __stdcall Scene_Paint(GenScene *sa)
   return sa;
 }
 
-GenScene * __stdcall Scene_Label(GenScene *sa,sInt label)
+GenScene *  Scene_Label(GenScene *sa,sInt label)
 {
   sa->_Label = label;
   return sa;
 }
 
-GenScene * __stdcall Scene_Light(sF323 s,sF323 r,sF323 t,sInt mode,sInt mask,sInt label,sF32 range,sF32 rangecut,sF32 amplify,sF32 spotfalloff,sF32 spotinner,sF32 spotouter,sInt4 diff,sInt4 amb,sInt4 spec)
+GenScene *  Scene_Light(sF323 s,sF323 r,sF323 t,sInt mode,sInt mask,sInt label,sF32 range,sF32 rangecut,sF32 amplify,sF32 spotfalloff,sF32 spotinner,sF32 spotouter,sInt4 diff,sInt4 amb,sInt4 spec)
 {
   GenScene *scene;
   GenLight *light;
@@ -576,12 +576,12 @@ GenScene * __stdcall Scene_Light(sF323 s,sF323 r,sF323 t,sInt mode,sInt mask,sIn
   return scene;
 }
 /*
-GenScene * __stdcall Scene_PaintLater(GenScene *sa)
+GenScene *  Scene_PaintLater(GenScene *sa)
 {
   return sa;
 }
 */
-GenScene * __stdcall Scene_PartScene(GenParticles *p)
+GenScene *  Scene_PartScene(GenParticles *p)
 {
   GenScene *sa;
 
@@ -652,12 +652,12 @@ GenMatPass *PopPass(sInt pass,sObject *obj)
 
 /****************************************************************************/
 
-GenMaterial * __stdcall Material_NewMaterial()
+GenMaterial *  Material_NewMaterial()
 {
   return new GenMaterial;
 }
 
-sObject * __stdcall MatPass_MatBase(sObject *obj,sInt pass,sInt flags,sInt mode,sInt rp,sInt4 color)
+sObject *  MatPass_MatBase(sObject *obj,sInt pass,sInt flags,sInt mode,sInt rp,sInt4 color)
 {
   GenMatPass *matpass;
 //  sInt i;
@@ -677,7 +677,7 @@ sObject * __stdcall MatPass_MatBase(sObject *obj,sInt pass,sInt flags,sInt mode,
   return obj;
 }
 
-sObject * __stdcall MatPass_MatTexture(sObject *obj,GenBitmap *bm,sInt pass,sInt stage,sInt flags)
+sObject *  MatPass_MatTexture(sObject *obj,GenBitmap *bm,sInt pass,sInt stage,sInt flags)
 {
   GenMatPass *matpass;
   sInt i;
@@ -717,7 +717,7 @@ sObject * __stdcall MatPass_MatTexture(sObject *obj,GenBitmap *bm,sInt pass,sInt
   return obj;
 }
 
-sObject * __stdcall MatPass_MatFinalizer(sObject *obj,sInt pass,sInt program,sF32 aspect,sF32 size,sF32 enlarge)
+sObject *  MatPass_MatFinalizer(sObject *obj,sInt pass,sInt program,sF32 aspect,sF32 size,sF32 enlarge)
 {
   GenMatPass *matpass;
 
@@ -732,7 +732,7 @@ sObject * __stdcall MatPass_MatFinalizer(sObject *obj,sInt pass,sInt program,sF3
   return obj;
 }
 
-sObject * __stdcall MatPass_MatLabel(sObject *obj,sInt label,sInt pass)
+sObject *  MatPass_MatLabel(sObject *obj,sInt label,sInt pass)
 {
   GenMatPass *matpass;
 
@@ -744,7 +744,7 @@ sObject * __stdcall MatPass_MatLabel(sObject *obj,sInt label,sInt pass)
   return obj;
 }
 
-sObject * __stdcall MatPass_MatTexTrans(sObject *obj,sInt label,sInt pass,sInt stage,sF323 s,sF323 r,sF323 t)
+sObject *  MatPass_MatTexTrans(sObject *obj,sInt label,sInt pass,sInt stage,sF323 s,sF323 r,sF323 t)
 {
   GenMatPass *matpass;
   GenMatrix *mat;
@@ -766,7 +766,7 @@ sObject * __stdcall MatPass_MatTexTrans(sObject *obj,sInt label,sInt pass,sInt s
 }
 
 #if !sINTRO_X
-sObject * __stdcall MatPass_MatDX7(sObject *obj,sInt pass,sInt color0,sInt color1,sInt alpha0,sInt alpha1)
+sObject *  MatPass_MatDX7(sObject *obj,sInt pass,sInt color0,sInt color1,sInt alpha0,sInt alpha1)
 {
   GenMatPass *matpass;
   sInt i;
@@ -806,7 +806,7 @@ sObject * __stdcall MatPass_MatDX7(sObject *obj,sInt pass,sInt color0,sInt color
 #endif
 
 #if !sINTRO_X
-sObject * __stdcall MatPass_MatBlend(sObject *obj,sInt pass,sInt alphatest,sInt alpharef,sInt source,sInt op,sInt dest)
+sObject *  MatPass_MatBlend(sObject *obj,sInt pass,sInt alphatest,sInt alpharef,sInt source,sInt op,sInt dest)
 {
   GenMatPass *matpass;
   sU32 *data;
@@ -845,7 +845,7 @@ sObject * __stdcall MatPass_MatBlend(sObject *obj,sInt pass,sInt alphatest,sInt 
 #endif
 
 #if !sINTRO_X
-sObject * __stdcall MatPass_MatStencil(sObject *obj,sInt pass,sInt stenciltest,sInt stencilref,sInt sfail,sInt zfail,sInt zpass)
+sObject *  MatPass_MatStencil(sObject *obj,sInt pass,sInt stenciltest,sInt stencilref,sInt sfail,sInt zfail,sInt zpass)
 {
   GenMatPass *matpass;
   sU32 *data;
@@ -875,7 +875,7 @@ sObject * __stdcall MatPass_MatStencil(sObject *obj,sInt pass,sInt stenciltest,s
 }
 #endif
 
-sObject * __stdcall MatPass_MatLight(sObject *obj,sInt pass,sInt ds,sInt ss,sInt as,sInt es,sInt4 d,sInt4 s,sInt4 a,sInt4 e,sF32 power,sInt specular,sInt mask)
+sObject *  MatPass_MatLight(sObject *obj,sInt pass,sInt ds,sInt ss,sInt as,sInt es,sInt4 d,sInt4 s,sInt4 a,sInt4 e,sF32 power,sInt specular,sInt mask)
 {
   GenMatPass *matpass;
   sU32 *data;
@@ -1255,7 +1255,7 @@ void GenParticles::Paint(sMatrix &mat,sInt time)
 /****************************************************************************/
 /****************************************************************************/
 
-GenParticles * __stdcall Part_New(GenMaterial *mtrl,sF32 rate,sF32 jitter,sInt maxpart,sF32 life,sF323 grav)
+GenParticles *  Part_New(GenMaterial *mtrl,sF32 rate,sF32 jitter,sInt maxpart,sF32 life,sF323 grav)
 {
   GenParticles *part;
 
@@ -1276,7 +1276,7 @@ GenParticles * __stdcall Part_New(GenMaterial *mtrl,sF32 rate,sF32 jitter,sInt m
   return part;
 }
 
-GenParticles * __stdcall Part_Emitter(GenParticles *sys,sF323 s,sF323 r,sF323 t,sInt flags,sF32 surface,sF32 scatter,sF32 speed,sF32 speedrand)
+GenParticles *  Part_Emitter(GenParticles *sys,sF323 s,sF323 r,sF323 t,sInt flags,sF32 surface,sF32 scatter,sF32 speed,sF32 speedrand)
 {
 #if !sINTRO_X
   SCRIPTVERIFY(sys);
@@ -1297,7 +1297,7 @@ GenParticles * __stdcall Part_Emitter(GenParticles *sys,sF323 s,sF323 r,sF323 t,
   return sys;
 }
 
-GenParticles * __stdcall Part_Rotate(GenParticles *sys,sF32 rotstart,sF32 rotrand,sF32 rotspeed)
+GenParticles *  Part_Rotate(GenParticles *sys,sF32 rotstart,sF32 rotrand,sF32 rotspeed)
 {
 #if !sINTRO_X
   SCRIPTVERIFY(sys);
@@ -1313,7 +1313,7 @@ GenParticles * __stdcall Part_Rotate(GenParticles *sys,sF32 rotstart,sF32 rotran
   return sys;
 }
 
-GenParticles * __stdcall Part_Life(GenParticles *sys,sF322 size,sF322 sizetime,sF32 aspect,sInt4 col0,sInt4 col1,sInt4 col2,sF323 coltime)
+GenParticles *  Part_Life(GenParticles *sys,sF322 size,sF322 sizetime,sF32 aspect,sInt4 col0,sInt4 col1,sInt4 col2,sF323 coltime)
 {
 #if !sINTRO_X
   SCRIPTVERIFY(sys);
@@ -1333,7 +1333,7 @@ GenParticles * __stdcall Part_Life(GenParticles *sys,sF322 size,sF322 sizetime,s
 }
 
 #if !sINTRO_X
-GenParticles * __stdcall Part_Spline(GenParticles *sys,GenSpline *spline,sInt mode,sF32 force)
+GenParticles *  Part_Spline(GenParticles *sys,GenSpline *spline,sInt mode,sF32 force)
 {
   SCRIPTVERIFY(sys);
   SCRIPTVERIFY(spline);

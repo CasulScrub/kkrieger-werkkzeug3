@@ -31,7 +31,7 @@ struct sDirEntry;                 // load a directory
 
 #define sISHANDLE(x) ((x)>=0)
 #define sINVALID -1
-#define sEXPORT __declspec(dllexport)
+#define sEXPORT 
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -140,7 +140,7 @@ struct sVertexDouble
   sF32 u0,v0;
   sF32 u1,v1;
 
-  __forceinline void Init(sF32 X,sF32 Y,sF32 Z=0.5f,
+  __attribute__((always_inline)) inline void Init(sF32 X,sF32 Y,sF32 Z=0.5f,
     sU32 C0=~0,sF32 U0=0,sF32 V0=0,sF32 U1=0,sF32 V1=0)
   { x=X;y=Y;z=Z;c0=C0;u0=U0;v0=V0;u1=U1;v1=V1; }
 };
@@ -603,9 +603,9 @@ public:
   sHostFont();
   ~sHostFont();
 
-  __forceinline sInt GetHeight() { return Height; }
-  __forceinline sInt GetAdvance() { return Advance; }
-  __forceinline sInt GetBaseline() { return Baseline; }
+  __attribute__((always_inline)) inline sInt GetHeight() { return Height; }
+  __attribute__((always_inline)) inline sInt GetAdvance() { return Advance; }
+  __attribute__((always_inline)) inline sInt GetBaseline() { return Baseline; }
 
   void Init(sChar *name,sInt height,sInt widht=0,sInt style=0);
   void GetWidth(sChar *);

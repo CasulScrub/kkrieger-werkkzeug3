@@ -1281,7 +1281,7 @@ sBool CheckMinMesh(GenMinMesh *&mesh)
 /***                                                                      ***/
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_SingleVert()
+GenMinMesh *  MinMesh_SingleVert()
 {
   GenMinMesh *mesh;
   GenMinVert *vp;
@@ -1301,7 +1301,7 @@ GenMinMesh * __stdcall MinMesh_SingleVert()
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Grid(sInt mode,sInt tx,sInt ty)
+GenMinMesh *  MinMesh_Grid(sInt mode,sInt tx,sInt ty)
 {
   GenMinMesh *mesh;
   sMatrix mat;
@@ -1320,7 +1320,7 @@ GenMinMesh * __stdcall MinMesh_Grid(sInt mode,sInt tx,sInt ty)
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
+GenMinMesh *  MinMesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt)
 {
   GenMinMesh *mesh;
   sMatrix mat;
@@ -1392,7 +1392,7 @@ GenMinMesh * __stdcall MinMesh_Cube(sInt tx,sInt ty,sInt tz,sInt flags,sFSRT srt
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags)
+GenMinMesh *  MinMesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,sF32 arclen,sInt flags)
 {
   GenMinMesh *mesh;
   GenMinVert *vp;
@@ -1441,7 +1441,7 @@ GenMinMesh * __stdcall MinMesh_Torus(sInt tx,sInt ty,sF32 ro,sF32 ri,sF32 phase,
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Sphere(sInt tx,sInt ty)
+GenMinMesh *  MinMesh_Sphere(sInt tx,sInt ty)
 {
   GenMinMesh *mesh;
   GenMinVert *vp;
@@ -1468,7 +1468,7 @@ GenMinMesh * __stdcall MinMesh_Sphere(sInt tx,sInt ty)
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Cylinder(sInt tx,sInt ty,sInt flags,sInt tz,sInt arc)
+GenMinMesh *  MinMesh_Cylinder(sInt tx,sInt ty,sInt flags,sInt tz,sInt arc)
 {
   GenMinMesh *mesh;
   GenMinVert *vp;
@@ -1589,7 +1589,7 @@ GenMinMesh * __stdcall MinMesh_Cylinder(sInt tx,sInt ty,sInt flags,sInt tz,sInt 
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_XSI(sChar *filename)
+GenMinMesh *  MinMesh_XSI(sChar *filename)
 {
   GenMinMesh *mesh;
   mesh = new GenMinMesh;
@@ -1772,7 +1772,7 @@ static sS16 KopuliData[][12] =
   { 8001,3399,2200,10370,6579,2200,12245,3728,2200,12245,3728,2200,  },
 };
 
-GenMinMesh * __stdcall MinMesh_Kopuli()
+GenMinMesh *  MinMesh_Kopuli()
 {
   GenMinMesh *mesh;
   sInt i,fc;
@@ -1849,7 +1849,7 @@ GenMinMesh * __stdcall MinMesh_Kopuli()
 /***                                                                      ***/
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_MatLink(GenMinMesh *mesh,GenMaterial *mtrl,sInt select,sInt pass)
+GenMinMesh *  MinMesh_MatLink(GenMinMesh *mesh,GenMaterial *mtrl,sInt select,sInt pass)
 {
   GenMinFace *face;
 
@@ -1872,7 +1872,7 @@ GenMinMesh * __stdcall MinMesh_MatLink(GenMinMesh *mesh,GenMaterial *mtrl,sInt s
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_MatLinkId(GenMinMesh *mesh,GenMaterial *mtrl,sInt id,sInt pass)
+GenMinMesh *  MinMesh_MatLinkId(GenMinMesh *mesh,GenMaterial *mtrl,sInt id,sInt pass)
 {
   if(!mtrl || mtrl->ClassId != KC_MATERIAL || CheckMinMesh(mesh))
     return 0;
@@ -1895,7 +1895,7 @@ GenMinMesh * __stdcall MinMesh_MatLinkId(GenMinMesh *mesh,GenMaterial *mtrl,sInt
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Add(sInt count,GenMinMesh *mesh,...)
+GenMinMesh *  MinMesh_Add(sInt count,GenMinMesh *mesh,...)
 {
   if(CheckMinMesh(mesh)) return 0;
   for(sInt i=1;i<count;i++)
@@ -1911,7 +1911,7 @@ GenMinMesh * __stdcall MinMesh_Add(sInt count,GenMinMesh *mesh,...)
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_SelectAll(GenMinMesh *mesh,sU32 mode)
+GenMinMesh *  MinMesh_SelectAll(GenMinMesh *mesh,sU32 mode)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -1948,7 +1948,7 @@ sBool SelectLogic(sInt old,sInt sel,sInt mode)
   return old;
 }
 
-GenMinMesh * __stdcall MinMesh_SelectCube(GenMinMesh *mesh,sInt mode,sF323 center,sF323 size)
+GenMinMesh *  MinMesh_SelectCube(GenMinMesh *mesh,sInt mode,sF323 center,sF323 size)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -1994,7 +1994,7 @@ GenMinMesh * __stdcall MinMesh_SelectCube(GenMinMesh *mesh,sInt mode,sF323 cente
 }
 
 
-GenMinMesh * __stdcall MinMesh_SelectLogic(GenMinMesh *mesh,sInt mode)
+GenMinMesh *  MinMesh_SelectLogic(GenMinMesh *mesh,sInt mode)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2027,7 +2027,7 @@ GenMinMesh * __stdcall MinMesh_SelectLogic(GenMinMesh *mesh,sInt mode)
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_DeleteFaces(GenMinMesh *mesh)
+GenMinMesh *  MinMesh_DeleteFaces(GenMinMesh *mesh)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2041,7 +2041,7 @@ GenMinMesh * __stdcall MinMesh_DeleteFaces(GenMinMesh *mesh)
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Invert(GenMinMesh *mesh)
+GenMinMesh *  MinMesh_Invert(GenMinMesh *mesh)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2056,7 +2056,7 @@ GenMinMesh * __stdcall MinMesh_Invert(GenMinMesh *mesh)
 /***                                                                      ***/
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_TransformEx(GenMinMesh *mesh,sInt mask,sFSRT srt)
+GenMinMesh *  MinMesh_TransformEx(GenMinMesh *mesh,sInt mask,sFSRT srt)
 {
   sMatrix mat;
 
@@ -2068,7 +2068,7 @@ GenMinMesh * __stdcall MinMesh_TransformEx(GenMinMesh *mesh,sInt mask,sFSRT srt)
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Displace(GenMinMesh *mesh,class GenBitmap *bmp,sInt mask,sF323 ampli)
+GenMinMesh *  MinMesh_Displace(GenMinMesh *mesh,class GenBitmap *bmp,sInt mask,sF323 ampli)
 {
   BilinearContext ctx;
   sU16 height[4];
@@ -2099,7 +2099,7 @@ GenMinMesh * __stdcall MinMesh_Displace(GenMinMesh *mesh,class GenBitmap *bmp,sI
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Perlin(GenMinMesh *mesh,sInt mask,sFSRT srt,sF323 ampl)
+GenMinMesh *  MinMesh_Perlin(GenMinMesh *mesh,sInt mask,sFSRT srt,sF323 ampl)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2193,7 +2193,7 @@ GenMinMesh * __stdcall MinMesh_Perlin(GenMinMesh *mesh,sInt mask,sFSRT srt,sF323
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_ExtrudeNormal(GenMinMesh *mesh,sInt mask,sF32 distance)
+GenMinMesh *  MinMesh_ExtrudeNormal(GenMinMesh *mesh,sInt mask,sF32 distance)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2209,7 +2209,7 @@ GenMinMesh * __stdcall MinMesh_ExtrudeNormal(GenMinMesh *mesh,sInt mask,sF32 dis
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Bend2(GenMinMesh *mesh,sF323 center,sF323 rotate,sF32 len,sF32 angle)
+GenMinMesh *  MinMesh_Bend2(GenMinMesh *mesh,sF323 center,sF323 rotate,sF32 len,sF32 angle)
 {
   sMatrix mt,mb;
   sVector vt;
@@ -2253,7 +2253,7 @@ GenMinMesh * __stdcall MinMesh_Bend2(GenMinMesh *mesh,sF323 center,sF323 rotate,
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_BakeAnimation(GenMinMesh *mesh,sF32 fade,sF32 metamorph)
+GenMinMesh *  MinMesh_BakeAnimation(GenMinMesh *mesh,sF32 fade,sF32 metamorph)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2261,7 +2261,7 @@ GenMinMesh * __stdcall MinMesh_BakeAnimation(GenMinMesh *mesh,sF32 fade,sF32 met
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_BoneChain(GenMinMesh *mesh,sF323 p0f,sF323 p1f,sInt count,sInt flags)
+GenMinMesh *  MinMesh_BoneChain(GenMinMesh *mesh,sF323 p0f,sF323 p1f,sInt count,sInt flags)
 {
   GenMinVert *vp;
   GenMinCluster *cl;
@@ -2342,7 +2342,7 @@ GenMinMesh * __stdcall MinMesh_BoneChain(GenMinMesh *mesh,sF323 p0f,sF323 p1f,sI
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_BoneTrain(GenMinMesh *mesh,GenSpline *spline,sF32 delta,sInt mode)
+GenMinMesh *  MinMesh_BoneTrain(GenMinMesh *mesh,GenSpline *spline,sF32 delta,sInt mode)
 {
   if(CheckMinMesh(mesh)) { sRelease(spline); return 0; }
   if(!spline) return mesh;
@@ -2365,7 +2365,7 @@ GenMinMesh * __stdcall MinMesh_BoneTrain(GenMinMesh *mesh,GenSpline *spline,sF32
   return mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_ScaleAnim(GenMinMesh *mesh,sF32 scale)
+GenMinMesh *  MinMesh_ScaleAnim(GenMinMesh *mesh,sF32 scale)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2821,7 +2821,7 @@ static void MTProcessCell(GenMinMesh *mesh,sInt pos,sF32 isoValue)
   }
 }
 
-GenMinMesh * __stdcall MinMesh_MTetra(sF32 isoValue)
+GenMinMesh *  MinMesh_MTetra(sF32 isoValue)
 {
   // create mesh, set up vertices and faces as necessary
   GenMinMesh *mesh = new GenMinMesh;
@@ -2883,7 +2883,7 @@ GenMinMesh * __stdcall MinMesh_MTetra(sF32 isoValue)
 /***                                                                      ***/
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Triangulate(GenMinMesh *mesh)
+GenMinMesh *  MinMesh_Triangulate(GenMinMesh *mesh)
 {
   if(CheckMinMesh(mesh)) return 0;
 
@@ -2930,7 +2930,7 @@ GenMinMesh * __stdcall MinMesh_Triangulate(GenMinMesh *mesh)
   return mesh;
 }
 
-static void __stdcall ExtrudeOnce(GenMinMesh *mesh,sInt *groups)
+static void  ExtrudeOnce(GenMinMesh *mesh,sInt *groups)
 {
   // initialize
   sInt faceCount = mesh->Faces.Count;
@@ -2999,7 +2999,7 @@ static void __stdcall ExtrudeOnce(GenMinMesh *mesh,sInt *groups)
   delete[] vertRemap;
 }
 
-GenMinMesh * __stdcall MinMesh_Extrude(GenMinMesh *mesh,sInt mode,sInt count,sF323 distance)
+GenMinMesh *  MinMesh_Extrude(GenMinMesh *mesh,sInt mode,sInt count,sF323 distance)
 {
   if(CheckMinMesh(mesh)) return 0;
   mesh->CalcAdjacency();
@@ -3825,7 +3825,7 @@ GenMinMesh *MeshCoder::Decode(sU8 *&p)
   return Mesh;
 }
 
-GenMinMesh * __stdcall MinMesh_Compress(GenMinMesh *inMesh)
+GenMinMesh *  MinMesh_Compress(GenMinMesh *inMesh)
 {
   if(CheckMinMesh(inMesh))
     return 0;
@@ -3891,7 +3891,7 @@ GenMinMesh * __stdcall MinMesh_Compress(GenMinMesh *inMesh)
 /****************************************************************************/
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Pipe(GenSpline *spline_,GenMinMesh *mesh0,GenMinMesh *mesh1,GenMinMesh *mesh2,sInt flags,sF32 texzoom,sF32 ringdist)
+GenMinMesh *  MinMesh_Pipe(GenSpline *spline_,GenMinMesh *mesh0,GenMinMesh *mesh1,GenMinMesh *mesh2,sInt flags,sF32 texzoom,sF32 ringdist)
 {
   if(spline_->GetBlobSpline()==0) return 0;
   if(spline_->GetBlobSpline()->Mode!=4) return 0;
@@ -4094,7 +4094,7 @@ GenMinMesh * __stdcall MinMesh_Pipe(GenSpline *spline_,GenMinMesh *mesh0,GenMinM
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Multiply(KOp *,GenMinMesh *mesh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude)
+GenMinMesh *  MinMesh_Multiply(KOp *,GenMinMesh *mesh,sFSRT srt,sInt count,sInt mode,sF32 tu,sF32 tv,sF323 lrot,sF32 extrude)
 {
 	GenMinMesh *out;
 	sMatrix xform,step,lxform,lstep,tmp;
@@ -4158,7 +4158,7 @@ GenMinMesh * __stdcall MinMesh_Multiply(KOp *,GenMinMesh *mesh,sFSRT srt,sInt co
 	return out;
 }
 
-GenMinMesh * __stdcall MinMesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMinMesh *inMesh,...)
+GenMinMesh *  MinMesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1,sInt3 count2,sF323 translate2,sInt random,sInt3 count3,sF323 translate3,sInt inCount,GenMinMesh *inMesh,...)
 {
   if(!inCount)
     return 0;
@@ -4232,7 +4232,7 @@ GenMinMesh * __stdcall MinMesh_Multiply2(sInt seed,sInt3 count1,sF323 translate1
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_Center(GenMinMesh *mesh,sInt which)
+GenMinMesh *  MinMesh_Center(GenMinMesh *mesh,sInt which)
 {
   sAABox box;
   sF32 tx,ty,tz;
@@ -4254,7 +4254,7 @@ GenMinMesh * __stdcall MinMesh_Center(GenMinMesh *mesh,sInt which)
 
 /****************************************************************************/
 
-GenMinMesh * __stdcall MinMesh_RenderAutoMap(GenMinMesh *mesh,sInt flags)
+GenMinMesh *  MinMesh_RenderAutoMap(GenMinMesh *mesh,sInt flags)
 {
   sAABox box;
   GenMinFace *face;

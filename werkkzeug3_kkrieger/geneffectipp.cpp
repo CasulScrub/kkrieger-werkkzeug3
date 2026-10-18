@@ -9,7 +9,7 @@
 
 /****************************************************************************/
 
-KObject * __stdcall Init_Effect_LineShuffle(sInt pass)
+KObject *  Init_Effect_LineShuffle(sInt pass)
 {
   GenEffect *fx = new GenEffect;
   fx->NeedCurrentRender = sTRUE;
@@ -19,7 +19,7 @@ KObject * __stdcall Init_Effect_LineShuffle(sInt pass)
   return fx;
 }
 
-void __stdcall Exec_Effect_LineShuffle(KOp *op,KEnvironment *kenv,sInt pass)
+void  Exec_Effect_LineShuffle(KOp *op,KEnvironment *kenv,sInt pass)
 {
   sMaterialEnv env;
   sVertexStandard *vp;
@@ -120,7 +120,7 @@ static void updateJPEGFilterKernel(sF32 strength,sInt mode)
   sSystem->UpdateTexture(GenOverlayManager->JPEGKernel1,k1Data);
 }
 
-KObject * __stdcall Init_Effect_JPEG(sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters)
+KObject *  Init_Effect_JPEG(sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters)
 {
   GenEffect *fx = new GenEffect;
   fx->NeedCurrentRender = sTRUE;
@@ -130,7 +130,7 @@ KObject * __stdcall Init_Effect_JPEG(sInt pass,sF32 ratio,sF32 strength,sInt mod
   return fx;
 }
 
-void __stdcall Exec_Effect_JPEG(KOp *op,KEnvironment *kenv,sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters)
+void  Exec_Effect_JPEG(KOp *op,KEnvironment *kenv,sInt pass,sF32 ratio,sF32 strength,sInt mode,sInt iters)
 {
   sViewport realView,smallView;
 

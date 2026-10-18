@@ -19,7 +19,7 @@
 #ifdef _DEBUG
 #include <stdarg.h>
 #include <stdio.h>
-void __cdecl printf2(const char *format, ...)
+void  printf2(const char *format, ...)
 {
   va_list    arg;
   char buf[4096];
@@ -62,7 +62,7 @@ HANDLE thread_handle=INVALID_HANDLE_VALUE;	// the handle to the decode thread
 
 int killDecodeThread=0;					// the kill switch for the decode thread
 
-DWORD WINAPI __stdcall DecodeThread(void *b); // the decode thread procedure
+DWORD WINAPI  DecodeThread(void *b); // the decode thread procedure
 
 unsigned char *myv2m;
 signed long *timeline;
@@ -350,7 +350,7 @@ static unsigned long get_576_samples(char *buf)
 	return l;
 }
 
-DWORD WINAPI __stdcall DecodeThread(void *b)
+DWORD WINAPI  DecodeThread(void *b)
 {
 	int done=0;
 	while (! *((int *)b) ) 
@@ -448,30 +448,30 @@ extern "C" __declspec( dllexport ) In_Module * winampGetInModule2()
 
 // FAKE DSIO IMPLEMENTATION
 
-sU32 __stdcall dsInit(DSIOCALLBACK *callback, void *parm, void *hWnd)
+sU32  dsInit(DSIOCALLBACK *callback, void *parm, void *hWnd)
 {
 	sscb=callback;
 	return 1;
 }
 
-void __stdcall dsClose()
+void  dsClose()
 {
 }
 
-sS32 __stdcall dsGetCurSmp()
+sS32  dsGetCurSmp()
 {
 	return decode_pos_ms;
 }
 	
-void __stdcall dsSetVolume(float vol)
+void  dsSetVolume(float vol)
 {
 }
 
-void __stdcall dsFadeOut(int time)
+void  dsFadeOut(int time)
 {
 }
 
-void __stdcall dsTick()
+void  dsTick()
 {
 }
 

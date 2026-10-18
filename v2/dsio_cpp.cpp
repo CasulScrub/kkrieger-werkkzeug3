@@ -101,7 +101,7 @@ static DWORD WINAPI threadfunc(void *param)
   return 0;
 }
 
-sU32 __stdcall dsInit(DSIOCALLBACK *callback, void *parm, void *hwnd)
+sU32  dsInit(DSIOCALLBACK *callback, void *parm, void *hwnd)
 {
   static const WAVEFORMATEX wfxprimary = { WAVE_FORMAT_PCM, 2, 44100, 44100*2*2, 2*2, 16, 0 };
   //static const WAVEFORMATEX wfxprimary = { WAVE_FORMAT_PCM, 2, 48000, 48000*2*2, 2*2, 16, 0 };
@@ -161,7 +161,7 @@ static void release(IUnknown **pcom)
   }
 }
 
-void __stdcall dsClose()
+void  dsClose()
 {
   if (g_dsound.thndl)
   {
@@ -181,7 +181,7 @@ void __stdcall dsClose()
   release((IUnknown **)&g_dsound.dssd);
 }
 
-sS32 __stdcall dsGetCurSmp()
+sS32  dsGetCurSmp()
 {
   DWORD gppos;
 
@@ -199,22 +199,22 @@ sS32 __stdcall dsGetCurSmp()
   return g_dsound.ltg;
 }
 
-void __stdcall dsSetVolume(float vol)
+void  dsSetVolume(float vol)
 {
   g_dsound.vol = vol * 32768.0f;
 }
 
-void __stdcall dsTick()
+void  dsTick()
 {
   SetEvent(g_dsound.tickev);
 }
 
-void __stdcall dsLock()
+void  dsLock()
 {
   EnterCriticalSection(&g_dsound.crsec);
 }
 
-void __stdcall dsUnlock()
+void  dsUnlock()
 {
   LeaveCriticalSection(&g_dsound.crsec);
 }

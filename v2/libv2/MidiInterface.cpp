@@ -61,7 +61,7 @@ namespace
 	}
 
 	static sU32 cbrleft;
-	static void __stdcall RenderFunc(void *, sF32 *buf, sU32 len)
+	static void  RenderFunc(void *, sF32 *buf, sU32 len)
 	/////////////////////////////////////////////////////////////
 	{
 		// fragmentation loop
@@ -93,7 +93,7 @@ namespace
 }
 
 
-bool __stdcall miInit(const void *v2bdata, MITIMERCALLBACK callback, void *cbparm, void *hwnd)
+bool  miInit(const void *v2bdata, MITIMERCALLBACK callback, void *cbparm, void *hwnd)
 //////////////////////////////////////////////////////////////////////////////
 {
 	// load/convert bank data
@@ -123,7 +123,7 @@ bool __stdcall miInit(const void *v2bdata, MITIMERCALLBACK callback, void *cbpar
 
 
 
-void __stdcall miClose()
+void  miClose()
 //////////////
 {
 	// simply stopping dsio is enough
@@ -132,7 +132,7 @@ void __stdcall miClose()
 
 
 
-void __stdcall miSetBPM(int bpm, int fraction)
+void  miSetBPM(int bpm, int fraction)
 ////////////////////////////////////
 {
 	// calc samples/tick
@@ -143,7 +143,7 @@ void __stdcall miSetBPM(int bpm, int fraction)
 
 
 
-void __stdcall miSendMIDIData(const unsigned char *data, unsigned long len)
+void  miSendMIDIData(const unsigned char *data, unsigned long len)
 ///////////////////////////////////////////////////////////
 {
 	sU32 reallen=sMin(1023-g_mbsize,len);
@@ -153,7 +153,7 @@ void __stdcall miSendMIDIData(const unsigned char *data, unsigned long len)
 
 
 
-void __stdcall miTick()
+void  miTick()
 /////////////
 {
   dsTick();

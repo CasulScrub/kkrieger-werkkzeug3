@@ -1275,8 +1275,8 @@ sBool sScanCycle(const sChar *s,sInt index,sInt &start,sInt &len)
 /****************************************************************************/
 
 #if !sMOBILE
-extern "C" char * __cdecl _fcvt( double value, int count, int *dec, int *sign );
-extern "C" char * __cdecl _ecvt( double value, int count, int *dec, int *sign );
+extern "C" char *  _fcvt( double value, int count, int *dec, int *sign );
+extern "C" char *  _ecvt( double value, int count, int *dec, int *sign );
 #endif
 
 sBool sFormatString(sChar *d,sInt left,const sChar *s,const sChar **fp)
@@ -1601,7 +1601,7 @@ sBool sFormatString(sChar *d,sInt left,const sChar *s,const sChar **fp)
 
 /****************************************************************************/
 
-void __cdecl sSPrintF(sChar *buffer,sInt size,const sChar *format,...)
+void  sSPrintF(sChar *buffer,sInt size,const sChar *format,...)
 {
   sFormatString(buffer,size,format,&format);
 }
@@ -2091,7 +2091,7 @@ void sVerifyFalse(const sChar *file,sInt line)
   sFatal(sTXT("%s(%d) : assertion"),file,line);
 }
 
-void __cdecl sFatal(const sChar *format,...)
+void  sFatal(const sChar *format,...)
 {
   static sChar buffer[1024];
 
@@ -2109,7 +2109,7 @@ void sDPrint(sChar *text)
   sOutputDebugString(text);
 }
 
-void __cdecl sDPrintF(const sChar *format,...)
+void  sDPrintF(const sChar *format,...)
 {
   sChar buffer[1024];
 
@@ -2135,10 +2135,10 @@ void sVerifyFalse(const sChar *file,sInt line)
 #if !sINTRO || !sRELEASE
 
 extern sInt sFatality;
-extern "C" void __stdcall OutputDebugStringA(char *string);
-extern "C" int __stdcall wvsprintfA(char *buffer,const char *fmt,va_list args);
+extern "C" void  OutputDebugStringA(char *string);
+extern "C" int  wvsprintfA(char *buffer,const char *fmt,va_list args);
 
-void __cdecl sFatal(const sChar *format,...)
+void  sFatal(const sChar *format,...)
 {
   static sChar buffer[1024];
 
@@ -2156,9 +2156,9 @@ void __cdecl sFatal(const sChar *format,...)
 
 #else
 
-extern "C" int __stdcall wvsprintfA(char *buffer,const char *fmt,va_list args);
+extern "C" int  wvsprintfA(char *buffer,const char *fmt,va_list args);
 
-void __cdecl sFatal(sChar *format,...)
+void  sFatal(sChar *format,...)
 {
   static sChar buffer[1024];
   va_list arg;
@@ -2183,7 +2183,7 @@ void sDPrint(sChar *text)
 
 
 #if !sINTRO || !sRELEASE
-void __cdecl sDPrintF(const sChar *format,...)
+void  sDPrintF(const sChar *format,...)
 {
   sChar buffer[1024];
 

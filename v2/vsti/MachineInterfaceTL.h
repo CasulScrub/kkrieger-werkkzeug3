@@ -756,11 +756,11 @@ namespace Buzz
 
 #define EXPORT_MACHINE(className) \
 	extern "C" { \
-		__declspec(dllexport) CMachineInfo const * __cdecl GetInfo() \
+		 CMachineInfo const *  GetInfo() \
 		{ \
 			return &className::m_info; \
 		} \
-		__declspec(dllexport) CMachineInterface * __cdecl CreateMachine() \
+		 CMachineInterface *  CreateMachine() \
 		{ \
 			CMachineInterface* mi = new className; \
 			return mi; \

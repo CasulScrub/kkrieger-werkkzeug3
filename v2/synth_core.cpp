@@ -243,7 +243,7 @@ static inline sF32 lerp(sF32 a, sF32 b, sF32 t)
 // DEBUG
 #include <stdarg.h>
 #include <stdio.h>
-extern "C" void __stdcall OutputDebugStringA(const char *what);
+extern "C" void  OutputDebugStringA(const char *what);
 static void dprintf(const char *fmt, ...)
 {
   char buf[256];
@@ -2587,13 +2587,13 @@ struct syWRonan
 
 extern "C"
 {
-  void __stdcall ronanCBInit(syWRonan *pthis);
-  void __stdcall ronanCBTick(syWRonan *pthis);
-  void __stdcall ronanCBNoteOn(syWRonan *pthis);
-  void __stdcall ronanCBNoteOff(syWRonan *pthis);
-  void __stdcall ronanCBSetCtl(syWRonan *pthis, sU32 ctl, sU32 val);
-  void __stdcall ronanCBProcess(syWRonan *pthis, sF32 *buf, sU32 len);
-  void __stdcall ronanCBSetSR(syWRonan *pthis, sInt samplerate);
+  void  ronanCBInit(syWRonan *pthis);
+  void  ronanCBTick(syWRonan *pthis);
+  void  ronanCBNoteOn(syWRonan *pthis);
+  void  ronanCBNoteOff(syWRonan *pthis);
+  void  ronanCBSetCtl(syWRonan *pthis, sU32 ctl, sU32 val);
+  void  ronanCBProcess(syWRonan *pthis, sF32 *buf, sU32 len);
+  void  ronanCBSetSR(syWRonan *pthis, sInt samplerate);
 }
 
 #else
@@ -2606,7 +2606,7 @@ static inline void ronanCBSetCtl(syWRonan *, sU32, sU32) {}
 static inline void ronanCBProcess(syWRonan *, sF32 *, sU32) {}
 static inline void ronanCBSetSR(syWRonan *, sInt) {}
 
-extern "C" void __stdcall synthSetLyrics(void *, const char **) {}
+extern "C" void  synthSetLyrics(void *, const char **) {}
 
 #endif
 
@@ -3272,62 +3272,62 @@ private:
 // C-style interface
 // --------------------------------------------------------------------------
 
-unsigned int __stdcall synthGetSize()
+unsigned int  synthGetSize()
 {
   return sizeof(V2Synth);
 }
 
-void __stdcall synthInit(void *pthis, const void *patchmap, int samplerate)
+void  synthInit(void *pthis, const void *patchmap, int samplerate)
 {
   ((V2Synth *)pthis)->init(patchmap, samplerate);
 }
 
-void __stdcall synthRender(void *pthis, void *buf, int smp, void *buf2, int add)
+void  synthRender(void *pthis, void *buf, int smp, void *buf2, int add)
 {
   ((V2Synth *)pthis)->render((sF32 *)buf, smp, (sF32 *)buf2, add != 0);
 }
 
-void __stdcall synthProcessMIDI(void *pthis, const void *ptr)
+void  synthProcessMIDI(void *pthis, const void *ptr)
 {
   ((V2Synth *)pthis)->processMIDI((const sU8 *)ptr);
 }
 
-void __stdcall synthSetGlobals(void *pthis, const void *ptr)
+void  synthSetGlobals(void *pthis, const void *ptr)
 {
   ((V2Synth *)pthis)->setGlobals((const sU8 *)ptr);
 }
 
-void __stdcall synthGetPoly(void *pthis, void *dest)
+void  synthGetPoly(void *pthis, void *dest)
 {
   ((V2Synth *)pthis)->getPoly((sInt*)dest);
 }
 
-void __stdcall synthGetPgm(void *pthis, void *dest)
+void  synthGetPgm(void *pthis, void *dest)
 {
   ((V2Synth *)pthis)->getPgm((sInt*)dest);
 }
 
-void __stdcall synthSetVUMode(void *, int)
+void  synthSetVUMode(void *, int)
 {
   // nyi
 }
 
-void __stdcall synthGetChannelVU(void *, int, float *, float *)
+void  synthGetChannelVU(void *, int, float *, float *)
 {
   // nyi
 }
 
-void __stdcall synthGetMainVU(void *, float *, float *)
+void  synthGetMainVU(void *, float *, float *)
 {
   // nyi
 }
 
-long __stdcall synthGetFrameSize(void *pthis)
+long  synthGetFrameSize(void *pthis)
 {
   return ((V2Synth *)pthis)->instance.SRcFrameSize;
 }
 
-extern "C" void * __stdcall synthGetSpeechMem(void *pthis)
+extern "C" void *  synthGetSpeechMem(void *pthis)
 {
   return &((V2Synth *)pthis)->ronan;
 }

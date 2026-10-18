@@ -22,8 +22,8 @@
 
 #if sDUMP_IPPALLOC
 static sInt OverlayMaxAlloc[GENOVER_RTSIZES] = { 0 };
-extern "C" void __stdcall OutputDebugStringA(const sChar *msg);
-extern "C" void __stdcall wsprintfA(sChar *str,const sChar *format,...);
+extern "C" void  OutputDebugStringA(const sChar *msg);
+extern "C" void  wsprintfA(sChar *str,const sChar *format,...);
 #endif
 
 /****************************************************************************/
@@ -835,51 +835,51 @@ GenIPP::~GenIPP()
 
 /****************************************************************************/
 
-GenIPP * __stdcall Init_IPP_Viewport(GenScene *scene,GenSpline *spline,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount)
+GenIPP *  Init_IPP_Viewport(GenScene *scene,GenSpline *spline,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount)
 {
   if(scene) scene->Release();
   if(spline) spline->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Blur(GenIPP *in,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount)
+GenIPP *  Init_IPP_Blur(GenIPP *in,sInt size,sF32 radius,sF32 amplify,sInt flags,sInt stages,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Copy(GenIPP *in,sInt size,sU32 color,sF32 zoom,sInt ocountt)
+GenIPP *  Init_IPP_Copy(GenIPP *in,sInt size,sU32 color,sF32 zoom,sInt ocountt)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Crashzoom(GenIPP *in,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount)
+GenIPP *  Init_IPP_Crashzoom(GenIPP *in,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Sharpen(GenIPP *in,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount)
+GenIPP *  Init_IPP_Sharpen(GenIPP *in,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Color(GenIPP *in,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount)
+GenIPP *  Init_IPP_Color(GenIPP *in,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Merge(GenIPP *in,GenIPP *in2,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount)
+GenIPP *  Init_IPP_Merge(GenIPP *in,GenIPP *in2,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount)
 {
   if(in) in->Release();
   if(in2) in2->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Mask(GenIPP *in,GenIPP *in2,GenIPP *in3,sInt size,sInt ocount)
+GenIPP *  Init_IPP_Mask(GenIPP *in,GenIPP *in2,GenIPP *in3,sInt size,sInt ocount)
 {
   if(in) in->Release();
   if(in2) in2->Release();
@@ -887,7 +887,7 @@ GenIPP * __stdcall Init_IPP_Mask(GenIPP *in,GenIPP *in2,GenIPP *in3,sInt size,sI
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Layer2D(GenIPP *in,GenMaterial *mtrl,sInt size,sF324 screen,sF324 uv,sF32 z,sInt clear,sInt ocount)
+GenIPP *  Init_IPP_Layer2D(GenIPP *in,GenMaterial *mtrl,sInt size,sF324 screen,sF324 uv,sF32 z,sInt clear,sInt ocount)
 {
   if(!mtrl || mtrl->ClassId != KC_MATERIAL) return 0;
   if(in) in->Release();
@@ -895,7 +895,7 @@ GenIPP * __stdcall Init_IPP_Layer2D(GenIPP *in,GenMaterial *mtrl,sInt size,sF324
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_Select(sInt count,GenIPP *in,...)
+GenIPP *  Init_IPP_Select(sInt count,GenIPP *in,...)
 {
   GenIPP **inp;
   sInt i;
@@ -905,7 +905,7 @@ GenIPP * __stdcall Init_IPP_Select(sInt count,GenIPP *in,...)
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_RenderTarget(GenIPP *in,GenBitmap *rt)
+GenIPP *  Init_IPP_RenderTarget(GenIPP *in,GenBitmap *rt)
 {
   if(!rt || rt->Texture == sINVALID) return 0;
 
@@ -914,13 +914,13 @@ GenIPP * __stdcall Init_IPP_RenderTarget(GenIPP *in,GenBitmap *rt)
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_HSCB(GenIPP *in,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount)
+GenIPP *  Init_IPP_HSCB(GenIPP *in,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
 }
 
-GenIPP * __stdcall Init_IPP_JPEG(GenIPP *in,sInt size,sInt dir,sF32 strength,sInt ocount)
+GenIPP *  Init_IPP_JPEG(GenIPP *in,sInt size,sInt dir,sF32 strength,sInt ocount)
 {
   if(in) in->Release();
   return new GenIPP;
@@ -930,7 +930,7 @@ GenIPP * __stdcall Init_IPP_JPEG(GenIPP *in,sInt size,sInt dir,sF32 strength,sIn
 
 extern sBool IntroStereo3D;
 
-void __stdcall Exec_IPP_Viewport(KOp *parent,KEnvironment *kenv,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount)
+void  Exec_IPP_Viewport(KOp *parent,KEnvironment *kenv,sInt size,sInt flags,sU32 color,sF323 rot,sF323 pos,sF32 farclip,sF32 nearclip,sF32 centerx,sF32 centery,sF32 zoomx,sF32 zoomy,sU32 fogc,sF32 fogend,sF32 fogst,sF32 eyed,sF32 focal,sF32 fx0,sF32 fy0,sF32 fx1,sF32 fy1,sInt ocount)
 {
   KOp *op;
   GenOverlayRT *rt;
@@ -1162,7 +1162,7 @@ void __stdcall Exec_IPP_Viewport(KOp *parent,KEnvironment *kenv,sInt size,sInt f
   }
 }
 
-void __stdcall Exec_IPP_Copy(KOp *parent,KEnvironment *kenv,sInt size,sU32 color,sF32 zoom,sInt ocount)
+void  Exec_IPP_Copy(KOp *parent,KEnvironment *kenv,sInt size,sU32 color,sF32 zoom,sInt ocount)
 {
   GenOverlayRT *rt,*in;
 
@@ -1189,7 +1189,7 @@ void __stdcall Exec_IPP_Copy(KOp *parent,KEnvironment *kenv,sInt size,sU32 color
   }
 }
 
-void __stdcall Exec_IPP_Blur(KOp *parent,KEnvironment *kenv,sInt size,sF32 radius,sF32 amplify,sInt type,sInt stages,sInt ocount)
+void  Exec_IPP_Blur(KOp *parent,KEnvironment *kenv,sInt size,sF32 radius,sF32 amplify,sInt type,sInt stages,sInt ocount)
 {
   parent->ExecInputs(kenv);
 
@@ -1202,7 +1202,7 @@ void __stdcall Exec_IPP_Blur(KOp *parent,KEnvironment *kenv,sInt size,sF32 radiu
     GenOverlayManager->LastOutput,size,radius,amplify,type,stages,ocount);
 }
 
-void __stdcall Exec_IPP_Crashzoom(KOp *parent,KEnvironment *kenv,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount)
+void  Exec_IPP_Crashzoom(KOp *parent,KEnvironment *kenv,sInt size,sInt steps,sF32 zoom,sF32 amplify,sF322 center,sInt ocount)
 {
   GenOverlayRT *in;
   sFRect rc[4];
@@ -1243,7 +1243,7 @@ void __stdcall Exec_IPP_Crashzoom(KOp *parent,KEnvironment *kenv,sInt size,sInt 
   GenOverlayManager->LastOutput = in;
 }
 
-void __stdcall Exec_IPP_Sharpen(KOp *parent,KEnvironment *kenv,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount)
+void  Exec_IPP_Sharpen(KOp *parent,KEnvironment *kenv,sInt size,sF32 radius,sU32 amplify,sInt stages,sInt ocount)
 {
   GenOverlayRT *in,*blur,*out;
   sViewport view;
@@ -1287,7 +1287,7 @@ void __stdcall Exec_IPP_Sharpen(KOp *parent,KEnvironment *kenv,sInt size,sF32 ra
     GenOverlayManager->LastOutput = in;
 }
 
-void __stdcall Exec_IPP_Color(KOp *parent,KEnvironment *kenv,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount)
+void  Exec_IPP_Color(KOp *parent,KEnvironment *kenv,sInt size,sU32 color,sInt operation,sU32 amplify,sInt ocount)
 {
   GenOverlayRT *in,*out;
   sViewport view;
@@ -1328,7 +1328,7 @@ void __stdcall Exec_IPP_Color(KOp *parent,KEnvironment *kenv,sInt size,sU32 colo
     GenOverlayManager->LastOutput = in;
 }
 
-void __stdcall Exec_IPP_Merge(KOp *parent,KEnvironment *kenv,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount)
+void  Exec_IPP_Merge(KOp *parent,KEnvironment *kenv,sInt size,sInt operation,sInt alpha,sU32 amplify,sInt ocount)
 {
   GenOverlayRT *in[2],*out;
   sViewport view;
@@ -1379,7 +1379,7 @@ void __stdcall Exec_IPP_Merge(KOp *parent,KEnvironment *kenv,sInt size,sInt oper
   GenOverlayManager->LastOutput = out;
 }
 
-void __stdcall Exec_IPP_Mask(KOp *parent,KEnvironment *kenv,sInt size,sInt ocount)
+void  Exec_IPP_Mask(KOp *parent,KEnvironment *kenv,sInt size,sInt ocount)
 {
   GenOverlayRT *in[3],*out;
   sViewport view;
@@ -1430,7 +1430,7 @@ void __stdcall Exec_IPP_Mask(KOp *parent,KEnvironment *kenv,sInt size,sInt ocoun
   GenOverlayManager->LastOutput = out;
 }
 
-void __stdcall Exec_IPP_Layer2D(KOp *parent,KEnvironment *kenv,sInt size,sFRect oxy,sFRect ouv,sF32 z,sInt flags,sInt ocount)
+void  Exec_IPP_Layer2D(KOp *parent,KEnvironment *kenv,sInt size,sFRect oxy,sFRect ouv,sF32 z,sInt flags,sInt ocount)
 {
   KOp *mtrlOp;
   GenOverlayRT *in,*out;
@@ -1518,7 +1518,7 @@ void __stdcall Exec_IPP_Layer2D(KOp *parent,KEnvironment *kenv,sInt size,sFRect 
   GenOverlayManager->LastOutput = out;
 }
 
-void __stdcall Exec_IPP_Select(KOp *op,KEnvironment *kenv,sInt count)
+void  Exec_IPP_Select(KOp *op,KEnvironment *kenv,sInt count)
 {
   GenOverlayRT *prev=0, *current=0;
 
@@ -1549,7 +1549,7 @@ void __stdcall Exec_IPP_Select(KOp *op,KEnvironment *kenv,sInt count)
     GenOverlayManager->LastOutput->Refs += count - 1;
 }
 
-void __stdcall Exec_IPP_RenderTarget(KOp *op,KEnvironment *kenv)
+void  Exec_IPP_RenderTarget(KOp *op,KEnvironment *kenv)
 {
   GenBitmap *rt = (GenBitmap *) op->GetLink(0)->Cache;
 
@@ -1578,7 +1578,7 @@ void __stdcall Exec_IPP_RenderTarget(KOp *op,KEnvironment *kenv)
 }
 
 #if !sPLAYER
-void __stdcall Exec_IPP_HSCB(KOp *parent,KEnvironment *kenv,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount)
+void  Exec_IPP_HSCB(KOp *parent,KEnvironment *kenv,sInt size,sF32 hue,sF32 sat,sF32 con,sF32 bright,sInt ocount)
 {
   GenOverlayRT *in,*out;
   sViewport view;
@@ -1631,7 +1631,7 @@ void __stdcall Exec_IPP_HSCB(KOp *parent,KEnvironment *kenv,sInt size,sF32 hue,s
 }
 #endif
 
-void __stdcall Exec_IPP_JPEG(KOp *parent,KEnvironment *kenv,sInt size,sInt dir,sF32 strength,sInt ocount)
+void  Exec_IPP_JPEG(KOp *parent,KEnvironment *kenv,sInt size,sInt dir,sF32 strength,sInt ocount)
 {
   GenOverlayRT *in,*out;
   sViewport view;

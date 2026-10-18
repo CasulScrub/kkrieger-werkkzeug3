@@ -11,7 +11,7 @@
 
 //
 #ifdef _DEBUG
-extern void __cdecl printf2(const char *format, ...);
+extern void  printf2(const char *format, ...);
 #else
 #define printf2
 #endif
@@ -107,7 +107,7 @@ static const sU8 rawphonemes[PTABSIZE] =
 #include <math.h>
 #pragma intrinsic (sin, cos, exp, log, atan, atan2, pow)
 
-__forceinline int mystrnicmp1(const char *a, const char *b)
+__attribute__((always_inline)) inline int mystrnicmp1(const char *a, const char *b)
 {
 	sInt l=0;
 	while (*a && *b)
@@ -354,7 +354,7 @@ static void reset()
 	w.spos=4;
 }
 
-extern "C" void __stdcall ronanCBSetSR(sU32 sr)
+extern "C" void  ronanCBSetSR(sU32 sr)
 {
 	g.samplerate=sr;
 	g.fc2pi_sr=2.0f*PI/(sF32)sr;
@@ -362,7 +362,7 @@ extern "C" void __stdcall ronanCBSetSR(sU32 sr)
 }
 
 
-extern "C" void __stdcall ronanCBInit()
+extern "C" void  ronanCBInit()
 {
 
 	// convert phoneme table to a usable format
@@ -400,7 +400,7 @@ extern "C" void __stdcall ronanCBInit()
 
 
 
-extern "C" void __stdcall ronanCBTick()
+extern "C" void  ronanCBTick()
 {
 	register syWRonan &w=*wsptr;
 	if (w.wait4off || w.wait4on) return;
@@ -482,18 +482,18 @@ extern "C" void __stdcall ronanCBTick()
 
 }
 
-extern "C" void __stdcall ronanCBNoteOn()
+extern "C" void  ronanCBNoteOn()
 {
 	workspace.wait4on=0;
 }
 
-extern "C" void __stdcall ronanCBNoteOff()
+extern "C" void  ronanCBNoteOff()
 {
 	workspace.wait4off=0;
 }
 
 
-extern "C" void __stdcall ronanCBSetCtl(sU32 ctl, sU32 val)
+extern "C" void  ronanCBSetCtl(sU32 ctl, sU32 val)
 {
 	// controller 4, 0-63			: set text #
 	// controller 4, 64-127		: set frame rate
@@ -524,7 +524,7 @@ extern "C" void __stdcall ronanCBSetCtl(sU32 ctl, sU32 val)
 }
 
 
-extern "C" void __stdcall ronanCBProcess(sF32 *buf, sU32 len)
+extern "C" void  ronanCBProcess(sF32 *buf, sU32 len)
 {
 	register syWRonan &w=*wsptr;
 	static syVRonan deltaframe;
@@ -581,7 +581,7 @@ extern "C" void __stdcall ronanCBProcess(sF32 *buf, sU32 len)
 
 }
 
-void __stdcall synthSetLyrics(const char **a_ptr)
+void  synthSetLyrics(const char **a_ptr)
 {
 	register syWRonan &w=*wsptr;
 	memcpy(texts,a_ptr,64*sizeof(char *));

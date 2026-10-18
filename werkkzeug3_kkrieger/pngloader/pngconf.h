@@ -147,7 +147,7 @@
  * 
  * CYGWIN (2002-01-20): The preceding is now obsolete. With the advent
  *   of auto-import in binutils, we no longer need to worry about 
- *   __declspec(dllexport) / __declspec(dllimport) and friends.  Therefore,
+ *    /  and friends.  Therefore,
  *   we don't need to worry about PNG_STATIC or ALL_STATIC when it comes
  *   to __declspec() stuff.  However, we DO need to worry about 
  *   PNG_BUILD_DLL and PNG_STATIC because those change some defaults
@@ -1236,12 +1236,12 @@ typedef z_stream FAR *  png_zstreamp;
 
 #if defined(__CYGWIN__)
 #  undef PNGAPI
-#  define PNGAPI __cdecl
+#  define PNGAPI 
 #  undef PNG_IMPEXP
 #  define PNG_IMPEXP
 #endif  
 
-/* If you define PNGAPI, e.g., with compiler option "-DPNGAPI=__stdcall",
+/* If you define PNGAPI, e.g., with compiler option "-DPNGAPI=",
  * you may get warnings regarding the linkage of png_zalloc and png_zfree.
  * Don't ignore those warnings; you must also reset the default calling
  * convention in your compiler to match your PNGAPI, and you must build
@@ -1264,7 +1264,7 @@ typedef z_stream FAR *  png_zstreamp;
 
 #  ifndef PNGAPI
 #     if defined(__GNUC__) || (defined (_MSC_VER) && (_MSC_VER >= 800))
-#        define PNGAPI __cdecl
+#        define PNGAPI 
 #     else
 #        define PNGAPI _cdecl
 #     endif
@@ -1298,9 +1298,9 @@ typedef z_stream FAR *  png_zstreamp;
 
 #     if !defined(PNG_IMPEXP)
 #        if defined(PNG_BUILD_DLL)
-#           define PNG_IMPEXP __declspec(dllexport)
+#           define PNG_IMPEXP 
 #        else
-#           define PNG_IMPEXP __declspec(dllimport)
+#           define PNG_IMPEXP 
 #        endif
 #     endif
 #  endif  /* PNG_IMPEXP */

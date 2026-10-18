@@ -149,7 +149,7 @@ public:
 
 CMessageLoop* theLoop = NULL;
 
-void __declspec(dllexport) v2vstiSetSampleRate(int newrate)
+void  v2vstiSetSampleRate(int newrate)
 {
 	/*
 	char str[1024];
@@ -215,7 +215,7 @@ static void Shutdown()
 	_Module.RemoveMessageLoop();
 }
 
-__declspec(dllexport) AEffEditor* v2vstiInit(AudioEffectX* effect)
+ AEffEditor* v2vstiInit(AudioEffectX* effect)
 {
 	v2vstiAEffect = effect;
 
@@ -224,7 +224,7 @@ __declspec(dllexport) AEffEditor* v2vstiInit(AudioEffectX* effect)
 	return theAEditor = new v2vstiEditor(effect); 
 }
 
-__declspec(dllexport) void v2buzzInit()
+ void v2buzzInit()
 {
     Init();
 }
@@ -245,7 +245,7 @@ void  v2vstiUpdateUI(int program, int index)
 }
 
 
-void  __declspec(dllexport) v2vstiShutdown(AEffEditor* editor)
+void   v2vstiShutdown(AEffEditor* editor)
 {
 	printf("ShutDown\n");
 	if(editor)
@@ -255,7 +255,7 @@ void  __declspec(dllexport) v2vstiShutdown(AEffEditor* editor)
 	}
 }
 
-void  __declspec(dllexport) v2buzzShutdown()
+void   v2buzzShutdown()
 {
     Shutdown();
 }
@@ -263,7 +263,7 @@ void  __declspec(dllexport) v2buzzShutdown()
 extern sU8 *theSynth;
 
 static unsigned char* chunk = NULL;
-long  __declspec(dllexport) v2vstiGetChunk(void** data, bool isPreset)
+long   v2vstiGetChunk(void** data, bool isPreset)
 {
 	printf("getChunk %08x,%d\n",data,(int)isPreset);
 
@@ -299,7 +299,7 @@ long  __declspec(dllexport) v2vstiGetChunk(void** data, bool isPreset)
 	return chunksize;
 }
 
-long  __declspec(dllexport) v2vstiSetChunk(void* data, long byteSize, bool isPreset)
+long   v2vstiSetChunk(void* data, long byteSize, bool isPreset)
 {
 	printf("setChunk %08x,%d,%d\n",data,byteSize,(int)isPreset);
 
@@ -346,18 +346,18 @@ long  __declspec(dllexport) v2vstiSetChunk(void* data, long byteSize, bool isPre
 	return 0;
 }
 
-void  __declspec(dllexport) v2vstiGetParameters(unsigned char** psoundmem, char** pglobals)
+void   v2vstiGetParameters(unsigned char** psoundmem, char** pglobals)
 {
 	*psoundmem = soundmem;
 	*pglobals = (char*)globals;
 }
 
-__declspec(dllexport) char* v2vstiGetPatchNames()
+ char* v2vstiGetPatchNames()
 {
 	return (char*)patchnames;
 }
 
-void  __declspec(dllexport) v2vstiGetParameterDefs
+void   v2vstiGetParameterDefs
 	(V2TOPIC** topics, int* ntopics, V2PARAM** parms, int* nparms, 
 	 V2TOPIC** gtopics, int* ngtopics, V2PARAM** gparms, int* ngparms)
 {
@@ -371,19 +371,19 @@ void  __declspec(dllexport) v2vstiGetParameterDefs
 	*ngparms = v2ngparms;
 }
 
-void __stdcall msAudioCallback(float *left, float *right, unsigned int len, int mixwithsource);
+void  msAudioCallback(float *left, float *right, unsigned int len, int mixwithsource);
 
-void  __declspec(dllexport) v2vstiProcess(float** inputs, float** outputs, long sampleframes)
+void   v2vstiProcess(float** inputs, float** outputs, long sampleframes)
 {
 	msAudioCallback(outputs[0],outputs[1],sampleframes,1);
 }
 
-void  __declspec(dllexport) v2vstiProcessReplacing(float** inputs, float** outputs, long sampleframes)
+void   v2vstiProcessReplacing(float** inputs, float** outputs, long sampleframes)
 {
 	msAudioCallback(outputs[0],outputs[1],sampleframes,0);
 }
 
-long  __declspec(dllexport) v2vstiProcessEvents(VstEvents* events)
+long   v2vstiProcessEvents(VstEvents* events)
 {
 	for(int i=0;i<events->numEvents;i++) 
 	{
@@ -397,13 +397,13 @@ long  __declspec(dllexport) v2vstiProcessEvents(VstEvents* events)
 	return 1;
 }
 
-void __declspec(dllexport) v2buzzProcessEvent(DWORD dwOffset, DWORD dwMidiData)
+void  v2buzzProcessEvent(DWORD dwOffset, DWORD dwMidiData)
 {    
     msProcessEvent(dwOffset,dwMidiData);
 }
 
 // stereo
-void __declspec(dllexport) v2buzzWork(float* pSamples, int nSampleCount)
+void  v2buzzWork(float* pSamples, int nSampleCount)
 {
     float* pL = new float[nSampleCount];
     float* pR = new float[nSampleCount];
@@ -421,7 +421,7 @@ void __declspec(dllexport) v2buzzWork(float* pSamples, int nSampleCount)
     delete[] pR;
 }
 
-void __declspec(dllexport) v2buzzDestroyEditor()
+void  v2buzzDestroyEditor()
 {
 	if(V2::g_BuzzEditor)
     {
@@ -432,7 +432,7 @@ void __declspec(dllexport) v2buzzDestroyEditor()
     }
 }
 
-void __declspec(dllexport) v2buzzShowEditor(HWND hWndParent)
+void  v2buzzShowEditor(HWND hWndParent)
 {
     if (!V2::g_BuzzEditor)
     {
@@ -449,7 +449,7 @@ void __declspec(dllexport) v2buzzShowEditor(HWND hWndParent)
     }
 }
 
-void __declspec(dllexport) v2vstiSetProgram(AEffEditor* editor, UINT nr)
+void  v2vstiSetProgram(AEffEditor* editor, UINT nr)
 {
 	printf("setProgram %d\n",nr);
     if (V2::g_BuzzEditor)
@@ -458,7 +458,7 @@ void __declspec(dllexport) v2vstiSetProgram(AEffEditor* editor, UINT nr)
 	    ((v2vstiEditor*)editor)->SetProgram(nr);
 }
 
-void __declspec(dllexport) v2buzzSetChannel(int channel)
+void  v2buzzSetChannel(int channel)
 {
 	if (V2::g_BuzzEditor)
 		V2::g_BuzzEditor->SetChannel(channel);
@@ -468,7 +468,7 @@ void __declspec(dllexport) v2buzzSetChannel(int channel)
 // wird der exportname sofort dekoriert. daher:
 extern "C"
 {
-	__declspec(dllexport) V2::IHost& v2GetHost()
+	 V2::IHost& v2GetHost()
 	{
 		return V2::g_theHost;
 	}

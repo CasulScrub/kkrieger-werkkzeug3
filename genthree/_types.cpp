@@ -634,7 +634,7 @@ sBool sScanCycle(sChar *s,sInt index,sInt &start,sInt &len)
 
 #if !sINTRO || !sRELEASE
 
-extern "C" char * __cdecl _fcvt( double value, int count, int *dec, int *sign );
+extern "C" char *  _fcvt( double value, int count, int *dec, int *sign );
 
 void sFormatString(sChar *d,sInt left,sChar *s,sChar **fp)
 {
@@ -913,7 +913,7 @@ void sFormatString(sChar *d,sInt left,sChar *s,sChar **fp)
 
 /****************************************************************************/
 
-void __cdecl sSPrintF(sChar *buffer,sInt size,sChar *format,...)
+void  sSPrintF(sChar *buffer,sInt size,sChar *format,...)
 {
   sFormatString(buffer,size,format,&format);
 }
@@ -1078,7 +1078,7 @@ void sVerifyFalse(sChar *file,sInt line)
 /****************************************************************************/
 
 #if !sINTRO || !sRELEASE
-void __cdecl sFatal(sChar *format,...)
+void  sFatal(sChar *format,...)
 {
   static sChar buffer[1024];
 
@@ -1104,7 +1104,7 @@ void sDPrint(sChar *text)
 /****************************************************************************/
 
 #if !sINTRO || !sRELEASE
-void __cdecl sDPrintF(sChar *format,...)
+void  sDPrintF(sChar *format,...)
 {
   sChar buffer[1024];
 

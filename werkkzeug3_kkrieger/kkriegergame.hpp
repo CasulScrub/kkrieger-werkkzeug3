@@ -599,18 +599,18 @@ struct KKriegerGame
 /***                                                                      ***/
 /****************************************************************************/
 
-class KObject * __stdcall Init_KKrieger_Para(KOp *op,KEnvironment *kenv);
-class KObject * __stdcall Init_KKrieger_Monster(KOp *op);
-class KObject * __stdcall Init_KKrieger_Events(KOp *op);
-class KObject * __stdcall Init_KKrieger_Respawn(sF323 pos,sInt zone,sF32 dir);
-class KObject * __stdcall Init_KKrieger_SplashDamage(sInt hits,sF32 range,sF32 enable);
-class KObject * __stdcall Init_KKrieger_MonsterFlags(KOp *op);
-void __stdcall Exec_KKrieger_Para(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_KKrieger_Monster(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_KKrieger_Events(KOp *op,KEnvironment *kenv);
-void __stdcall Exec_KKrieger_Respawn(KOp *op,KEnvironment *kenv,sF323 pos,sInt zone,sF32 dir);
-void __stdcall Exec_KKrieger_SplashDamage(KOp *op,KEnvironment *kenv,sInt hits,sF32 range,sF32 enable);
-void __stdcall Exec_KKrieger_MonsterFlags(KOp *op,KEnvironment *kenv,sInt kill,sInt spawn,sInt flags);
+class KObject *  Init_KKrieger_Para(KOp *op,KEnvironment *kenv);
+class KObject *  Init_KKrieger_Monster(KOp *op);
+class KObject *  Init_KKrieger_Events(KOp *op);
+class KObject *  Init_KKrieger_Respawn(sF323 pos,sInt zone,sF32 dir);
+class KObject *  Init_KKrieger_SplashDamage(sInt hits,sF32 range,sF32 enable);
+class KObject *  Init_KKrieger_MonsterFlags(KOp *op);
+void  Exec_KKrieger_Para(KOp *op,KEnvironment *kenv);
+void  Exec_KKrieger_Monster(KOp *op,KEnvironment *kenv);
+void  Exec_KKrieger_Events(KOp *op,KEnvironment *kenv);
+void  Exec_KKrieger_Respawn(KOp *op,KEnvironment *kenv,sF323 pos,sInt zone,sF32 dir);
+void  Exec_KKrieger_SplashDamage(KOp *op,KEnvironment *kenv,sInt hits,sF32 range,sF32 enable);
+void  Exec_KKrieger_MonsterFlags(KOp *op,KEnvironment *kenv,sInt kill,sInt spawn,sInt flags);
 
 /****************************************************************************/
 /***                                                                      ***/

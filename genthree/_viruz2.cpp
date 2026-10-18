@@ -25,27 +25,27 @@ extern "C"
   extern int ssCPUUsage;
 #endif
 
-	extern void __stdcall ssRender(sF32 *outbuf, sU32 len);
+	extern void  ssRender(sF32 *outbuf, sU32 len);
 
 	// init sound system
 	// data: pointer to V2M file
 	// hWnd: your window handle
-  extern void __stdcall ssInit(sU8 *data, void *hWnd);
+  extern void  ssInit(sU8 *data, void *hWnd);
 
 	// close sound system
-  extern void __stdcall ssClose();
+  extern void  ssClose();
 
 	// start playing (from song start)
-	extern void __stdcall ssPlay();
+	extern void  ssPlay();
 
 	// stop playing
-	extern void __stdcall ssStop();
+	extern void  ssStop();
 
 	// get the timer value (will be reset when starting)
 	// Note: The timer value is synchronized with the sound
 	//			 output and will thus start at a negative value
 	//       while the sound system fills up the first buffer!
-	extern sS32 __stdcall ssGetTime();
+	extern sS32  ssGetTime();
 
 
 	// Does a fade-out of the music within "time" milliseconds.
@@ -53,11 +53,11 @@ extern "C"
 	//       some msecs later than you called this function, so
 	//       make sure you wait a certain amount of time to
 	//       not interrupt a running fade... or so...
-	extern void __stdcall ssFadeOut(sU32 time);
+	extern void  ssFadeOut(sU32 time);
 
   // make the sound system render the next block
   // put this in your frame loop
-  extern void __stdcall ssDoTick();
+  extern void  ssDoTick();
 
 #ifdef RULESYNC
 	// Get current song position (being played actually)
@@ -68,7 +68,7 @@ extern "C"
 	// TT   is the number of the 32th tick within the current bar
 	// NN   is the total number of 32th ticks a the current bar has (32, normally, may change with
 	//      different time signatures than 4/4)
-	extern sS32 __stdcall ssGetPos();
+	extern sS32  ssGetPos();
 
 
 	// Retrieve an array of timer<->song position 
@@ -80,7 +80,7 @@ extern "C"
 	//       ... and so on for every found position
 	// otherv2m: NULL to get positions of song used with ssInit, ptr to v2m data otherwise
 	// NOTE: it is your responsibility to free the array again.
-	extern sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m=0);
+	extern sU32  ssCalcPositions(sS32 **dest, sU8 *otherv2m=0);
 
 	// Starts playing at a certain timer position
 	// time: the timer value you want to play from
@@ -88,12 +88,12 @@ extern "C"
 	//       value you specified, but will be as close as possible.
 	//       Use ssGetPos()/ssGetSongTime() to determine where
 	//       you really are.
-	extern void __stdcall ssPlayFrom(sS32 time);
+	extern void  ssPlayFrom(sS32 time);
 
 	// get the song timer value
 	// Just as ssGetTime(), but it will reflect the song position even
 	// after ssPlayFrom() calls.
-	extern sS32 __stdcall ssGetSongTime();
+	extern sS32  ssGetSongTime();
 
 #endif
 }
@@ -105,25 +105,25 @@ extern "C"
 #define _SYNTH_H_
 extern "C"
 {
-	extern void __stdcall synthInit(void *patchmap, int samplerate=44100);
-	extern void __stdcall synthRender(void *buf, int smp, void *buf2=0, int add=0);
-	extern void __stdcall synthProcessMIDI(void *ptr);
-	extern void __stdcall synthSetGlobals(void *ptr);
-	extern void __stdcall synthGetPoly(void *dest);
-	extern void __stdcall synthGetPgm(void *dest);
-	extern void __stdcall synthGetLD(float *l, float *r);
+	extern void  synthInit(void *patchmap, int samplerate=44100);
+	extern void  synthRender(void *buf, int smp, void *buf2=0, int add=0);
+	extern void  synthProcessMIDI(void *ptr);
+	extern void  synthSetGlobals(void *ptr);
+	extern void  synthGetPoly(void *dest);
+	extern void  synthGetPgm(void *dest);
+	extern void  synthGetLD(float *l, float *r);
 
 	// only if VUMETER define is set in synth source
 
 	// vu output values are floats, 1.0 == 0dB
 	// you might want to clip or logarithmize the values for yourself
-	extern void __stdcall synthSetVUMode(int mode); // 0: peak, 1: rms
-	extern void __stdcall synthGetChannelVU(int ch, float *l, float *r); // ch: 0..15
-	extern void __stdcall synthGetMainVU(float *l, float *r);
+	extern void  synthSetVUMode(int mode); // 0: peak, 1: rms
+	extern void  synthGetChannelVU(int ch, float *l, float *r); // ch: 0..15
+	extern void  synthGetMainVU(float *l, float *r);
 }
 
 #ifdef RONAN
-	extern void __stdcall synthSetLyrics(const char **ptr);
+	extern void  synthSetLyrics(const char **ptr);
 #endif
 
 #endif
@@ -268,7 +268,7 @@ typedef struct
 	sF32 drygain;
 } tronan;
 
-extern "C" void __stdcall ronanSetParms(void *p);
+extern "C" void  ronanSetParms(void *p);
 
 
 
@@ -625,7 +625,7 @@ void ssTick()
 
 
 
-void __stdcall ssRender(sF32 *outbuf, sU32 len)
+void  ssRender(sF32 *outbuf, sU32 len)
 {
 #ifdef _DEBUG
 //	int oldsmpl=dsGetCurSmp();
@@ -709,7 +709,7 @@ void __stdcall ssRender(sF32 *outbuf, sU32 len)
 }
 
 
-void __stdcall ssInit(sU8 *d, void *hWnd)
+void  ssInit(sU8 *d, void *hWnd)
 {
 
 	ssInitBase(d,base);
@@ -728,13 +728,13 @@ void __stdcall ssInit(sU8 *d, void *hWnd)
 }
 
 
-void __stdcall ssFadeOut(sU32 time)
+void  ssFadeOut(sU32 time)
 {
 //	dsFadeOut(time*44100/TIMER_TICKS_PER_SEC);
 }
 
 
-void __stdcall ssClose()
+void  ssClose()
 {
 //  dsClose();
 
@@ -745,7 +745,7 @@ void __stdcall ssClose()
 }
 
 /*
-sS32 __stdcall ssGetTime()
+sS32  ssGetTime()
 {
 	sS32 bla=dsGetCurSmp()-state.tdif;
 	__asm
@@ -761,7 +761,7 @@ sS32 __stdcall ssGetTime()
 }
 */
 
-void __stdcall ssPlay()
+void  ssPlay()
 {
 	ssStop();
 	ssReset();
@@ -774,14 +774,14 @@ void __stdcall ssPlay()
 }
 
 
-void __stdcall ssStop()
+void  ssStop()
 {
 	state.running=0;
 	state.silent=1;
 	// MIDI-Reset schicken!
 }
 
-void __stdcall ssDoTick()
+void  ssDoTick()
 {
 //  dsTick();
 }
@@ -789,7 +789,7 @@ void __stdcall ssDoTick()
 
 #ifdef RULESYNC
 
-sS32 __stdcall ssGetPos()
+sS32  ssGetPos()
 {
 	if (!state.running)
 		return rscurpos;
@@ -799,7 +799,7 @@ sS32 __stdcall ssGetPos()
 	return rscurpos;
 }
 
-sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m)
+sU32  ssCalcPositions(sS32 **dest, sU8 *otherv2m)
 {
 	_ssbase mybase;
 	if (otherv2m)
@@ -870,7 +870,7 @@ sU32 __stdcall ssCalcPositions(sS32 **dest, sU8 *otherv2m)
 
 /*
 
-void __stdcall ssPlayFrom(sS32 time)
+void  ssPlayFrom(sS32 time)
 {
 	state.silent=1;
 	ssStop();
@@ -916,7 +916,7 @@ void __stdcall ssPlayFrom(sS32 time)
 }
 
 
-sS32 __stdcall ssGetSongTime()
+sS32  ssGetSongTime()
 {
 	sS32 bla=dsGetCurSmp();
   bla+=rstimeoffs;

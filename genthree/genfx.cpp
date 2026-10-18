@@ -53,7 +53,7 @@ static void RH_Nop(GenFXChain *chain,FXViewport &view)
 	sSystem->EndViewport();
 }
 
-sObject * __stdcall FXChain_New(sInt size,sInt ocount,sInt4 color)
+sObject *  FXChain_New(sInt size,sInt ocount,sInt4 color)
 {
 	GenFXChain *chain;
 
@@ -109,7 +109,7 @@ static void RH_BeginViewport(GenFXChain *chain,FXViewport &view)
 	sSystem->SetCamera(cam);
 }
 
-sObject * __stdcall FXChain_BeginViewport(GenFXChain *chn,sInt3 pos,sInt3 parm2,sInt aspect,sInt mode,sInt ocount,sInt4 color,sInt zoom)
+sObject *  FXChain_BeginViewport(GenFXChain *chn,sInt3 pos,sInt3 parm2,sInt aspect,sInt mode,sInt ocount,sInt4 color,sInt zoom)
 {
 	GenFXChain *chain;
 	sInt i;
@@ -131,7 +131,7 @@ sObject * __stdcall FXChain_BeginViewport(GenFXChain *chn,sInt3 pos,sInt3 parm2,
   return chain;
 }
 
-sObject * __stdcall FXChain_Viewport(GenFXChain *chn,GenScene *scene,sInt3 pos,sInt3 parm2,sInt aspect,sInt mode,sInt ocount,sInt4 color,sInt zoom)
+sObject *  FXChain_Viewport(GenFXChain *chn,GenScene *scene,sInt3 pos,sInt3 parm2,sInt aspect,sInt mode,sInt ocount,sInt4 color,sInt zoom)
 {
   chn = (GenFXChain *) FXChain_BeginViewport(chn,pos,parm2,aspect,mode,0x10000,color,zoom);
   chn = (GenFXChain *) FXChain_PaintScene(chn,scene,0x10000);
@@ -141,7 +141,7 @@ sObject * __stdcall FXChain_Viewport(GenFXChain *chn,GenScene *scene,sInt3 pos,s
 
 /****************************************************************************/
 
-void __stdcall FXChain_Render(GenFXChain *chain)
+void  FXChain_Render(GenFXChain *chain)
 {
 	SCRIPTVERIFYVOID(chain);
 	chain->Render();
@@ -202,7 +202,7 @@ static void RH_Layer2D(GenFXChain *chain,FXViewport &view)
 	sSystem->EndViewport();
 }
 
-sObject * __stdcall FXChain_Layer2D(GenFXChain *chn,GenMaterial *mtrl,sInt4 color,sInt4 screen,sInt4 uv,sInt z,sInt clear,sInt ocount,sF322 zoom,sInt rotate,sF322 center)
+sObject *  FXChain_Layer2D(GenFXChain *chn,GenMaterial *mtrl,sInt4 color,sInt4 screen,sInt4 uv,sInt z,sInt clear,sInt ocount,sF322 zoom,sInt rotate,sF322 center)
 {
 	GenFXChain *chain;
 	sInt i;
@@ -302,7 +302,7 @@ static void RH_MergeColor(GenFXChain *chain,FXViewport &view)
   sSystem->SetTexture(1,0);
 }
 
-sObject * __stdcall FXChain_Merge(GenFXChain *c1,GenFXChain *c2,sInt mode,sInt param,sF322 zoom,sInt rotate,sF322 center,sInt size,sInt ocount)
+sObject *  FXChain_Merge(GenFXChain *c1,GenFXChain *c2,sInt mode,sInt param,sF322 zoom,sInt rotate,sF322 center,sInt size,sInt ocount)
 {
 	GenFXChain *chain;
 
@@ -326,7 +326,7 @@ sObject * __stdcall FXChain_Merge(GenFXChain *c1,GenFXChain *c2,sInt mode,sInt p
 	return chain;
 }
 
-sObject * __stdcall FXChain_Color(GenFXChain *chn,sInt mode,sInt4 color,sInt size,sInt ocount,sF322 zoom,sInt rotate,sF322 center,sInt lighten)
+sObject *  FXChain_Color(GenFXChain *chn,sInt mode,sInt4 color,sInt size,sInt ocount,sF322 zoom,sInt rotate,sF322 center,sInt lighten)
 {
 	GenFXChain *chain;
 
@@ -355,7 +355,7 @@ void RH_EndViewport(GenFXChain *chain,FXViewport &view)
 	sSystem->EndViewport();
 }
 
-sObject * __stdcall FXChain_EndViewport(GenFXChain *chn,sInt ocount)
+sObject *  FXChain_EndViewport(GenFXChain *chn,sInt ocount)
 {
 	GenFXChain *chain;
 
@@ -379,7 +379,7 @@ void RH_PaintScene(GenFXChain *chain,FXViewport &view)
 	((GenScene *) chain->Object)->Paint(mat);
 }
 
-sObject * __stdcall FXChain_PaintScene(GenFXChain *chn,GenScene *scn,sInt ocount)
+sObject *  FXChain_PaintScene(GenFXChain *chn,GenScene *scn,sInt ocount)
 {
 	GenFXChain *chain;
 
@@ -398,7 +398,7 @@ sObject * __stdcall FXChain_PaintScene(GenFXChain *chn,GenScene *scn,sInt ocount
 
 /****************************************************************************/
 
-void __stdcall FXChain_ResetAlloc()
+void  FXChain_ResetAlloc()
 {
   FXMaster->ResetAlloc();
 }
@@ -477,7 +477,7 @@ void RH_Blend4x(GenFXChain *chain,FXViewport &view)
   sSystem->SetTexture(1,0);
 }
 
-sObject * __stdcall FXChain_Blend4x(GenFXChain *chn,sF324 r0,sF324 r1,sF324 r2,sF324 r3,sInt cmode,sInt size,sInt ocount,sInt amplify)
+sObject *  FXChain_Blend4x(GenFXChain *chn,sF324 r0,sF324 r1,sF324 r2,sF324 r3,sInt cmode,sInt size,sInt ocount,sInt amplify)
 {
 	GenFXChain *chain;
 	sInt i;
@@ -502,7 +502,7 @@ sObject * __stdcall FXChain_Blend4x(GenFXChain *chn,sF324 r0,sF324 r1,sF324 r2,s
 
 /****************************************************************************/
 
-sObject * __stdcall FXChain_Label(GenFXChain *chain,sInt label,sInt ocount)
+sObject *  FXChain_Label(GenFXChain *chain,sInt label,sInt ocount)
 {
 	SCRIPTVERIFY(chain);
   GenFXChain *result;

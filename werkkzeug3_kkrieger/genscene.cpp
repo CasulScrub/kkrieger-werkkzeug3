@@ -297,7 +297,7 @@ void ExecSceneInputs(KOp *parent,KEnvironment *kenv,sF32 *srt)
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Scene(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sBool lightmap)
+GenScene *  Init_Scene_Scene(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sBool lightmap)
 {
   GenScene *scene;
 
@@ -311,14 +311,14 @@ GenScene * __stdcall Init_Scene_Scene(GenMesh *mesh,sF323 s,sF323 r,sF323 t,sBoo
   return scene;
 }
 
-void __stdcall Exec_Scene_Scene(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t,sBool lightmap)
+void  Exec_Scene_Scene(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t,sBool lightmap)
 {
   ExecSceneInputs(op,kenv,&s.x);
 }
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Add(sInt count,GenScene *s0,...)
+GenScene *  Init_Scene_Add(sInt count,GenScene *s0,...)
 {
   GenScene *scene,*add;
   sInt i;
@@ -334,14 +334,14 @@ GenScene * __stdcall Init_Scene_Add(sInt count,GenScene *s0,...)
   return scene;
 }
 
-void __stdcall Exec_Scene_Add(KOp *op,KEnvironment *kenv)
+void  Exec_Scene_Add(KOp *op,KEnvironment *kenv)
 {
   ExecSceneInputs(op,kenv,0);
 }
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Multiply(GenScene *add,sF323 s,sF323 r,sF323 t,sInt count)
+GenScene *  Init_Scene_Multiply(GenScene *add,sF323 s,sF323 r,sF323 t,sInt count)
 {
   GenScene *scene;
 
@@ -356,7 +356,7 @@ GenScene * __stdcall Init_Scene_Multiply(GenScene *add,sF323 s,sF323 r,sF323 t,s
   return scene;
 }
 
-void __stdcall Exec_Scene_Multiply(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t,sInt count)
+void  Exec_Scene_Multiply(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t,sInt count)
 {
   sMatrix mat,mat2;
   sInt i;
@@ -379,24 +379,24 @@ void __stdcall Exec_Scene_Multiply(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Transform(GenScene *add,sF323 s,sF323 r,sF323 t)
+GenScene *  Init_Scene_Transform(GenScene *add,sF323 s,sF323 r,sF323 t)
 {
   return Init_Scene_Multiply(add,s,r,t,0);
 }
 
-void __stdcall Exec_Scene_Transform(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t)
+void  Exec_Scene_Transform(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t)
 {
   ExecSceneInputs(op,kenv,&s.x);
 }
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Light(sF323 r,sF323 t,sU32 flags,sF32 zoom,sU32 color,sF32 amplify,sF32 range)
+GenScene *  Init_Scene_Light(sF323 r,sF323 t,sU32 flags,sF32 zoom,sU32 color,sF32 amplify,sF32 range)
 {
   return new GenScene;
 }
 
-void __stdcall Exec_Scene_Light(KOp *op,KEnvironment *kenv,sF323 r,sF323 t,sU32 flags,sF32 zoom,sU32 color,sF32 amplify,sF32 range)
+void  Exec_Scene_Light(KOp *op,KEnvironment *kenv,sF323 r,sF323 t,sU32 flags,sF32 zoom,sU32 color,sF32 amplify,sF32 range)
 {
   //KSceneJob *job;
   sF32 srt[9];
@@ -443,7 +443,7 @@ void __stdcall Exec_Scene_Light(KOp *op,KEnvironment *kenv,sF323 r,sF323 t,sU32 
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Camera(sF323 s,sF323 r,sF323 t)
+GenScene *  Init_Scene_Camera(sF323 s,sF323 r,sF323 t)
 {
   GenScene *scene;
 
@@ -453,7 +453,7 @@ GenScene * __stdcall Init_Scene_Camera(sF323 s,sF323 r,sF323 t)
   return scene;
 }
 
-void __stdcall Exec_Scene_Camera(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t)
+void  Exec_Scene_Camera(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF323 t)
 {
   sMatrix mat;
   
@@ -473,7 +473,7 @@ void __stdcall Exec_Scene_Camera(KOp *op,KEnvironment *kenv,sF323 s,sF323 r,sF32
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Limb(GenScene *scene0,GenScene *scene1,sF323 pos,sF323 dir,sF32 l0,sF32 l1,sU32 flags)
+GenScene *  Init_Scene_Limb(GenScene *scene0,GenScene *scene1,sF323 pos,sF323 dir,sF32 l0,sF32 l1,sU32 flags)
 {
   GenScene *scene;
   GenScene *add;
@@ -488,7 +488,7 @@ GenScene * __stdcall Init_Scene_Limb(GenScene *scene0,GenScene *scene1,sF323 pos
   return scene;
 }
 
-void __stdcall Exec_Scene_Limb(KOp *op,KEnvironment *kenv,sF323 pos,sF323 dirv,sF32 a,sF32 b,sU32 flags)
+void  Exec_Scene_Limb(KOp *op,KEnvironment *kenv,sF323 pos,sF323 dirv,sF32 a,sF32 b,sU32 flags)
 {
   sMatrix mat0,mat1,var;
   sF32 c,s,t;
@@ -581,7 +581,7 @@ void __stdcall Exec_Scene_Limb(KOp *op,KEnvironment *kenv,sF323 pos,sF323 dirv,s
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Walk(GenScene *scene0,
+GenScene *  Init_Scene_Walk(GenScene *scene0,
   sU32 Flags,sInt FootCount,sF32 StepTresh,sF32 RunLowTresh,sF32 RunHighTresh,
   sInt2 ft,sF322 sl,sF322 ss,sF322 sn,
   sF323 l0,sF323 l1,sF323 l2,sF323 l3,sF323 l4,sF323 l5,sF323 l6,sF323 l7,
@@ -621,7 +621,7 @@ struct WalkMem : public KInstanceMem
   sVector FootDelta[8];         // position of the foot-contact point relative to body
 } *mem;
 
-void __stdcall Exec_Scene_Walk(KOp *op,KEnvironment *kenv,
+void  Exec_Scene_Walk(KOp *op,KEnvironment *kenv,
   sU32 Flags,sInt FootCount,sF32 StepTresh,sF32 RunLowTresh,sF32 RunHighTresh,
   sInt2 fg,sF322 sl,sF322 ss,sF322 sn,
   sF323 l0,sF323 l1,sF323 l2,sF323 l3,sF323 l4,sF323 l5,sF323 l6,sF323 l7,
@@ -1036,7 +1036,7 @@ void __stdcall Exec_Scene_Walk(KOp *op,KEnvironment *kenv,
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Rotate(GenScene *scene0,sF323 dir,sInt axxis)
+GenScene *  Init_Scene_Rotate(GenScene *scene0,sF323 dir,sInt axxis)
 {
   GenScene *scene;
   GenScene *add;
@@ -1049,7 +1049,7 @@ GenScene * __stdcall Init_Scene_Rotate(GenScene *scene0,sF323 dir,sInt axxis)
   return scene;
 }
 
-void __stdcall Exec_Scene_Rotate(KOp *op,KEnvironment *kenv,sF323 dir,sInt axxis)
+void  Exec_Scene_Rotate(KOp *op,KEnvironment *kenv,sF323 dir,sInt axxis)
 {
   sMatrix mat;//,save;
   sVector v;
@@ -1096,7 +1096,7 @@ void __stdcall Exec_Scene_Rotate(KOp *op,KEnvironment *kenv,sF323 dir,sInt axxis
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Forward(GenScene *scene0,sF32 tresh)
+GenScene *  Init_Scene_Forward(GenScene *scene0,sF32 tresh)
 {
   GenScene *scene;
   GenScene *add;
@@ -1114,7 +1114,7 @@ struct ForwardMem : KInstanceMem
   sVector oldpos;
 };
 
-void __stdcall Exec_Scene_Forward(KOp *op,KEnvironment *kenv,sF32 tresh)
+void  Exec_Scene_Forward(KOp *op,KEnvironment *kenv,sF32 tresh)
 {
   sMatrix mat;//,save;
   sVector v;
@@ -1156,7 +1156,7 @@ void __stdcall Exec_Scene_Forward(KOp *op,KEnvironment *kenv,sF32 tresh)
 
 #if sLINK_KKRIEGER
 
-GenScene * __stdcall Init_Scene_Physic(GenScene *scene0,sInt flags,sF323 speed,sF323 scale,sF323 rmassf,sF32 mass,sInt partkind)
+GenScene *  Init_Scene_Physic(GenScene *scene0,sInt flags,sF323 speed,sF323 scale,sF323 rmassf,sF32 mass,sInt partkind)
 {
   GenScene *scene;
   GenScene *add;
@@ -1179,7 +1179,7 @@ struct PhysicMem : KInstanceMem
 //  KKriegerPartBox Box;
 };
 
-void __stdcall Exec_Scene_Physic(KOp *op,KEnvironment *kenv,sInt flags,sF323 speedf,sF323 scalef,sF323 rmassf,sF32 mass,sInt partkind)
+void  Exec_Scene_Physic(KOp *op,KEnvironment *kenv,sInt flags,sF323 speedf,sF323 scalef,sF323 rmassf,sF32 mass,sInt partkind)
 {
   sMatrix mat;//,save;
   PhysicMem *mem;
@@ -1303,12 +1303,12 @@ void __stdcall Exec_Scene_Physic(KOp *op,KEnvironment *kenv,sInt flags,sF323 spe
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_ForceLights(GenScene *in,sInt mode,sInt sw)
+GenScene *  Init_Scene_ForceLights(GenScene *in,sInt mode,sInt sw)
 {
   return in;
 }
 
-void __stdcall Exec_Scene_ForceLights(KOp *op,KEnvironment *kenv,sInt mode,sInt sw)
+void  Exec_Scene_ForceLights(KOp *op,KEnvironment *kenv,sInt mode,sInt sw)
 {
   sInt inc;
 
@@ -1320,19 +1320,19 @@ void __stdcall Exec_Scene_ForceLights(KOp *op,KEnvironment *kenv,sInt mode,sInt 
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_MatHack(GenMaterial *)
+GenScene *  Init_Scene_MatHack(GenMaterial *)
 {
   return new GenScene;
 }
 
-void __stdcall Exec_Scene_MatHack(KOp *op,KEnvironment *kenv)
+void  Exec_Scene_MatHack(KOp *op,KEnvironment *kenv)
 {
   op->ExecInputs(kenv);
 }
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Sector(GenScene *scene0)
+GenScene *  Init_Scene_Sector(GenScene *scene0)
 {
   GenScene *scene,*add;
   
@@ -1344,7 +1344,7 @@ GenScene * __stdcall Init_Scene_Sector(GenScene *scene0)
   return scene;
 }
 
-void __stdcall Exec_Scene_Sector(KOp *op,KEnvironment *kenv)
+void  Exec_Scene_Sector(KOp *op,KEnvironment *kenv)
 {
   GenScene *scene;
 
@@ -1367,7 +1367,7 @@ void __stdcall Exec_Scene_Sector(KOp *op,KEnvironment *kenv)
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Portal(GenScene *in,GenScene *s0,GenScene *s1,GenScene *si,sF322 x,sF322 y,sF322 z,sInt cost,sF32 door)
+GenScene *  Init_Scene_Portal(GenScene *in,GenScene *s0,GenScene *s1,GenScene *si,sF322 x,sF322 y,sF322 z,sInt cost,sF32 door)
 {
   if(s0) s0->Release();
   if(s1) s1->Release();
@@ -1375,7 +1375,7 @@ GenScene * __stdcall Init_Scene_Portal(GenScene *in,GenScene *s0,GenScene *s1,Ge
   return in ? in : new GenScene;
 }
 
-void __stdcall Exec_Scene_Portal(KOp *op,KEnvironment *kenv,sF322 x,sF322 y,sF322 z,sInt cost,sF32 door)
+void  Exec_Scene_Portal(KOp *op,KEnvironment *kenv,sF322 x,sF322 y,sF322 z,sInt cost,sF32 door)
 {
   //KPortalJob *job;
   KOp *s[3];
@@ -1422,12 +1422,12 @@ void __stdcall Exec_Scene_Portal(KOp *op,KEnvironment *kenv,sF322 x,sF322 y,sF32
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_AdjustPass(GenScene *in,sInt adjust)
+GenScene *  Init_Scene_AdjustPass(GenScene *in,sInt adjust)
 {
   return in;
 }
 
-void __stdcall Exec_Scene_AdjustPass(KOp *op,KEnvironment *kenv,sInt adjustPass)
+void  Exec_Scene_AdjustPass(KOp *op,KEnvironment *kenv,sInt adjustPass)
 {
   RenderPassAdjust += adjustPass;
   op->ExecInput(kenv,0);
@@ -1446,7 +1446,7 @@ struct ScenePartMem : public KInstanceMem
   sVector *Pos;
 };
 
-GenScene * __stdcall Init_Scene_Particles(GenScene *scene0,
+GenScene *  Init_Scene_Particles(GenScene *scene0,
   sInt mode,sInt count,sInt seed,
   sF323 rand,sF323 rot,sF323 rotspeed,sF32 anim,
   sF323 line,KSpline *spline)
@@ -1464,7 +1464,7 @@ GenScene * __stdcall Init_Scene_Particles(GenScene *scene0,
 
 /****************************************************************************/
 
-void __stdcall Exec_Scene_Particles(KOp *op,KEnvironment *kenv,
+void  Exec_Scene_Particles(KOp *op,KEnvironment *kenv,
   sInt mode,sInt count,sInt seed,
   sF323 rand,sF323 rot,sF323 rotspeed,sF32 anim,
   sF323 line,KSpline *spline)
@@ -1550,7 +1550,7 @@ void __stdcall Exec_Scene_Particles(KOp *op,KEnvironment *kenv,
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_ApplySpline(GenScene *add,GenSpline *sp)
+GenScene *  Init_Scene_ApplySpline(GenScene *add,GenSpline *sp)
 {
   GenScene *scene;
 
@@ -1564,7 +1564,7 @@ GenScene * __stdcall Init_Scene_ApplySpline(GenScene *add,GenSpline *sp)
   return scene;
 }
  
-void __stdcall Exec_Scene_ApplySpline(KOp *op,KEnvironment *kenv,sF32 time)
+void  Exec_Scene_ApplySpline(KOp *op,KEnvironment *kenv,sF32 time)
 {
   sMatrix mat;
   GenSpline *sp;
@@ -1582,14 +1582,14 @@ void __stdcall Exec_Scene_ApplySpline(KOp *op,KEnvironment *kenv,sF32 time)
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Marker(GenScene *add,sInt marker)
+GenScene *  Init_Scene_Marker(GenScene *add,sInt marker)
 {
   GenScene *scene = new GenScene;
   *scene->Childs.Add() = MakeScene(add);
   return scene;
 }
 
-void __stdcall Exec_Scene_Marker(KOp *op,KEnvironment *kenv,sInt marker)
+void  Exec_Scene_Marker(KOp *op,KEnvironment *kenv,sInt marker)
 {
   sVERIFY(marker>=0 && marker<sCOUNTOF(kenv->Markers));
   kenv->Markers[marker] = kenv->ExecStack.Top();
@@ -1598,7 +1598,7 @@ void __stdcall Exec_Scene_Marker(KOp *op,KEnvironment *kenv,sInt marker)
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_LOD(GenScene *high,GenScene *low,sF32 lod)
+GenScene *  Init_Scene_LOD(GenScene *high,GenScene *low,sF32 lod)
 {
   GenScene *scene = new GenScene;
   *scene->Childs.Add() = MakeScene(high);
@@ -1607,7 +1607,7 @@ GenScene * __stdcall Init_Scene_LOD(GenScene *high,GenScene *low,sF32 lod)
   return scene;
 }
 
-void __stdcall Exec_Scene_LOD(KOp *op,KEnvironment *kenv,sF32 lod)
+void  Exec_Scene_LOD(KOp *op,KEnvironment *kenv,sF32 lod)
 {
   sF32 dist;
   sVector v;
@@ -1628,12 +1628,12 @@ void __stdcall Exec_Scene_LOD(KOp *op,KEnvironment *kenv,sF32 lod)
 
 /****************************************************************************/
 
-GenScene * __stdcall Init_Scene_Ambient(sU32 color)
+GenScene *  Init_Scene_Ambient(sU32 color)
 {
   return new GenScene;
 }
 
-void __stdcall Exec_Scene_Ambient(KOp *op,KEnvironment *kenv,sU32 color)
+void  Exec_Scene_Ambient(KOp *op,KEnvironment *kenv,sU32 color)
 {
   Engine->AddAmbientLight(color);
 }

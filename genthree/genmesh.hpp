@@ -364,37 +364,37 @@ public:
 
 /****************************************************************************/
 
-sObject * __stdcall Mesh_Cube(GenMesh *msh,sInt tx,sInt ty,sInt tz,sInt crease);
-sObject * __stdcall Mesh_SelectAll(GenMesh *msh,sU32 mask1,sU32 mask0);
-sObject * __stdcall Mesh_SelectCube(GenMesh *msh,sF323 center,sF323 size,sInt flags,sU32 dmask1,sU32 dmask0);
-sObject * __stdcall Mesh_Subdivide(GenMesh *msh,sInt mask,sF32 alpha,sInt count);
-sObject * __stdcall Mesh_Extrude(GenMesh *msh,sInt smask,sInt mode,sInt dmask);
-sObject * __stdcall Mesh_Transform(GenMesh *msh,sInt mask,sF323 s,sF323 r,sF323 t);
-sObject * __stdcall Mesh_Cylinder(GenMesh *msh,sInt tx,sInt ty);
-sObject * __stdcall Mesh_NewMesh(sInt colorSets,sInt uvSets);
-sObject * __stdcall Mesh_Material(GenMesh *msh,GenMaterial *mat,sInt id,sInt mask);
-sObject * __stdcall Mesh_TransformEx(GenMesh *msh,sInt mask,sInt sj,sInt dj,sF323 s,sF323 r,sF323 t);
-sObject * __stdcall Mesh_Crease(GenMesh *msh,sInt mask,sInt what,sInt selType);
-sObject * __stdcall Mesh_UnCrease(GenMesh *msh,sInt mask,sInt what,sInt selType);
-sObject * __stdcall Mesh_CalcNormals(GenMesh *msh,sInt mode,sInt mask,sInt calcWhat);
-sObject * __stdcall Mesh_Torus(GenMesh *msh,sInt x,sInt y,sF32 radiusi,sInt phase,sF32 arclen);
-sObject * __stdcall Mesh_Sphere(GenMesh *msh,sInt x,sInt y);
-sObject * __stdcall Mesh_Triangulate(GenMesh *msh,sInt threshold,sInt mask,sInt type);
-sObject * __stdcall Mesh_Cut(GenMesh *msh,sF322 dir,sF32 offset,sInt mode);
-sObject * __stdcall Mesh_ExtrudeNormal(GenMesh *msh,sF32 distance,sInt mask);
-sObject * __stdcall Mesh_Displace(GenMesh *msh,GenBitmap *bmp,sF32 ampli,sInt mask);
-sObject * __stdcall Mesh_Bevel(GenMesh *msh,sF32 elev,sF32 pull,sInt mask,sInt mode,sInt dmask);
-sObject * __stdcall Mesh_Perlin(GenMesh *msh,sInt mask,sF323 s,sF323 r,sF323 t,sF323 ampl);
-sObject * __stdcall Mesh_Add(GenMesh *msh,GenMesh *msh2);
-sObject * __stdcall Mesh_DeleteFaces(GenMesh *msh,sInt mask);
-sObject * __stdcall Mesh_Babe(sChar *filename,sInt dummy,sInt anim0,sInt anim1,sInt phase,sInt flags);
-sObject * __stdcall Mesh_BeginRecord(GenMesh *msh);
-sObject * __stdcall Mesh_AnimLabel(GenMesh *msh,sInt label,sU32 flags);
-sObject * __stdcall Mesh_AnimLabelCont(GenMesh *msh);
-sObject * __stdcall Mesh_SelectRandom(GenMesh *msh,sU32 ratio,sInt seed,sU32 dmask1,sU32 dmask0);
-sObject * __stdcall Mesh_Multiply(GenMesh *msh,sF323 s,sF323 r,sF323 t,sInt count);
-sObject * __stdcall Mesh_SelectAngle(GenMesh *msh,sF32 angle,sU32 dmask1,sU32 dmask0);
-sObject * __stdcall Mesh_ExtrudeWK(GenMesh *msh,sInt mask,sInt mode,sInt count,sF32 distance,sF323 s,sF323 r,sInt scalemode); 
+sObject *  Mesh_Cube(GenMesh *msh,sInt tx,sInt ty,sInt tz,sInt crease);
+sObject *  Mesh_SelectAll(GenMesh *msh,sU32 mask1,sU32 mask0);
+sObject *  Mesh_SelectCube(GenMesh *msh,sF323 center,sF323 size,sInt flags,sU32 dmask1,sU32 dmask0);
+sObject *  Mesh_Subdivide(GenMesh *msh,sInt mask,sF32 alpha,sInt count);
+sObject *  Mesh_Extrude(GenMesh *msh,sInt smask,sInt mode,sInt dmask);
+sObject *  Mesh_Transform(GenMesh *msh,sInt mask,sF323 s,sF323 r,sF323 t);
+sObject *  Mesh_Cylinder(GenMesh *msh,sInt tx,sInt ty);
+sObject *  Mesh_NewMesh(sInt colorSets,sInt uvSets);
+sObject *  Mesh_Material(GenMesh *msh,GenMaterial *mat,sInt id,sInt mask);
+sObject *  Mesh_TransformEx(GenMesh *msh,sInt mask,sInt sj,sInt dj,sF323 s,sF323 r,sF323 t);
+sObject *  Mesh_Crease(GenMesh *msh,sInt mask,sInt what,sInt selType);
+sObject *  Mesh_UnCrease(GenMesh *msh,sInt mask,sInt what,sInt selType);
+sObject *  Mesh_CalcNormals(GenMesh *msh,sInt mode,sInt mask,sInt calcWhat);
+sObject *  Mesh_Torus(GenMesh *msh,sInt x,sInt y,sF32 radiusi,sInt phase,sF32 arclen);
+sObject *  Mesh_Sphere(GenMesh *msh,sInt x,sInt y);
+sObject *  Mesh_Triangulate(GenMesh *msh,sInt threshold,sInt mask,sInt type);
+sObject *  Mesh_Cut(GenMesh *msh,sF322 dir,sF32 offset,sInt mode);
+sObject *  Mesh_ExtrudeNormal(GenMesh *msh,sF32 distance,sInt mask);
+sObject *  Mesh_Displace(GenMesh *msh,GenBitmap *bmp,sF32 ampli,sInt mask);
+sObject *  Mesh_Bevel(GenMesh *msh,sF32 elev,sF32 pull,sInt mask,sInt mode,sInt dmask);
+sObject *  Mesh_Perlin(GenMesh *msh,sInt mask,sF323 s,sF323 r,sF323 t,sF323 ampl);
+sObject *  Mesh_Add(GenMesh *msh,GenMesh *msh2);
+sObject *  Mesh_DeleteFaces(GenMesh *msh,sInt mask);
+sObject *  Mesh_Babe(sChar *filename,sInt dummy,sInt anim0,sInt anim1,sInt phase,sInt flags);
+sObject *  Mesh_BeginRecord(GenMesh *msh);
+sObject *  Mesh_AnimLabel(GenMesh *msh,sInt label,sU32 flags);
+sObject *  Mesh_AnimLabelCont(GenMesh *msh);
+sObject *  Mesh_SelectRandom(GenMesh *msh,sU32 ratio,sInt seed,sU32 dmask1,sU32 dmask0);
+sObject *  Mesh_Multiply(GenMesh *msh,sF323 s,sF323 r,sF323 t,sInt count);
+sObject *  Mesh_SelectAngle(GenMesh *msh,sF32 angle,sU32 dmask1,sU32 dmask0);
+sObject *  Mesh_ExtrudeWK(GenMesh *msh,sInt mask,sInt mode,sInt count,sF32 distance,sF323 s,sF323 r,sInt scalemode); 
 
 /****************************************************************************/
 

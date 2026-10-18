@@ -21,7 +21,7 @@
 
 #pragma warning (disable: 4244)              // conversion from 'a' to 'b', possible loss of data
 
-#define sINLINE                   __forceinline           // use this to inline
+#define sINLINE                   __attribute__((always_inline)) inline           // use this to inline
 
 #endif
 

@@ -133,7 +133,7 @@ static unsigned short SqrtTab[257] =
 };
 
 
-__forceinline sInt Mul24(sInt var_a,sInt var_b)
+__attribute__((always_inline)) inline sInt Mul24(sInt var_a,sInt var_b)
 {
   return (sS32)( ((sS64)var_a)*((sS64)var_b)>>24 );
 }

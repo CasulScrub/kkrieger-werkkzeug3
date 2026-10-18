@@ -244,7 +244,7 @@ class CCAPackerBackEnd: public PackerBackEnd
   sF32 RealGammaLen(sInt i,sU32 value);
   sF32 EncodeGamma(sInt i,sU32 value);
 
-  sF32 __forceinline GammaLen(sInt i,sU32 value)
+  sF32 __attribute__((always_inline)) inline GammaLen(sInt i,sU32 value)
   {
     if(value<256)
       return GammaLens[i][value];

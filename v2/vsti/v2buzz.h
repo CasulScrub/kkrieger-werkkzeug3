@@ -628,7 +628,7 @@ public:
 	int             m_currentPrograms[16];
 	V2::IHost*		m_host;
 
-	static void __cdecl ParamChanged(void* tag, int index)
+	static void  ParamChanged(void* tag, int index)
 	{
 	}
 

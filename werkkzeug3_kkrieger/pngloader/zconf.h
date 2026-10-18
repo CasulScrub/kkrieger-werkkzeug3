@@ -205,9 +205,9 @@
 #  ifdef ZLIB_DLL
 #    if defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))
 #      ifdef ZLIB_INTERNAL
-#        define ZEXTERN extern __declspec(dllexport)
+#        define ZEXTERN extern 
 #      else
-#        define ZEXTERN extern __declspec(dllimport)
+#        define ZEXTERN extern 
 #      endif
 #    endif
 #  endif  /* ZLIB_DLL */
@@ -221,7 +221,7 @@
 #    endif
 #    include <windows.h>
      /* No need for _export, use ZLIB.DEF instead. */
-     /* For complete Windows compatibility, use WINAPI, not __stdcall. */
+     /* For complete Windows compatibility, use WINAPI, not . */
 #    define ZEXPORT WINAPI
 #    ifdef WIN32
 #      define ZEXPORTVA WINAPIV
@@ -234,11 +234,11 @@
 #if defined (__BEOS__)
 #  ifdef ZLIB_DLL
 #    ifdef ZLIB_INTERNAL
-#      define ZEXPORT   __declspec(dllexport)
-#      define ZEXPORTVA __declspec(dllexport)
+#      define ZEXPORT   
+#      define ZEXPORTVA 
 #    else
-#      define ZEXPORT   __declspec(dllimport)
-#      define ZEXPORTVA __declspec(dllimport)
+#      define ZEXPORT   
+#      define ZEXPORTVA 
 #    endif
 #  endif
 #endif
