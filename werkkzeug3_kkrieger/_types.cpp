@@ -75,27 +75,27 @@ sU32 sGetRnd()
     "mov %%eax, %0\n\t"
     : "=m" (i), "+m" (sRandomSeed)
   );
-#else
-  __asm
-  {
-    mov eax,sRandomSeed
-
-    imul eax,eax,343fdh
-    add eax,269ec3h
-    mov ebx,eax
-
-    imul eax,eax,343fdh
-    add eax,269ec3h
-
-    mov sRandomSeed,eax
-
-    sar eax,10
-    and eax,00000ffffh
-    shl ebx,6
-    and ebx,0ffff0000h
-    or eax,ebx
-    mov i,eax
-  }
+//#else
+//  __asm
+//  {
+//    mov eax,sRandomSeed
+//
+//    imul eax,eax,343fdh
+//    add eax,269ec3h
+//    mov ebx,eax
+//
+//    imul eax,eax,343fdh
+//    add eax,269ec3h
+//
+//    mov sRandomSeed,eax
+//
+//    sar eax,10
+//    and eax,00000ffffh
+//    shl ebx,6
+//    and ebx,0ffff0000h
+//    or eax,ebx
+//    mov i,eax
+//  }
 #endif
 #endif
   return i;
@@ -385,36 +385,36 @@ sF64 sFACos(sF64 f)
     "fstpl   %0\n\t"
     : "+m" (f)
   );
-#else
-  __asm
-  {
-    fld     qword ptr [f];
-    fld1;
-    fchs;
-    fcomp   st(1);
-    fstsw   ax;
-    je      suckt;
-
-    fld     st;
-    fld1;
-    fsubrp  st(1), st;
-    fxch    st(1);
-    fld1;
-    faddp   st(1), st;
-    fdivp   st(1), st;
-    fsqrt;
-    fld1;
-    jmp     short end;
-
-suckt:
-    fld1;
-    fldz;
-
-end:
-    fpatan;
-    fadd    st, st;
-    fstp    qword ptr [f];
-  }
+//#else
+//  __asm
+//  {
+//    fld     qword ptr [f];
+//    fld1;
+//    fchs;
+//    fcomp   st(1);
+//    fstsw   ax;
+//    je      suckt;
+//
+//    fld     st;
+//    fld1;
+//    fsubrp  st(1), st;
+//    fxch    st(1);
+//    fld1;
+//    faddp   st(1), st;
+//    fdivp   st(1), st;
+//    fsqrt;
+//    fld1;
+//    jmp     short end;
+//
+//suckt:
+//    fld1;
+//    fldz;
+//
+//end:
+//    fpatan;
+//    fadd    st, st;
+//    fstp    qword ptr [f];
+//  }
 #endif
 
   return f;
@@ -433,16 +433,16 @@ sF64 sFMod(sF64 a,sF64 b)
     : "+m" (a)
     : "m" (b)
   );
-#else
-  __asm
-  {
-    fld   qword ptr [b];
-    fld   qword ptr [a];
-    fprem;
-
-    fstp  st(1);
-    fstp  qword ptr [a];
-  }
+//#else
+//  __asm
+//  {
+//    fld   qword ptr [b];
+//    fld   qword ptr [a];
+//    fprem;
+//
+//    fstp  st(1);
+//    fstp  qword ptr [a];
+//  }
 #endif
 
   return a;
@@ -506,123 +506,123 @@ sF64 sFPow(sF64 a,sF64 b)
 #endif
 
   return r;
-#else
-  __asm
-  {
-    fld   qword ptr [b];
-    fld   qword ptr [a];
-
-    ftst;
-    fstsw ax;
-    sahf;
-    jz    zero;
-
-    fyl2x;
-    fist  dword ptr [a];
-    sub   esp, 12;
-    mov   dword ptr [esp],0;
-    mov   dword ptr [esp+4],0x80000000;
-    fisub dword ptr [a];
-    mov   eax, dword ptr [a];
-    add   eax, 0x3fff;
-    mov   [esp+8], eax;
-    jle   underflow;
-    cmp   eax, 0x8000;
-    jge   overflow;
-    f2xm1;
-    fld1;
-    fadd;
-    fld   tbyte ptr [esp];
-    add   esp, 12;
-    fmul;
-    jmp   end;
-
-underflow:
-    fstp  st;
-    fldz;
-    add   esp, 12;
-    jmp   end;
-
-overflow:
-    push  0x7f800000;
-    fstp  st;
-    fld   dword ptr [esp];
-    add   esp, 16;
-    jmp   end;
-
-zero:
-    fstp  st(1);
-
-end:
-  }
-#endif
-}
-
-/*sF64 sFPow(sF64 a,sF64 b)
-{
-	__asm
-	{
-		fld		qword ptr [a];
-		fld		qword ptr [b];
-
-		fxch	st(1);
-		ftst;
-		fstsw	ax;
-		sahf;
-		jz		zero;
-
-		fyl2x;
-		fld1;
-		fld		st(1);
-		fprem;
-		f2xm1;
-		faddp	st(1), st;
-		fscale;
-
-zero:
-		fstp	st(1);
-		fstp	qword ptr [a];
-	}
-	
-	return a;
-}*/
-
-sF64 sFExp(sF64 f)
-{
-#ifdef __GNUC__
-	asm (
-		"fldl   %0\n\t"
-		"fldl2e\n\t"
-		"fmulp	%%st, %%st(1)\n\t"
-
-		"fld1\n\t"
-		"fld    %%st(1)\n\t"
-		"fprem\n\t"
-		"f2xm1\n\t"
-		"faddp	%%st, %%st(1)\n\t"
-		"fscale\n\t"
-
-        "fstp   %%st(1)\n\t"
-		"fstpl  %0\n\t"
-        : "+m" (f)
-	);
-#else
-	__asm
-	{
-		fld		qword ptr [f];
-		fldl2e;
-		fmulp	st(1), st;
-
-		fld1;
-		fld		st(1);
-		fprem;
-		f2xm1;
-		faddp	st(1), st;
-		fscale;
-
-    fstp  st(1);
-		fstp	qword ptr [f];
-	}
+//#else
+//  __asm
+//  {
+//    fld   qword ptr [b];
+//    fld   qword ptr [a];
+//
+//    ftst;
+//    fstsw ax;
+//    sahf;
+//    jz    zero;
+//
+//    fyl2x;
+//    fist  dword ptr [a];
+//    sub   esp, 12;
+//    mov   dword ptr [esp],0;
+//    mov   dword ptr [esp+4],0x80000000;
+//    fisub dword ptr [a];
+//    mov   eax, dword ptr [a];
+//    add   eax, 0x3fff;
+//    mov   [esp+8], eax;
+//    jle   underflow;
+//    cmp   eax, 0x8000;
+//    jge   overflow;
+//    f2xm1;
+//    fld1;
+//    fadd;
+//    fld   tbyte ptr [esp];
+//    add   esp, 12;
+//    fmul;
+//    jmp   end;
+//
+//underflow:
+//    fstp  st;
+//    fldz;
+//    add   esp, 12;
+//    jmp   end;
+//
+//overflow:
+//    push  0x7f800000;
+//    fstp  st;
+//    fld   dword ptr [esp];
+//    add   esp, 16;
+//    jmp   end;
+//
+//zero:
+//    fstp  st(1);
+//
+//end:
+//  }
+//#endif
+//}
+//
+///*sF64 sFPow(sF64 a,sF64 b)
+//{
+//	__asm
+//	{
+//		fld		qword ptr [a];
+//		fld		qword ptr [b];
+//
+//		fxch	st(1);
+//		ftst;
+//		fstsw	ax;
+//		sahf;
+//		jz		zero;
+//
+//		fyl2x;
+//		fld1;
+//		fld		st(1);
+//		fprem;
+//		f2xm1;
+//		faddp	st(1), st;
+//		fscale;
+//
+//zero:
+//		fstp	st(1);
+//		fstp	qword ptr [a];
+//	}
+//	
+//	return a;
+//}*/
+//
+//sF64 sFExp(sF64 f)
+//{
+//#ifdef __GNUC__
+//	asm (
+//		"fldl   %0\n\t"
+//		"fldl2e\n\t"
+//		"fmulp	%%st, %%st(1)\n\t"
+//
+//		"fld1\n\t"
+//		"fld    %%st(1)\n\t"
+//		"fprem\n\t"
+//		"f2xm1\n\t"
+//		"faddp	%%st, %%st(1)\n\t"
+//		"fscale\n\t"
+//
+//        "fstp   %%st(1)\n\t"
+//		"fstpl  %0\n\t"
+//        : "+m" (f)
+//	);
+//#else
+//	__asm
+//	{
+//		fld		qword ptr [f];
+//		fldl2e;
+//		fmulp	st(1), st;
+//
+//		fld1;
+//		fld		st(1);
+//		fprem;
+//		f2xm1;
+//		faddp	st(1), st;
+//		fscale;
+//
+//    fstp  st(1);
+//		fstp	qword ptr [f];
+//	}
 #endif
 
 	return f;
@@ -806,49 +806,49 @@ void sCopyMemFast(void *d,const void *s,sInt c)
     : "m" (s), "m" (d), "m" (c)
     );
 #endif
-#else
-    __asm
-    {
-      mov     esi, [s];
-      mov     edi, [d];
-      mov     ecx, [c];
-      shr     ecx, 6;
-      jz      tail;
-
-copy:
-      movq    mm0, [esi+ 0];
-      movq    mm1, [esi+ 8];
-      movq    mm2, [esi+16];
-      movq    mm3, [esi+24];
-      movq    mm4, [esi+32];
-      movq    mm5, [esi+40];
-      movq    mm6, [esi+48];
-      movq    mm7, [esi+56];
-
-      movntq  [edi+ 0], mm0;
-      movntq  [edi+ 8], mm1;
-      movntq  [edi+16], mm2;
-      movntq  [edi+24], mm3;
-      movntq  [edi+32], mm4;
-      movntq  [edi+40], mm5;
-      movntq  [edi+48], mm6;
-      movntq  [edi+56], mm7;
-
-      add     esi, 64;
-      add     edi, 64;
-      dec     ecx;
-      jnz     copy;
-
-      emms;
-
-tail:
-      mov     ecx, [c];
-      and     ecx, 63;
-      jz      end;
-      rep     movsb;
-
-end:
-    }
+//#else
+//    __asm
+//    {
+//      mov     esi, [s];
+//      mov     edi, [d];
+//      mov     ecx, [c];
+//      shr     ecx, 6;
+//      jz      tail;
+//
+//copy:
+//      movq    mm0, [esi+ 0];
+//      movq    mm1, [esi+ 8];
+//      movq    mm2, [esi+16];
+//      movq    mm3, [esi+24];
+//      movq    mm4, [esi+32];
+//      movq    mm5, [esi+40];
+//      movq    mm6, [esi+48];
+//      movq    mm7, [esi+56];
+//
+//      movntq  [edi+ 0], mm0;
+//      movntq  [edi+ 8], mm1;
+//      movntq  [edi+16], mm2;
+//      movntq  [edi+24], mm3;
+//      movntq  [edi+32], mm4;
+//      movntq  [edi+40], mm5;
+//      movntq  [edi+48], mm6;
+//      movntq  [edi+56], mm7;
+//
+//      add     esi, 64;
+//      add     edi, 64;
+//      dec     ecx;
+//      jnz     copy;
+//
+//      emms;
+//
+//tail:
+//      mov     ecx, [c];
+//      and     ecx, 63;
+//      jz      end;
+//      rep     movsb;
+//
+//end:
+//    }
 #endif
   }
   else

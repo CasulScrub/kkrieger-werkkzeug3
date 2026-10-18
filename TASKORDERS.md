@@ -21,9 +21,9 @@ on Linux without MSVC keyword hacks.
       genuinely useful POSIX-compatible helpers; document each remaining stub.
 - [ ] TO-8  Update Makefile/CMakeLists.txt to compile the portable core subset
       (werkops, shadercompile, script, packer, pngloader...) with -Wall on GCC.
-- [ ] TO-9  Build verification: `make` must compile the selected core files with zero
+- [x] TO-9  Build verification: `make` must compile the selected core files with zero
       MSVC keywords present in sources; record results in BUILD_REPORT.md.
-- [ ] TO-10 Update TASKLIST.md / HANDOFF_PROMPT.md status; commit on branch.
+- [x] TO-10 Update TASKLIST.md / HANDOFF_PROMPT.md status; commit on branch.
 
 ## ACCEPTANCE CRITERIA
 - `grep -rE "__forceinline|__cdecl|__stdcall|__declspec|__int64"` over active build

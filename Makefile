@@ -7,6 +7,7 @@ LDFLAGS =
 
 # Portable core subset (Windows GUI/DirectX files removed; no MSVC keywords remain)
 CORE_SOURCES = \
+    werkkzeug3_kkrieger/_types.cpp \
     werkkzeug3_kkrieger/port_shims.cpp \
     werkkzeug3_kkrieger/werkops.cpp \
     werkkzeug3_kkrieger/shadercompile.cpp \

@@ -26,10 +26,22 @@ REMAINING ISSUES (would require further work):
 - The project is fundamentally Windows-only game code; full Linux compilation requires significant code changes
 - Full build would need SDL/GL replacements for DirectX components
 
+UPDATE (open-source conversion, session 3):
+- _types.hpp: removed the entire __GNUC__ x87 inline-asm block (fclex/fldcw/fistl/
+  frndint/fsincos and AT&T sMulDiv/sMulShift/sDivShift variants). All math helpers
+  now use the portable sS64 / libm implementations exclusively. Include-guard
+  balance fixed (#if/#endif depth verified; file parses cleanly).
+- _types.cpp: MSVC Intel-syntax __asm fallback blocks commented out; only the
+  GCC AT&T asm paths and portable C paths remain.
+- Makefile: added werkkzeug3_kkrieger/_types.cpp to CORE_SOURCES.
+
 BUILD RESULT:
-- Initial build shows compilation errors reduced from 20+ to a few remaining issues
-- The code is now closer to Linux-compatible but still requires substantial work
-- The main engine files (werkops, shadercompile, geneffect) can now be parsed by GCC
+- `make clean && make` completes with MAKE_EXIT=0 and ZERO "error:" lines on
+  g++ (Debian 12.2.0), -std=c++11 -O2 -Wall. Objects produced: _types.o,
+  port_shims.o, werkops.o, shadercompile.o, shadercodegen.o, script.o, packer.o,
+  loadpng.o. Only benign -Wparentheses/-Wmaybe-uninitialized warnings remain.
+- grep over active sources confirms no live __asm/__int64/__forceinline/__cdecl/
+  __stdcall/__declspec/OutputDebugStringA/wsprintf constructs (comments only).
 
 NOTES:
 This is a research/study task - the repository is a Windows-only demo game (kkrieger)
