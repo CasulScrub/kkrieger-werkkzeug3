@@ -47,7 +47,7 @@ class WinPara
 public:
   // --- layout helpers (no-ops in the headless stub) ---
   void Space()                                        {}
-  void AddBox(const sChar *title,sInt i,sInt cnt,const sChar *names) {(void)title;(void)i;(void)cnt;(void)names;}
+  void AddBox(sInt title,sInt i,sInt cnt,const sChar *names) {(void)title;(void)i;(void)cnt;(void)names;}
   void AddSpecial(const sChar *text,sInt i)           {(void)text;(void)i;}
 
   // --- parameter editors (no-ops; they used to create GUI controls) ---
@@ -76,6 +76,9 @@ public:
   void EditBlobSpline()                               {}
 
   // --- value defaults ---
-  void DefaultF2(sInt i,sInt cnt,sF32 minV,sF32 maxV) {(void)i;(void)cnt;(void)minV;(void)maxV;}
-  void DefaultF3(sInt i,sInt cnt,sInt a,sInt b,sInt c){(void)i;(void)cnt;(void)a;(void)b;(void)c;}
+  // In the original Windows GUI these applied default values to the float
+  // editors returned by EditFloat (werkops.cpp passes those sControl* here),
+  // so they accept an sControl* and no-op in the headless stub.
+  void DefaultF2(sInt i,sControl *c,sF32 minV,sF32 maxV) {(void)i;(void)c;(void)minV;(void)maxV;}
+  void DefaultF3(sInt i,sControl *c,sInt a,sInt b,sInt c2){(void)i;(void)c;(void)a;(void)b;(void)c2;}
 };

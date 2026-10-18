@@ -39,6 +39,12 @@ class WerkDoc;
 
 typedef void (* WerkClassEdit)(class WerkkzeugApp *,class WerkOp *);
 typedef void (* WerkClassCalc)(struct KOp *);
+// Portable open-source change: the original code stored Init/Exec handlers as
+// plain void*, which GCC rejects (implicit function-pointer -> void* is not a
+// valid conversion). This opaque "any handler" function-pointer typedef keeps
+// the heterogeneous WerkClasses table portable; call sites cast to the
+// concrete signature they need (see kdoc.cpp).
+typedef void (* WerkClassHandler)();
 
 struct WerkClass
 {
@@ -51,8 +57,13 @@ struct WerkClass
   sU32 Shortcut;                            // shortcut in palette
   sChar *Packing;                           // "iiffbc" type information for packing
   WerkClassEdit EditHandler;                // set up for editing this operator
-  void *InitHandler;                        // initialize Object
-  void *ExecHandler;                        // execute Object
+  // Portable open-source change: these used to be plain void*, which forced
+  // invalid function-pointer -> void* conversions in the WerkClasses table
+  // (error under GCC). They are only ever stored and cast back to a concrete
+  // handler signature at the call sites (kdoc.cpp, werkops.cpp), so an opaque
+  // "any function pointer" typedef is the correct portable representation.
+  WerkClassHandler InitHandler;                    // initialize Object (opaque handler, cast at call sites)
+  WerkClassHandler ExecHandler;                    // execute Object (opaque handler, cast at call sites)
   sInt Inputs[KK_MAXINPUT];                 // KC_?? of inputs
   sInt Links[KK_MAXLINK];                   // KC_?? of links
 };

@@ -18,15 +18,15 @@
 #include "base/base_config.hpp"     // read default config
 #include <cstddef>
 //#include "xmmintrin.h"
-#endif  __TYPES_HPP__
-#endif  __TYPES_HPP__
+#endif
+#endif
 #ifdef __MINGW32__
 #include <corecrt.h>
-#endif  __TYPES_HPP__
+#endif
 
 #ifndef _WIN32_WCE
 //#include "xmmintrin.h"
-#endif  __TYPES_HPP__
+#endif
 
 #define sPLAT_PC      1
 #define sPLAT_PDA     2
@@ -36,7 +36,7 @@
 #include "Cmnintrin.h"
 #else
 #define sPLATFORM     sPLAT_PC
-#endif  __TYPES_HPP__
+#endif
 
 
 /****************************************************************************/
@@ -51,7 +51,7 @@
 
 #ifdef _WIN32_WCE
 #define __w64
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -61,20 +61,20 @@
 #define sRELEASE 0
 #else
 #define sRELEASE 1
-#endif  __TYPES_HPP__
+#endif
 
 #ifndef sUSE_SHADERS
 #pragma message("please set sUSE_SHADERS!")
 #define sUSE_SHADERS 0
-#endif  __TYPES_HPP__
+#endif
 #ifndef sUNICODE
 #pragma message("please set sUNICODE!")
 #define sUNICODE 0
-#endif  __TYPES_HPP__
+#endif
 #ifndef sMOBILE
 #pragma message("please set sMOBILE!")
 #define sMOBILE 0
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -90,7 +90,7 @@ void *   operator new[](size_t,const char *,int);
 inline void  operator delete(void *p, const char *, int s) { ::operator delete(p); }
 inline void  operator delete[](void *p, const char *, int s) { ::operator delete[](p); }
 #define new new(__FILE__,__LINE__)
-#endif  __TYPES_HPP__
+#endif
 //#endif
 
 #define sNORETURN __attribute__((noreturn))  // use this for dead end funtions
@@ -219,7 +219,7 @@ typedef unsigned int              sU32;     // for packed arrays and bitfields
 typedef unsigned long long        sU64;     // use as needed
 #else
 typedef unsigned long long          sU64;     // use as needed
-#endif  __TYPES_HPP__
+#endif
 typedef signed char               sS8;      // for packed arrays
 typedef short                     sS16;     // for packed arrays
 typedef int                       sS32;     // for packed arrays
@@ -227,22 +227,22 @@ typedef int                       sS32;     // for packed arrays
 typedef signed long long          sS64;     // use as needed
 #else
 typedef signed long long            sS64;     // use as needed
-#endif  __TYPES_HPP__
+#endif
 #if !sMOBILE
 typedef float                     sF32;     // basic floatingpoint
 typedef double                    sF64;     // use as needed
-#endif  __TYPES_HPP__
+#endif
 typedef int                       sInt;     // use this most!
 #ifdef __GNUC__
 typedef long                      sDInt;    // type for pointer diff
 #else
 typedef int __w64                 sDInt;    // type for pointer diff
-#endif  __TYPES_HPP__
+#endif
 #if sUNICODE
 typedef unsigned short            sChar;    // type for strings
 #else
 typedef char                      sChar;    // type for strings
-#endif  __TYPES_HPP__
+#endif
 typedef signed char               sBool;    // not so usefull, don't use
 typedef void*                     sPtr;     // not so usefull, don't use
 typedef const void*               sCPtr;    // not so usefull, don't use
@@ -262,7 +262,7 @@ typedef const void*               sCPtr;    // not so usefull, don't use
 #define sTXT(x) sTXT2(x)
 #else
 #define sTXT(x) x
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -273,7 +273,7 @@ typedef const void*               sCPtr;    // not so usefull, don't use
 #define sPI2    6.28318530717958647692528676655901
 #define sPIF    3.1415926535897932384626433832795f
 #define sPI2F   6.28318530717958647692528676655901f
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -303,7 +303,7 @@ sU32 sDec3(sF32 x,sF32 y,sF32 z);
 void sHermite(sF32 *d,sF32 *p0,sF32 *p1,sF32 *p2,sF32 *p3,sInt count,sF32 fade,sF32 t,sF32 c,sF32 b,sBool ignoretime=0);
 void sHermiteD(sF32 *d,sF32 *dd,sF32 *p0,sF32 *p1,sF32 *p2,sF32 *p3,sInt count,sF32 fade,sF32 t,sF32 c,sF32 b,sBool ignoretime=0);
 __attribute__((always_inline)) inline sF32 sFade(sF32 a,sF32 b,sF32 fade)												{return a+(b-a)*fade;}
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -334,7 +334,7 @@ __attribute__((always_inline)) inline sF32 sFade(sF32 a,sF32 b,sF32 fade)							
 
 #pragma intrinsic (abs)                                       // int intrinsic
 #pragma intrinsic (memset,memcpy,memcmp,strlen)               // memory intrinsic
-#endif  __TYPES_HPP__
+#endif
 
 __attribute__((always_inline)) inline sInt sAbs(sInt i)                                 { return abs(i); }
 __attribute__((always_inline)) inline void sSetMem(sPtr dd,sInt s,sInt c)               { memset(dd,s,c); }
@@ -344,7 +344,7 @@ __attribute__((always_inline)) inline sInt sCmpMem(const void *dd,const void *ss
 __attribute__((always_inline)) inline sInt sGetStringLen(const sChar *s)                { return (sInt)strlen(s); }
 #else
 __attribute__((always_inline)) inline sInt sGetStringLen(const sChar *s)                { for(sInt i=0;s[i];i++); return i; }
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -376,14 +376,14 @@ __attribute__((always_inline)) inline sF64 sFACos(sF64 f)         { return acos(
 __attribute__((always_inline)) inline sF64 sFMod(sF64 a,sF64 b)   { return fmod(a,b); }
 __attribute__((always_inline)) inline sF64 sFExp(sF64 f)          { return exp(f); }
 __attribute__((always_inline)) inline sF64 sFPow(sF64 a,sF64 b)   { return pow(a,b); }
-#endif  __TYPES_HPP__
+#endif
 
 #if sINTRO
 sF64 sFACos(sF64 f);
 sF64 sFPow(sF64 a,sF64 b);
 sF64 sFMod(sF64 a,sF64 b);
 sF64 sFExp(sF64 f);
-#endif  __TYPES_HPP__
+#endif
 
 // Calculate real roots of polynomials with given degrees:
 // p(x) = coeffs[0]*x^0 + coeffs[1]*x^1 + ...
@@ -391,7 +391,7 @@ sF64 sFExp(sF64 f);
 // in roots [0..n-1]
 sInt sQuadraticRoots(const sF32 *coeffs,sF32 *roots);
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -584,7 +584,9 @@ inline void sFloatDen1() {}
 
 sBool sNormalFloat(sF32 value);
 
-#endif  __TYPES_HPP__
+// NOTE: the include guard __TYPES_HPP__ stays OPEN here on purpose - it is
+// closed by the final #endif at the bottom of this file. (A previous edit
+// wrongly closed it mid-file, which left that trailing #endif unmatched.)
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -629,7 +631,7 @@ sInt sScanInt(const sChar *&scan);
 sInt sScanHex(const sChar *&scan);
 #if !sMOBILE
 sF32 sScanFloat(const sChar *&scan);
-#endif  __TYPES_HPP__
+#endif
 sBool sScanString(const sChar *&scan,sChar *buffer,sInt size);
 sBool sScanName(const sChar *&scan,sChar *buffer,sInt size);
 void sScanSpace(const sChar *&scan);
@@ -690,7 +692,7 @@ public:
   template <class type> type *Alloc(sInt count=1) {return (type *)Alloc(sizeof(type)*count);}
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -707,7 +709,7 @@ extern sU8 sPerlinPermute[512];
 void sInitPerlin();
 void sPerlin3D(const sVector &pos,sVector &out);
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -726,7 +728,7 @@ extern sF32 sReadF16(const sU8 *&data);
 extern void sWriteF24(sU8 *&data,sF32 value);   // 1/3 bytes
 extern sF32 sReadF24(const sU8 *&data);
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -778,23 +780,22 @@ inline void sDPrint(const sChar *text) {}
 inline void  sDPrintF(const sChar *format,...) {}
 sNORETURN void  sFatal(char *format,...);
 
-#endif  __TYPES_HPP__
+#endif
 
 #if sDEBUG
-#if sRELEASE
+  #if sRELEASE
 #define sVERIFY(x) {if(!(x))sVerifyFalse(sTXT(__FILE__),__LINE__);}
 #define sVERIFYFALSE {sVerifyFalse(sTXT(__FILE__),__LINE__);}
-#else
+  #else
 // Portable replacement for the MSVC Intel-syntax "__asm { int 3 }" breakpoint:
 // __builtin_trap() works on all GCC/Clang targets (emits int3/ud2 as appropriate).
 #define sVERIFY(x) {if(!(x)) {sVerifyFalse(sTXT(__FILE__),__LINE__); __builtin_trap(); }}
 #define sVERIFYFALSE {sVerifyFalse(sTXT(__FILE__),__LINE__); __builtin_trap();}
-#endif  __TYPES_HPP__
-#endif  __TYPES_HPP__
+  #endif
 #else
 #define sVERIFY(x) {;}
 #define sVERIFYFALSE {;}
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                       ***/
@@ -862,7 +863,7 @@ union sFSRT
   sF32 v[9];
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -903,7 +904,7 @@ struct sFRect
   void Extend(sF32 i);
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
@@ -1181,7 +1182,7 @@ sBool sCullBBox(const sAABox &box,const sCullPlane *planes,sInt planeCount);
 
 /****************************************************************************/
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1305,7 +1306,7 @@ public:
 
 typedef sObject *(*sNewHandler)();
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1655,7 +1656,7 @@ template <class Type> sBool sObjList<Type>::IsInside(Type *o)
   return sFALSE;
 }
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1826,7 +1827,7 @@ public:
   sBool Read(sU32 *&);
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1863,8 +1864,8 @@ public:
   void PrintArg(const sChar *format,const sChar **fp);
 };
 
-#endif  __TYPES_HPP__
-#endif  __TYPES_HPP__
+#endif
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1882,9 +1883,9 @@ public:
 #define sZONE(x)
 #define sMAKEZONE(x,name,col)
 #define sREGZONE(x)
-#endif  __TYPES_HPP__
+#endif
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1926,7 +1927,7 @@ public:
   virtual sInt GetTuneLength() = 0; // in samples
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1956,7 +1957,7 @@ public:
   void PopAll()                       { Stack.Count = 1; }
 };
 
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 /***                                                                      ***/
@@ -1984,7 +1985,7 @@ class sTickTimer
 #else
   // Non-GCC fallback: portable clock instead of the MSVC-only "__asm { rdtsc }".
   static sU64 Tick()                  { struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts); return (sU64)ts.tv_sec * 1000000000ull + (sU64)ts.tv_nsec; }
-#endif  __TYPES_HPP__
+#endif
 
 public:
   sTickTimer()                        { Reset(); }
@@ -1995,8 +1996,8 @@ public:
 
   sU64 GetTotal() const               { return Total; }
 };
-#endif  __TYPES_HPP__
+#endif
 
 /****************************************************************************/
 
-#endif  __TYPES_HPP__
+#endif
