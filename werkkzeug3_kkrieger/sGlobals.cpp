@@ -10,11 +10,13 @@
 #include "_start.hpp"
 #include "_gui.hpp"
 #include "_util.hpp"
+#include "material11.hpp"   // sMBF_* material blend flags
 #include "_diskitem.hpp"
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 /****************************************************************************/
@@ -26,7 +28,7 @@
 sBroker_ *sBroker = 0;
 sGuiManager *sGui = 0;
 sGuiPainter *sPainter = 0;
-sDiskItem *sDiskRoot = 0;
+class sDiskItem *sDiskRoot = 0;
 sInt sFatality = 0;
 
 /****************************************************************************/
@@ -414,8 +416,8 @@ sBool sHostFont::Prepare(sBitmap *bm, sChar *letters, sHostFontLetter *met)
   {
     met[i].Location.x1 = 0;
     met[i].Location.y1 = 0;
-    met[i].Location.x2 = 5;
-    met[i].Location.y2 = 7;
+    met[i].Location.x1 = 5;
+    met[i].Location.y1 = 7;
     met[i].Pre = 0;
     met[i].Post = Advance - 5;
     met[i].Top = 0;

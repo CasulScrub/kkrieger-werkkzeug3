@@ -156,107 +156,40 @@ namespace FRIED
     ndct4(x0[3],x1[3],x2[3],x3[3]);
   }
 
+  // portable scalar inverse-DCT helper (permuted input, matches indct42D_MB math)
+  static void iwht4_s(sS16 &ar,sS16 &br,sS16 &cr,sS16 &dr)
+  {
+    sInt a,b,c,d,t;
+
+    a = ar; b = cr; c = dr; d = br;   // reorder
+
+    a -= b;
+    c += d;
+    t = (c - a) >> 1;
+    b -= t;
+    d -= t;
+    c += b;
+    a -= d;
+
+    ar = a; br = b; cr = c; dr = d;
+  }
+
+  // FIXME: no output shifting as of yet
   // FIXME: no output shifting as of yet
   void indct42D(sS16 *x0,sS16 *x1,sS16 *x2,sS16 *x3)
   {
-  #if 1
-    __asm
-    {
-      mov       eax, [x0];
-      mov       ebx, [x1];
-      mov       ecx, [x2];
-      mov       edx, [x3];
-
-      // load (ok, this is going to be somewhat confusing)
-      movq      mm0, [eax]; // mm0=a
-      movq      mm1, [ecx]; // mm1=c
-      movq      mm2, [edx]; // mm2=d
-      movq      mm3, [ebx]; // mm3=b
-
-      // vertical pass
-      movq      mm4, mm2;
-      movq      mm5, mm2;
-      psraw     mm4, 1;
-      psraw     mm5, 3;
-      psubw     mm3, mm4;
-      paddw     mm3, mm5;
-      psubw     mm0, mm1;
-      pxor      mm6, mm6;
-      movq      mm4, mm3;
-      movq      mm5, mm3;
-      psraw     mm4, 1;
-      psraw     mm5, 3;   
-      paddw     mm3, mm0;
-      psubw     mm6, mm0;
-      paddw     mm2, mm4;
-      psraw     mm3, 1;
-      psubw     mm2, mm5;
-      psubw     mm0, mm3;
-      paddw     mm6, mm2;
-      psraw     mm6, 1;
-      psubw     mm1, mm6;
-      paddw     mm2, mm1;
-
-      // transpose (afterwards value from mm4 now in mm2)
-      movq      mm4, mm0;
-      movq      mm5, mm2;
-      punpcklwd mm0, mm1;
-      punpckhwd mm4, mm1;
-      punpcklwd mm2, mm3;
-      punpckhwd mm5, mm3;
-
-      movq      mm1, mm0;
-      movq      mm3, mm4;
-      punpckldq mm0, mm2;
-      punpckhdq mm1, mm2;
-      punpckldq mm4, mm5;
-      punpckhdq mm3, mm5;
-
-      // translation: mm1 => mm4, mm2 => mm3, mm3 => mm1, mm4 => mm2
-      // horizontal pass
-      movq      mm2, mm3;
-      movq      mm5, mm3;
-      psraw     mm2, 1;
-      psraw     mm5, 3;
-      psubw     mm1, mm2;
-      paddw     mm1, mm5;
-      psubw     mm0, mm4;
-      pxor      mm6, mm6;
-      movq      mm2, mm1;
-      movq      mm5, mm1;
-      psraw     mm2, 1;
-      psraw     mm5, 3;   
-      paddw     mm1, mm0;
-      psubw     mm6, mm0;
-      paddw     mm3, mm2;
-      psraw     mm1, 1;
-      psubw     mm3, mm5;
-      psubw     mm0, mm1;
-      paddw     mm6, mm3;
-      psraw     mm6, 1;
-      psubw     mm4, mm6;
-      paddw     mm3, mm4;
-
-      movq      [eax], mm0;
-      movq      [ebx], mm4;
-      movq      [ecx], mm3;
-      movq      [edx], mm1;
-
-      emms;
-    }
-  #else
     // vertical
-    indct4_s(x0[0],x1[0],x2[0],x3[0]);
-    indct4_s(x0[1],x1[1],x2[1],x3[1]);
-    indct4_s(x0[2],x1[2],x2[2],x3[2]);
-    indct4_s(x0[3],x1[3],x2[3],x3[3]);
+    iwht4_s(x0[0],x1[0],x2[0],x3[0]);
+    iwht4_s(x0[1],x1[1],x2[1],x3[1]);
+    iwht4_s(x0[2],x1[2],x2[2],x3[2]);
+    iwht4_s(x0[3],x1[3],x2[3],x3[3]);
 
     // horizontal
-    indct4_s(x0[0],x0[1],x0[2],x0[3]);
-    indct4_s(x1[0],x1[1],x1[2],x1[3]);
-    indct4_s(x2[0],x2[1],x2[2],x2[3]);
-    indct4_s(x3[0],x3[1],x3[2],x3[3]);
-  #endif
+    iwht4_s(x0[0],x0[1],x0[2],x0[3]);
+    iwht4_s(x1[0],x1[1],x1[2],x1[3]);
+    iwht4_s(x2[0],x2[1],x2[2],x2[3]);
+    iwht4_s(x3[0],x3[1],x3[2],x3[3]);
+  }
   }
 
   void ndct42D_MB(sInt *x0,sInt *x1,sInt *x2,sInt *x3)
@@ -448,135 +381,6 @@ namespace FRIED
 
   void lbt4post4x4(sS16 *x0,sS16 *x1,sS16 *x2,sS16 *x3)
   {
-#if 1
-    __asm
-    {
-      mov       eax, [x0];
-      mov       ebx, [x1];
-      mov       ecx, [x2];
-      mov       edx, [x3];
-
-      // split the load, because movq SUCKS for non-8byte-aligned data
-      movq      mm0, [eax];
-      movq      mm1, [ebx];
-      movq      mm2, [ecx];
-      movq      mm3, [edx];
-
-      /*movd      mm0, [eax];
-      movd      mm1, [ebx];
-      movd      mm2, [ecx];
-      movd      mm3, [edx];
-      punpckldq mm0, [eax+4];
-      punpckldq mm1, [ebx+4];
-      punpckldq mm2, [ecx+4];
-      punpckldq mm3, [edx+4];*/
-
-      // vertical lbt postfilter stage 1
-      psubw     mm3, mm0;
-      psubw     mm2, mm1;
-      movq      mm4, mm2;
-      paddw     mm0, mm0;
-      paddw     mm1, mm1;
-      paddw     mm0, mm3;
-      paddw     mm1, mm2;
-      psraw     mm4, 1;
-
-      // vertical lbt postfilter stage 2
-      paddw     mm2, mm2;
-      psubw     mm3, mm4;
-      psubw     mm2, mm3;
-      psraw     mm2, 2;
-      paddw     mm3, mm2;
-
-      // vertical lbt postfilter stage 3
-      psubw     mm0, mm3;
-      psubw     mm1, mm2;
-      paddw     mm2, mm2;
-      paddw     mm3, mm3;
-      paddw     mm2, mm1;
-      paddw     mm3, mm0;
-
-      // transpose (afterwards value from mm4 now in mm2)
-      movq      mm4, mm0;
-      movq      mm5, mm2;
-      punpcklwd mm0, mm1;
-      punpckhwd mm4, mm1;
-      punpcklwd mm2, mm3;
-      punpckhwd mm5, mm3;
-
-      movq      mm1, mm0;
-      movq      mm3, mm4;
-      punpckldq mm0, mm2;
-      punpckhdq mm1, mm2;
-      punpckldq mm4, mm5;
-      punpckhdq mm3, mm5;
-
-      // horizontal lbt postfilter stage 1
-      psubw     mm3, mm0;
-      psubw     mm4, mm1;
-      movq      mm2, mm4;
-      paddw     mm0, mm0;
-      paddw     mm1, mm1;
-      psraw     mm2, 1;
-      paddw     mm0, mm3;
-      paddw     mm1, mm4;
-
-      // horizontal lbt postfilter stage 2
-      paddw     mm4, mm4;
-      psubw     mm3, mm2;
-      psubw     mm4, mm3;
-      psraw     mm4, 2;
-      paddw     mm3, mm4;
-
-      // horizontal lbt postfilter stage 3
-      psubw     mm1, mm4;
-      psubw     mm0, mm3;
-      paddw     mm4, mm4;
-      paddw     mm3, mm3;
-      paddw     mm4, mm1;
-      paddw     mm3, mm0;
-
-      // transpose
-      movq      mm2, mm0;
-      movq      mm5, mm4;
-      punpcklwd mm0, mm1;
-      punpckhwd mm2, mm1;
-      punpcklwd mm4, mm3;
-      punpckhwd mm5, mm3;
-
-  #if 1
-      movq      mm1, mm0;
-      movq      mm3, mm2;
-      punpckldq mm0, mm4;
-      punpckhdq mm1, mm4;
-      punpckldq mm2, mm5;
-      punpckhdq mm3, mm5;
-
-      movq      [eax], mm0;
-      movq      [ebx], mm1;
-      movq      [ecx], mm2;
-      movq      [edx], mm3;
-  #else
-      // store + second half of transpose
-      movd      [eax], mm0;
-      movd      [eax+4], mm4;
-      movd      [ecx], mm2;
-      movd      [ecx+4], mm5;
-
-      psrlq     mm0, 32;
-      psrlq     mm4, 32;
-      psrlq     mm2, 32;
-      psrlq     mm5, 32;
-
-      movd      [ebx], mm0;
-      movd      [ebx+4], mm4;
-      movd      [edx], mm2;
-      movd      [edx+4], mm5;
-  #endif
-
-      emms;
-    }
-#else
     // vertical
     lbtpost1D(x0[0],x1[0],x2[0],x3[0]);
     lbtpost1D(x0[1],x1[1],x2[1],x3[1]);
@@ -588,6 +392,4 @@ namespace FRIED
     lbtpost1D(x1[0],x1[1],x1[2],x1[3]);
     lbtpost1D(x2[0],x2[1],x2[2],x2[3]);
     lbtpost1D(x3[0],x3[1],x3[2],x3[3]);
-#endif
-  }
 }
