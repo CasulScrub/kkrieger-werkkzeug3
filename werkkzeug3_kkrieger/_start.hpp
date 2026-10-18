@@ -5,6 +5,10 @@
 
 #include "_types.hpp"
 
+#if !defined(_WIN32)
+#include <GL/gl.h>            // open-source OpenGL backend (Mesa/libGL)
+#endif
+
 /****************************************************************************/
 /***                                                                      ***/
 /***   Forwards                                                           ***/
@@ -65,7 +69,8 @@ sBool sAppHandler(sInt code,sDInt value);
 #define sSF_MINIMAL       0x0100  // in windowed mode, no windows title border
 
 #define sSF_GRAPHMASK     0x000f
-#define sSF_DIRECT3D      0x0001
+#define sSF_DIRECT3D      0x0001  // Windows-only Direct3D9 backend (proprietary)
+#define sSF_OPENGL        0x0002  // Open-source SDL2 + OpenGL backend (Linux/POSIX)
 
 void sSetConfig(sU32 Flags,sInt xsize=640,sInt ysize=480);
 
@@ -513,8 +518,13 @@ struct sGeoBuffer                 // a vertex or indexbuffer
   sInt UserCount;                 // counts active allocations. increased with alloc, decreased with free. if decreased to zero, the buffer is assumed to be completly free'ed and Used is reset
   union
   {
+#if defined(_WIN32)               // Direct3D objects only exist on the Windows/DX backend
     struct IDirect3DVertexBuffer9 *VB;
     struct IDirect3DIndexBuffer9 *IB;
+#else                             // POSIX/SDL-GL backend: plain OpenGL buffer names
+    GLuint GLVBO;                 // vertex buffer object name (0 = none)
+    GLuint GLIBO;                 // index buffer object name (0 = none)
+#endif
   };
 
   void Init();                    // clear all field of structure
@@ -552,7 +562,11 @@ struct sHardTex
   sU32 Flags;                     // sTIF_???
   sInt Format;                    // requested sTF_??
 
+  #if defined(_WIN32)
   struct IDirect3DTexture9 *Tex;
+  #else
+  GLuint GLTex;                            // OpenGL texture name
+  #endif
 };
 
 /****************************************************************************/
@@ -610,8 +624,16 @@ struct sMaterialSetup             // actual data used by D3D
   sU32 *VSCode;                   // vertexshader bytecode
   sU32 *PSCode;                   // pixelshader bytecode
 
+  #if defined(_WIN32)
   struct IDirect3DVertexShader9 *VS;    // vertex shader
+  #else
+  GLuint GLVS;                             // OpenGL program object (shader translation TODO)
+  #endif
+  #if defined(_WIN32)
   struct IDirect3DPixelShader9 *PS;     // pixel shader
+  #else
+  GLuint GLPS;                             // pixel shaders emulated in fixed-function for now
+  #endif
 };
 
 struct sMaterialInstance                // set of textures+constants
@@ -662,8 +684,16 @@ struct sScreen
 
 struct sSampleBuffer
 {
+  #if defined(_WIN32)
   struct IDirectSoundBuffer *Buffer;
+  #else
+  void *SDLBuf;                            // SDL audio buffer slot (see _startgl_sdl.cpp)
+  #endif
+  #if defined(_WIN32)
   struct IDirectSound3DBuffer *Buf3D;
+  #else
+  void *SDLBuf3D;                          // 3d sound params handled in software mix
+  #endif
   sInt PlayTime;
 };
 
@@ -766,7 +796,11 @@ struct sSystem_
   void FillDS();
   void MarkDS();
   sSample Sample[sMAXSAMPLEHANDLE];
+  #if defined(_WIN32)
   struct IDirectSound3DListener *Listener;
+  #else
+  int SDLListener;                         // listener state kept in sSystem_ fields
+  #endif
   sInt SoundTime;
 
 // direct input
@@ -799,29 +833,81 @@ struct sSystem_
 #endif
   sInt PerfLastTime;
 
+// Open-source backend (SDL2 + OpenGL) private state - see _startgl_sdl.cpp
+#if !defined(_WIN32)
+  sDInt GLContext;                // SDL_GLContext handle
+  sInt TickTime;                  // ms accumulator for sAPPCODE_TICK
+  sF32 *GeoScratchV;              // client-array scratch (vertex upload)
+  sU16 *GeoScratchI;              // client-array scratch (index upload)
+  sInt CurDrawVC,CurDrawIC;       // last GeoBegin counts
+  sU32 *PaintBufMem;              // Begin2D software framebuffer
+  sInt PaintW,PaintH;             // its dimensions
+  sInt NumVSConstantsCache,NumPSConstantsCache;   // pending shader constants
+  sVector *VSConstantsCache,*PSConstantsCache;
+  void RunLoop();                 // SDL event pump (replaces Win32 message loop)
+  void KeyBufferPush(sU32 key);   // helper: queue a virtual key
+  void Tick();                    // 10ms timeslice driver
+#endif
+
 // DirectGraphics specific
 
+  #if defined(_WIN32)
   struct IDirect3D9 *DXD;
+  #else
+  void *DXD;                               // unused on GL backend
+  #endif
+  #if defined(_WIN32)
   struct IDirect3DDevice9 *DXDev;
+  #else
+  void *DXDev;                             // unused on GL backend
+  #endif
 
+  #if defined(_WIN32)
   struct IDirect3DTexture9 *DXStreamTexture;
+  #else
+  void *DXStreamTexture;                   // unused on GL backend
+  #endif
   sInt DXStreamLevel;
 
   sInt ZBufXSize,ZBufYSize;
 	sU32 ZBufFormat;
+	#if defined(_WIN32)
 	struct IDirect3DSurface9 *ZBuffer;
+	#else
+	void *ZBuffer;                           // unused on GL backend
+	#endif
+  #if defined(_WIN32)
   struct IDirect3DSurface9 *DXBlockSurface[2];
+  #else
+  void *DXBlockSurface;                    // unused on GL backend
+  #endif
 
+  #if defined(_WIN32)
   struct IDirect3DCubeTexture9 *DXNormalCube;
+  #else
+  void *DXNormalCube;                      // unused on GL backend
+  #endif
+  #if defined(_WIN32)
   struct IDirect3DVolumeTexture9 *DXAttenuationVolume;
+  #else
+  void *DXAttenuationVolume;               // unused on GL backend
+  #endif
 
   sInt CurrentTarget;
 
 // new material system
   sMaterialSetup Setups[MAX_SETUPS];
   sInt CurrentSetupId;
+  #if defined(_WIN32)
   struct IDirect3DVertexShader9 *CurrentVS;
+  #else
+  void *CurrentVS;                         // unused on GL backend
+  #endif
+  #if defined(_WIN32)
   struct IDirect3DPixelShader9 *CurrentPS;
+  #else
+  void *CurrentPS;                         // unused on GL backend
+  #endif
   sInt CurrentTextures[MAX_TEXSTAGE];
   sU32 CurrentStates[0x310];
 
