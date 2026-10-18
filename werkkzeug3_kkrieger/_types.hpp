@@ -41,13 +41,9 @@
 
 /****************************************************************************/
 
-#pragma warning (disable : 4068)    // unknown pragma (for lekktor)
-#pragma warning (disable : 4244)    // 'double' to 'float'
-//#pragma warning (disable : 4018)  // signed/unsigned mismatch
-#pragma warning (disable : 4251)    // dll-interfaces needed for baseclass (template problem)
-
-#pragma inline_recursion (on)       // get full inline power
-#pragma inline_depth (255)
+// MSVC-specific warning/inline pragmas live inside an _MSC_VER guard near
+// the intrinsics section below; GCC ignores them, so they are not emitted
+// on the open-source toolchain.
 
 #define sSTRINGIZE_(x) #x
 #define sSTRINGIZE(x) sSTRINGIZE_(x)
@@ -317,19 +313,28 @@ __attribute__((always_inline)) inline sF32 sFade(sF32 a,sF32 b,sF32 fade)							
 
 // integer
 
-typedef unsigned int size_t;
+// size_t comes from <cstddef> (included above); the old MSVC hack of
+// typedef'ing it to unsigned int is not portable and conflicts with the
+// system headers on GCC.
 
-extern "C"
-{
-  int  abs(int);
-  void *  memset( void *dest, int c, size_t count );
-  void *  memcpy( void *dest, const void *src, size_t count );
-  int  memcmp( const void *buf1, const void *buf2, size_t count );
-  size_t  strlen( const char *string );
-}
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+
+// MSVC-only pragmas (#pragma warning / #pragma intrinsic /
+// #pragma inline_recursion / #pragma inline_depth) are ignored by GCC,
+// so they are wrapped in an _MSC_VER guard to keep the build log clean.
+#ifdef _MSC_VER
+#pragma warning (disable : 4068)    // unknown pragma (for lekktor)
+#pragma warning (disable : 4244)    // 'double' to 'float'
+#pragma warning (disable : 4251)    // dll-interfaces needed for baseclass (template problem)
+
+#pragma inline_recursion (on)       // get full inline power
+#pragma inline_depth (255)
 
 #pragma intrinsic (abs)                                       // int intrinsic
 #pragma intrinsic (memset,memcpy,memcmp,strlen)               // memory intrinsic
+#endif
 
 __attribute__((always_inline)) inline sInt sAbs(sInt i)                                 { return abs(i); }
 __attribute__((always_inline)) inline void sSetMem(sPtr dd,sInt s,sInt c)               { memset(dd,s,c); }
@@ -346,32 +351,9 @@ __attribute__((always_inline)) inline sInt sGetStringLen(const sChar *s)        
 // float
 
 #if !sMOBILE
-
-extern "C"
-{
-
-  double  atan(double);
-  double  atan2(double,double);
-  double  cos(double);
-  double  exp(double);
-  double  fabs(double);
-  double  log(double);
-  double  log10(double);
-  double  sin(double);
-  double  sqrt(double);
-  double  tan(double); 
-
-  double  acos(double);
-  double  asin(double);
-  double  cosh(double);
-  double  fmod(double,double);
-  double  pow(double,double);
-  double  sinh(double);
-  double  tanh(double);
-}
-
-#pragma intrinsic (atan,atan2,cos,exp,log,log10,sin,sqrt,tan,fabs) // true intrinsic
-#pragma intrinsic (acos,asin,cosh,fmod,pow,sinh,tanh)         // fake intrinsic
+// Math functions come from <cmath> (included above); the old extern "C"
+// redeclarations and MSVC #pragma intrinsic lines were removed for
+// portability.
 
 __attribute__((always_inline)) inline sF64 sFATan(sF64 f)         { return atan(f); }
 __attribute__((always_inline)) inline sF64 sFATan2(sF64 a,sF64 b) { return atan2(a,b); }
@@ -554,144 +536,10 @@ __attribute__((always_inline)) inline sInt sDivShift30(sInt var_a,sInt var_b)
     return ret;
 }
 #else
-#pragma warning (disable : 4035) 
-
-__attribute__((always_inline)) inline void sFloatFix()
-{
-  __asm
-	{
-    fclex;
-		push		0103fh; // round to nearest even + single precision
-		fldcw		[esp];
-		pop			eax;
-	}
-}
-
-__attribute__((always_inline)) inline void sFloatDouble()
-{
-  __asm
-  {
-    fclex;
-    push    0123fh; // round to nearest even + double precision
-    fldcw   [esp];
-    pop     eax;
-  }
-}
-
-__attribute__((always_inline)) inline void sFloatDen1()
-{
-  __asm
-	{
-    fclex;
-		push		0141fh;
-		fldcw		[esp];
-		pop			eax;
-	}
-}
-__attribute__((always_inline)) inline void sFloatDen0()
-{
-  __asm
-	{
-    fclex;
-		push		0143fh;
-		fldcw		[esp];
-		pop			eax;
-	}
-}
-
-__attribute__((always_inline)) inline sInt sFtol (const float f)
-{
-  __asm 
-  {
-    fld f
-    push eax
-    fistp dword ptr [esp]
-    pop eax
-  }
-}
-
-__attribute__((always_inline)) inline sF32 sFRound (const float f)
-{
-  __asm 
-  {
-    fld f
-    frndint
-  }
-}
-
-__attribute__((always_inline)) inline void sFSinCos(const float x,sF32 &sine,sF32 &cosine)
-{
-  __asm
-  {
-    fld x;
-    fsincos;
-    mov eax,[cosine];
-    fstp dword ptr [eax];
-    mov eax,[sine];
-    fstp dword ptr [eax];
-  }
-}
-
-__attribute__((always_inline)) inline sInt sMulDiv(sInt var_a,sInt var_b,sInt var_c)
-{
-  __asm
-  {
-    mov eax,var_a
-    imul var_b
-    idiv var_c
-  }
-}
-
-__attribute__((always_inline)) inline sInt sMulShift(sInt var_a,sInt var_b)
-{
-  __asm
-  {
-    mov eax, var_a
-    imul var_b
-    shrd eax, edx, 16
-  }
-}
-
-__attribute__((always_inline)) inline sInt sMulShift30(sInt var_a,sInt var_b)
-{
-  __asm
-  {
-    mov eax, var_a
-    imul var_b
-    shrd eax, edx, 30
-  }
-}
-
-__attribute__((always_inline)) inline sInt sDivShift(sInt var_a,sInt var_b)
-{
-  __asm
-  {
-    mov eax,var_a
-    mov edx,eax
-    shl eax,16
-    sar edx,16
-    idiv var_b
-  }
-}
-
-__attribute__((always_inline)) inline sInt sDivShift30(sInt var_a,sInt var_b)
-{
-  __asm
-  {
-    mov eax,var_a
-    mov edx,eax
-    shl eax,30
-    sar edx,2
-    idiv var_b
-  }
-}
-#endif
-
-sBool sNormalFloat(sF32 value);
-
-#pragma warning (default : 4035) 
-
-#else
+// The old MSVC-only fallback used Intel-syntax __asm blocks and
+// #pragma warning, which GCC cannot compile; those were removed.
+// On the open-source toolchain the portable sS64-based implementations
+// below are used instead.
 
 __attribute__((always_inline)) inline sInt sMulDiv(sInt var_a,sInt var_b,sInt var_c)
 {
@@ -717,6 +565,24 @@ __attribute__((always_inline)) inline sInt sDivShift30(sInt var_a,sInt var_b)
 {
   return (sS32)( (((sS64)var_a)<<30)/((sS64)var_b) );
 }
+
+// Portable replacements for the removed MSVC Intel-syntax __asm helpers.
+__attribute__((always_inline)) inline sF32 sFRound(sF32 f)   { return floorf(f); }
+__attribute__((always_inline)) inline sInt sFtol(sF32 f)     { return (sInt)f; }
+
+inline void sFSinCos(sF32 x,sF32 &sine,sF32 &cosine)
+{
+  sine = sinf(x);
+  cosine = cosf(x);
+}
+
+// No-ops: the old MSVC path used these to reset the x87 FPU control word;
+// on the open-source toolchain SSE2 arithmetic is used instead.
+inline void sFloatDouble() {}
+inline void sFloatDen0() {}
+inline void sFloatDen1() {}
+
+sBool sNormalFloat(sF32 value);
 
 #endif
 

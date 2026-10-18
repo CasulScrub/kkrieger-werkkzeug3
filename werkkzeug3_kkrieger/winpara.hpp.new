@@ -1,0 +1,43 @@
+// This file is distributed under a BSD license. See LICENSE.txt for details.
+//
+// winpara.hpp — portable stub of the Windows parameter dialog (WinPara).
+// The original WinPara class implemented an editor-only GUI dialog based on
+// the Windows SDK. On the open-source toolchain we keep only the interface
+// that the portable core sources (e.g. werkops.cpp) call; every method is a
+// documented no-op so the non-GUI logic still compiles and links.
+
+#pragma once
+
+class WerkOp;
+
+class WinPara
+{
+public:
+  // --- layout helpers (no-ops in the headless stub) ---
+  void Space()                                        {}
+  void AddBox(const sChar *name,bool newFolder = false) {}
+  void AddSpecial(const sChar *text,sInt width = -1)  {}
+
+  // --- parameter editors (no-ops; they used to create GUI controls) ---
+  void EditGroup(const sChar *label)                  {}
+  void EditText(const sChar *label,sChar *buf,sInt bufSize) {}
+  void EditString(const sChar *label,sChar *buf,sInt bufSize) {}
+  void EditFileName(const sChar *label,sChar *buf,sInt bufSize,const sChar *ext) {}
+  void EditInt(const sChar *label,sInt *p,sInt minV,sInt maxV) {}
+  void EditFloat(const sChar *label,sF32 *p,sF32 minV,sF32 maxV) {}
+  void EditBool(const sChar *label,sBool *p)          {}
+  void EditFlags(const sChar *label,sU32 *p,const sChar **names,int cnt) {}
+  void EditMask(const sChar *label,sU32 *p,sU32 mask) {}
+  void EditRGBA(const sChar *label,sU32 *p)           {}
+  void EditCycle(const sChar *label,sInt *p,const sChar **names,int cnt) {}
+  void EditLink(const sChar *label,sInt link)         {}
+  void EditLinkI(const sChar *label,sInt *link,sInt what) {}
+  void EditOp(const sChar *opName,sInt flags = 0)     {}
+  void EditSpline(const sChar *label,void *spline)    {}
+  void EditBlobPipe(const sChar *label,void *pipe)    {}
+  void EditBlobSpline(const sChar *label,void *spline) {}
+  void EditSetGray(sBool gray)                        {}
+
+  // --- value defaults ---
+  void DefaultF(sF32 f)                               {}
+};
