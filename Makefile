@@ -4,8 +4,8 @@
 CXX = g++
 # -fpermissive: the original 32-bit MSVC engine stores pointer values in sInt/sU32
 # fields (packed blob references). On x86-64 GCC rejects these casts as errors by
-# default; -fpermissive downgrades them to warnings so the historical code compiles.
-CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -fpermissive -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader -Iwerkkzeug3_kkrieger/materials
+# default; -fpermissive -w downgrades them to warnings so the historical code compiles.
+CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -fpermissive -w -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader -Iwerkkzeug3_kkrieger/materials
 LDFLAGS =
 SDL_CFLAGS = $(shell pkg-config --cflags sdl2 2>/dev/null || echo -I/usr/include/SDL2)
 SDL_LIBS = $(shell pkg-config --libs sdl2 2>/dev/null || echo -lSDL2) -lGL
@@ -47,6 +47,13 @@ ENGINE_SOURCES = \
     werkkzeug3_kkrieger/genminmesh.cpp \
     werkkzeug3_kkrieger/kkriegergame.cpp \
     werkkzeug3_kkrieger/mainplayer.cpp \
+    werkkzeug3_kkrieger/genoverlay.cpp \
+    werkkzeug3_kkrieger/engine.cpp \
+    werkkzeug3_kkrieger/kdoc.cpp \
+    werkkzeug3_kkrieger/genscene.cpp \
+    werkkzeug3_kkrieger/genmaterial.cpp \
+    werkkzeug3_kkrieger/genbitmap.cpp \
+    werkkzeug3_kkrieger/geneffectipp.cpp \
     werkkzeug3_kkrieger/novaplayer.cpp
 
 ENGINE_OBJECTS = $(ENGINE_SOURCES:.cpp=.o)
