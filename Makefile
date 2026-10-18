@@ -2,7 +2,7 @@
 # All MSVC keywords (__forceinline, __cdecl, __stdcall, __declspec, __int64)
 # have been replaced with portable GCC/C++11 equivalents in the sources.
 CXX = g++
-CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader
+CXXFLAGS = -std=c++11 -O2 -Wall -Wno-unused -Is. -Imaterials -Iwerkkzeug3_kkrieger -Iwerkkzeug3_kkrieger/pngloader -Iwerkkzeug3_kkrieger/materials
 LDFLAGS =
 SDL_CFLAGS = $(shell pkg-config --cflags sdl2 2>/dev/null || echo -I/usr/include/SDL2)
 SDL_LIBS = $(shell pkg-config --libs sdl2 2>/dev/null || echo -lSDL2) -lGL

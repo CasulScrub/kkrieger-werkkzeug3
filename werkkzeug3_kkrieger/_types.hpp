@@ -15,7 +15,13 @@
 #ifdef _WIN32_WCE
 #include "player_mobile/player_mobile_config.hpp" // ugly hack 
 #else
+// Open-source Linux build: default to the kkrieger player configuration
+// (sPLAYER=1, sINTRO=1) instead of the Windows tool config.
+#if defined(__linux__) || defined(__APPLE__)
+#include "player_kkrieger/kkrieger_config.hpp"
+#else
 #include "base/base_config.hpp"     // read default config
+#endif
 #include <cstddef>
 //#include "xmmintrin.h"
 #endif
@@ -1865,5 +1871,16 @@ public:
 #endif
 
 #endif // !sMOBILE (asm section)
+
+/****************************************************************************/
+/***                                                                      ***/
+/***   Portability shims (open-source build)                              ***/
+/***                                                                      ***/
+/****************************************************************************/
+
+// sFloatFix(): on MSVC/x86 this flushed the FPU control word via inline asm.
+// The x87 asm was removed from this header during the open-source
+// conversion; floating point needs no fixup on GCC/Clang, so it is a no-op.
+inline void sFloatFix() {}
 
 #endif // __TYPES_HPP__

@@ -18,6 +18,11 @@ extern "C" void OutputDebugStringA(const char *str)
 #include <new>
 
 // Portable placement array-new matching the debug 'new' macro in _types.hpp.
+void *operator new(size_t size, const char *, int)
+{
+  return ::malloc(size ? size : 1);
+}
+
 void *operator new[](size_t size, const char *, int)
 {
   void *p = ::malloc(size ? size : 1);

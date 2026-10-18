@@ -5,6 +5,23 @@
 
 #include "_types.hpp"
 
+// Player-target build flags: mainplayer.cpp / novaplayer.cpp expect the
+// kkrieger player configuration (sPLAYER=1, sINTRO=1, sLINK_KKRIEGER=1).
+// Define defaults here so declarations below are visible; config headers
+// guard themselves with #ifndef so they will not clash.
+#ifndef sPLAYER
+#define sPLAYER 1
+#endif
+#ifndef sINTRO
+#define sINTRO 1
+#endif
+#ifndef sINTRO_XXX
+#define sINTRO_XXX 0
+#endif
+#ifndef sLINK_KKRIEGER
+#define sLINK_KKRIEGER 1
+#endif
+
 #if !defined(_WIN32)
 #include <GL/gl.h>            // open-source OpenGL backend (Mesa/libGL)
 #endif
