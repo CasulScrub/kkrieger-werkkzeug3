@@ -7,7 +7,13 @@
 #include "fried.hpp"
 #include "fried_internal.hpp"
 
+#ifdef _MSC_VER
 #include <crtdbg.h>
+#define FRIED_ASSERT(x) _ASSERTE(x)
+#else
+#include <assert.h>
+#define FRIED_ASSERT(x) assert(x)
+#endif
 
 namespace FRIED
 {
